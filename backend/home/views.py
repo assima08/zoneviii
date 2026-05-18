@@ -41,3 +41,12 @@ def create_reservation(request):
     
     return Response(serializer.errors)
 
+
+@api_view(['GET'])
+def tarifs_list(request):
+    tarifs = Tarifs.objects.all()
+    serializer = TarifSerializer(
+        Tarifs,
+        many = True
+    )
+    return Response(serializer.data)
