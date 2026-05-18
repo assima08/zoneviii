@@ -25,14 +25,25 @@ class Client(models.Model):
     nomClient = models.CharField(max_length =100)
     prenomClient = models.CharField(max_length =100)
     telephone = models.CharField(max_length =20)
-    email = models.EmailField(max_length = 254)
+    email = models.EmailField(max_length = 254, unique=True)
+    photo = models.ImageField(upload_to='experts/',null=True, blank=True)
 
 class Reservation(models.Model):
+    TYPE_STATUT = [
+        ('attente', 'en attente'),
+        ('confirme', 'confirmé'),
+        ('decline','decliné'),
+    ]
     date = models.DateField()
     heure = models.TimeField()
     duree = models.DurationField()
     client = models.ForeignKey(Client,on_delete = models.CASCADE)
     tarif = models.ForeignKey(Tarifs, on_delete = models.CASCADE)
+    statut = models.CharField(
+        max_length=20,
+        choices= TYPE_STATUT,
+        default='attente'
+    )
 
 class Expert(models.Model):
     nomExpert = models.CharField(max_length =100)
@@ -42,5 +53,4 @@ class Expert(models.Model):
 class ExpertService(models.Model):
     expert = models.ForeignKey(Expert, on_delete = models.CASCADE)
     service = models.ForeignKey(Service, on_delete = models.CASCADE)
-
 
