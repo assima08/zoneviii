@@ -1,0 +1,48 @@
+/* =========================
+   VINYL CONTAINER
+========================= */
+
+.vinyl-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: absolute;
+
+    left: -140px;
+
+    top : 40px;
+}
+
+
+/* =========================
+   VINYL IMAGE
+========================= */
+
+.vinyl-image {
+
+    width: 500px;
+
+    animation: spin 8s linear infinite;
+}
+
+
+/* =========================
+   ROTATION
+========================= */
+
+@keyframes spin {
+
+    from {
+
+        transform: rotate(0deg);
+    }
+
+    to {
+
+        transform: rotate(360deg);
+    }
+}
