@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-image: url("/bgstudio2.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+:root {
+
+    --electric-blue: #2140ff;
+
+    --background: #f5f5f5;
+
+    --text-dark: #111111;
+}

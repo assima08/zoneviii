@@ -1,0 +1,147 @@
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    width: 100%;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 25px 80px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+
+    font-size: 2rem;
+
+    font-weight: 900;
+
+    color: #111111;
+
+    letter-spacing: -1px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.logo:hover {
+
+    color: #2140ff;
+}
+
+
+/* =========================
+   NAV LINKS
+========================= */
+
+.nav-links {
+
+    display: flex;
+
+    gap: 50px;
+
+    list-style: none;
+}
+
+.nav-links li {
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: #222222;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.nav-links li:hover {
+
+    color: #2140ff;
+}
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.menu-icon {
+
+    display: none;
+
+    font-size: 2rem;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media screen and (max-width: 900px) {
+
+    .navbar {
+
+        padding: 20px 30px;
+    }
+
+    .nav-links {
+
+        display: none;
+    }
+
+    .menu-icon {
+
+        display: block;
+    }
+}
+.logo {
+
+    color: #111111;
+}
+
+.nav-links li {
+
+    color: #111111;
+}
+.nav-links li:hover {
+
+    color: #2140ff;
+}
