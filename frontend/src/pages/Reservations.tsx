@@ -2,14 +2,33 @@ import { useEffect, useState } from "react";
 
 import ReservationCard from "../components/ReservationCard";
 
+import ReservationModal from "../components/ReservationModal";
+
 import "../styles/reservations.css";
 
 import type { Service } from "../interfaces/Service";
 
+import type { Tarif } from "../interfaces/Tarif";
+
+
 
 function Reservations() {
 
-    const [services, setServices] = useState<Service[]>([]);
+
+
+    const [services, setServices]
+        = useState<Service[]>([]);
+
+
+
+    const [selectedTarif, setSelectedTarif]
+        = useState<Tarif | null>(null);
+
+
+
+    const [showModal, setShowModal]
+        = useState(false);
+
 
 
 
@@ -22,16 +41,34 @@ function Reservations() {
             .then((data) => {
 
                 setServices(data);
-
             })
 
             .catch((error) => {
 
                 console.log(error);
-
             });
 
     }, []);
+
+
+
+
+    function openModal(tarif: Tarif) {
+
+        setSelectedTarif(tarif);
+
+        setShowModal(true);
+    }
+
+
+
+    function closeModal() {
+
+        setShowModal(false);
+
+        setSelectedTarif(null);
+    }
+
 
 
 
@@ -51,20 +88,29 @@ function Reservations() {
 
                 {services.map((service) => (
 
-
                     service.tarifs.map((tarif) => (
 
                         <ReservationCard
 
                             key={tarif.id}
 
-                            service={service.nomService}
+                            service={
+                                service.nomService
+                            }
 
-                            tarif={tarif.nomTarif}
+                            tarif={
+                                tarif.nomTarif
+                            }
 
-                            prix={tarif.prix}
+                            prix={
+                                tarif.prix
+                            }
 
                             duree="2h"
+
+                            onReserve={() =>
+                                openModal(tarif)
+                            }
 
                         />
 
@@ -74,8 +120,28 @@ function Reservations() {
 
             </div>
 
+
+
+
+            {
+
+                showModal && (
+
+                    <ReservationModal
+
+                        tarif={selectedTarif}
+
+                        onClose={closeModal}
+
+                    />
+
+                )
+            }
+
         </div>
     );
 }
+
+
 
 export default Reservations;

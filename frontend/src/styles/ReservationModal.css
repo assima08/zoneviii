@@ -1,0 +1,440 @@
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.5);
+
+    backdrop-filter: blur(14px);
+
+    -webkit-backdrop-filter: blur(14px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 999;
+
+    padding: 40px 20px;
+
+    overflow-y: auto;
+}
+
+
+
+/* =========================
+   MODAL
+========================= */
+
+.reservation-modal {
+
+    width: 560px;
+
+    max-width: 100%;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    padding: 42px;
+
+    border-radius: 34px;
+
+    background:
+            rgba(25,25,28,0.82);
+
+    backdrop-filter: blur(24px);
+
+    -webkit-backdrop-filter: blur(24px);
+
+    border:
+            1px solid rgba(255,255,255,0.08);
+
+    position: relative;
+
+    overflow-x: hidden;
+
+    box-shadow:
+            0 25px 70px rgba(0,0,0,0.35);
+
+    animation:
+            modalAppear 0.35s ease;
+}
+
+
+
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
+
+.reservation-modal::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+.reservation-modal::-webkit-scrollbar-thumb {
+
+    background: rgba(255,255,255,0.15);
+
+    border-radius: 20px;
+}
+
+
+
+/* =========================
+   BLUE GLOW
+========================= */
+
+.reservation-modal::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+            radial-gradient(
+
+                    circle at bottom center,
+
+                    rgba(45,72,255,0.35),
+
+                    transparent 60%
+            );
+
+    pointer-events: none;
+}
+
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes modalAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+                translateY(40px)
+                scale(0.96);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+                translateY(0)
+                scale(1);
+    }
+}
+
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.close-button {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 22px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 2.2rem;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transition: 0.3s;
+}
+
+
+
+.close-button:hover {
+
+    transform: rotate(90deg);
+
+    color: #5f74ff;
+}
+
+
+
+/* =========================
+   TITLE
+========================= */
+
+.reservation-modal h2 {
+
+    font-size: 4rem;
+
+    font-weight: 900;
+
+    line-height: 0.95;
+
+    color: white;
+
+    margin-bottom: 36px;
+
+    letter-spacing: -3px;
+
+    position: relative;
+
+    z-index: 2;
+
+    padding-right: 40px;
+}
+
+
+
+/* =========================
+   TARIF BOX
+========================= */
+
+.selected-tarif {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 26px 30px;
+
+    border-radius: 24px;
+
+    background:
+            rgba(255,255,255,0.96);
+
+    margin-bottom: 28px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+
+.selected-tarif span {
+
+    font-size: 1.15rem;
+
+    font-weight: 700;
+
+    color: #111;
+
+    text-transform: uppercase;
+}
+
+
+
+.selected-tarif strong {
+
+    font-size: 2rem;
+
+    font-weight: 900;
+
+    color: #2d48ff;
+}
+
+
+
+/* =========================
+   FORM
+========================= */
+
+.modal-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+
+/* =========================
+   INPUTS
+========================= */
+
+.modal-form input {
+
+    width: 100%;
+
+    height: 74px;
+
+    border: none;
+
+    border-radius: 24px;
+
+    padding: 0 26px;
+
+    background:
+            rgba(255,255,255,0.95);
+
+    font-size: 1.05rem;
+
+    color: #111;
+
+    outline: none;
+
+    transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+    box-sizing: border-box;
+}
+
+
+
+/* =========================
+   INPUT FOCUS
+========================= */
+
+.modal-form input:focus {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+            0 0 0 4px rgba(45,72,255,0.25);
+}
+
+
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.modal-form input::placeholder {
+
+    color: rgba(0,0,0,0.5);
+}
+
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.confirm-button {
+
+    width: 100%;
+
+    height: 74px;
+
+    margin-top: 8px;
+
+    border: none;
+
+    border-radius: 24px;
+
+    background:
+
+            linear-gradient(
+                    135deg,
+                    #2d48ff,
+                    #6178ff
+            );
+
+    color: white;
+
+    font-size: 1.05rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+    box-shadow:
+            0 14px 35px rgba(45,72,255,0.35);
+}
+
+
+
+/* =========================
+   BUTTON HOVER
+========================= */
+
+.confirm-button:hover {
+
+    transform:
+            translateY(-4px);
+
+    box-shadow:
+            0 18px 45px rgba(45,72,255,0.45);
+}
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media screen and (max-width: 700px) {
+
+    .modal-overlay {
+
+        padding: 20px 14px;
+    }
+
+    .reservation-modal {
+
+        padding: 28px;
+    }
+
+    .reservation-modal h2 {
+
+        font-size: 2.9rem;
+
+        line-height: 1;
+    }
+
+    .selected-tarif {
+
+        padding: 20px;
+    }
+
+    .selected-tarif strong {
+
+        font-size: 1.5rem;
+    }
+
+    .modal-form input {
+
+        height: 64px;
+
+        border-radius: 20px;
+    }
+
+    .confirm-button {
+
+        height: 64px;
+
+        border-radius: 20px;
+    }
+}

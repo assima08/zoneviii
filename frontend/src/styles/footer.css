@@ -1,10 +1,26 @@
-/* =========================
-   FOOTER
-========================= */
+.footer {
 
-.foot {
+    position: fixed;
 
-    width: 100%;
+    bottom: 22px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 760px;
+
+    height: 95px;
+
+    border-radius: 34px;
+
+    background: rgba(20,20,20,0.42);
+
+    backdrop-filter: blur(24px);
+
+    -webkit-backdrop-filter: blur(24px);
+
+    border: 1px solid rgba(255,255,255,0.08);
 
     display: flex;
 
@@ -12,66 +28,111 @@
 
     align-items: center;
 
-    gap: 35px;
+    gap: 32px;
 
-    padding: 25px 0;
+    z-index: 10;
 
-    position: fixed;
+    overflow: hidden;
 
-    bottom: 0;
-
-    left: 0;
-
-    z-index: 1000;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    backdrop-filter: blur(15px);
-
-    -webkit-backdrop-filter: blur(15px);
-
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+            0 12px 45px rgba(0,0,0,0.28);
 }
 
 
+
 /* =========================
-   ICON CONTAINER
+   BLUE GLOW
+========================= */
+
+.footer::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+            radial-gradient(
+
+                    circle at center,
+
+                    rgba(45,72,255,0.32),
+
+                    transparent 62%
+            );
+
+    pointer-events: none;
+}
+
+
+
+/* =========================
+   MENU ITEM
 ========================= */
 
 .menu-item {
 
-    display: flex;
+    position: relative;
 
-    align-items: center;
-
-    justify-content: center;
+    z-index: 2;
 }
 
 
+
 /* =========================
-   LINKS
+   SOCIAL BUTTON
 ========================= */
 
 .nav-link {
 
-    width: 55px;
+    width: 62px;
 
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    height: 62px;
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.15);
+    display: flex;
 
-    transition: 0.35s ease;
+    justify-content: center;
 
-    cursor: pointer;
+    align-items: center;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+    transition:
+            transform 0.3s ease,
+            background 0.3s ease,
+            box-shadow 0.3s ease;
 }
+
+
+
+/* =========================
+   HOVER
+========================= */
+
+.nav-link:hover {
+
+    transform:
+            translateY(-5px)
+            scale(1.06);
+
+    background:
+            rgba(45,72,255,0.28);
+
+    box-shadow:
+
+            0 0 30px rgba(45,72,255,0.45);
+}
+
 
 
 /* =========================
@@ -86,47 +147,49 @@
 
     object-fit: contain;
 
-    transition: 0.35s ease;
+    filter:
+            brightness(0)
+            invert(1);
+
+    transition:
+            transform 0.3s ease;
 }
+
 
 
 /* =========================
-   HOVER EFFECT
+   ICON HOVER
 ========================= */
-
-.nav-link:hover {
-
-    transform: translateY(-6px);
-
-    background: rgba(33, 64, 255, 0.2);
-
-    box-shadow: 0 0 20px rgba(33, 64, 255, 0.4);
-}
 
 .nav-link:hover img {
 
-    transform: scale(1.1);
+    transform: scale(1.12);
 }
+
 
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
 
-    .foot {
+    .footer {
+
+        width: 92%;
+
+        height: 82px;
 
         gap: 20px;
 
-        padding: 18px 0;
+        bottom: 16px;
     }
 
     .nav-link {
 
-        width: 48px;
+        width: 54px;
 
-        height: 48px;
+        height: 54px;
     }
 
     .nav-link img {
@@ -134,5 +197,26 @@
         width: 20px;
 
         height: 20px;
+    }
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+    .footer {
+
+        border-radius: 26px;
+
+        height: 74px;
+
+        gap: 14px;
+    }
+
+    .nav-link {
+
+        width: 48px;
+
+        height: 48px;
     }
 }
