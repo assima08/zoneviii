@@ -1,0 +1,259 @@
+.services-page {
+
+    min-height: 100vh;
+
+    padding: 180px 70px 120px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================
+   TITRE
+========================= */
+
+.services-title {
+
+    font-size: 6rem;
+
+    font-weight: 900;
+
+    text-align: center;
+
+    margin-bottom: 90px;
+
+    letter-spacing: -4px;
+
+    color: #000;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.services-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+
+    gap: 45px;
+
+    align-items: stretch;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.service-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 45px;
+
+    border-radius: 36px;
+
+    background: rgba(255,255,255,0.35);
+
+    backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    box-shadow:
+            0 15px 40px rgba(0,0,0,0.08),
+            inset 0 1px 0 rgba(255,255,255,0.6);
+
+    transition:
+            transform 0.35s ease,
+            box-shadow 0.35s ease;
+
+    min-height: 420px;
+}
+
+
+/* glow */
+
+.service-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -120px;
+
+    right: -120px;
+
+    width: 260px;
+
+    height: 260px;
+
+    background: radial-gradient(
+            circle,
+            rgba(37,72,255,0.20),
+            transparent 70%
+    );
+
+    z-index: 0;
+}
+
+
+/* hover */
+
+.service-card:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow:
+            0 20px 60px rgba(37,72,255,0.18),
+            0 10px 30px rgba(0,0,0,0.12);
+}
+
+
+/* =========================
+   TITRE SERVICE
+========================= */
+
+.service-card h2 {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 3rem;
+
+    font-weight: 800;
+
+    margin-bottom: 25px;
+
+    color: #2140ff;
+
+    letter-spacing: -2px;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.service-card p {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 1.15rem;
+
+    line-height: 2;
+
+    color: rgba(0,0,0,0.65);
+
+    margin-bottom: 40px;
+
+    max-width: 95%;
+}
+
+
+/* =========================
+   TARIFS
+========================= */
+
+.tarifs-container {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =========================
+   TARIF ITEM
+========================= */
+
+.tarif-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 22px 24px;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.55);
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s ease;
+}
+
+
+.tarif-item:hover {
+
+    transform: scale(1.02);
+
+    background: rgba(255,255,255,0.75);
+}
+
+
+/* nom tarif */
+
+.tarif-item span {
+
+    font-size: 1.1rem;
+
+    font-weight: 600;
+
+    color: #111;
+}
+
+
+/* prix */
+
+.tarif-item strong {
+
+    font-size: 1.4rem;
+
+    font-weight: 800;
+
+    color: #2140ff;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .services-title {
+
+        font-size: 4rem;
+    }
+
+    .services-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+
+        padding: 35px;
+    }
+}

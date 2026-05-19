@@ -21,7 +21,9 @@ class Tarifs(models.Model):
         max_digits = 10,
         decimal_places =2
     )
-    service = models.ForeignKey(Service,on_delete = models.CASCADE)
+    service = models.ForeignKey(Service,
+                                on_delete = models.CASCADE,
+                                related_name="tarifs")
     def __str__(self):
         return self.nomTarif
 

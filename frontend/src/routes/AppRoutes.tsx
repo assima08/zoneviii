@@ -10,6 +10,7 @@ import {
 
 import "../styles/global.css";
 
+
 import Navbar from "../components/navbar.tsx";
 
 import Footer from "../components/footer.tsx";

@@ -1,15 +1,20 @@
 from rest_framework import serializers
 from .models import *
 
-class ServiceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Service
-        fields = '__all__'
-
 class TarifSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tarifs
         fields = '__all__'
+
+class ServiceSerializer(serializers.ModelSerializer):
+    tarifs = TarifSerializer(
+        many=True,
+        read_only=True
+    )
+    class Meta:
+        model = Service
+        fields = '__all__'
+
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
