@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import generics
 
 from .models import *
 from .serializers import *
@@ -50,3 +51,9 @@ def tarifs_list(request):
         many = True
     )
     return Response(serializer.data)
+
+class ReservationCreateView(generics.CreateAPIView):
+
+    queryset = Reservation.objects.all()
+
+    serializer_class = ReservationCreateSerializer

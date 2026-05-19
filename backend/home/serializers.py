@@ -55,9 +55,9 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
         fields = [
 
-            "dateReservation",
+            "date",
 
-            "heureReservation",
+            "heure",
 
             "tarif",
 
@@ -98,7 +98,11 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
             client=client,
 
-            **validated_data
+            date=validated_data["date"],
+
+            heure=validated_data["heure"],
+
+            tarif=validated_data["tarif"]
         )
 
 
