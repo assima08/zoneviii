@@ -16,15 +16,18 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ReservationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tarifs
-        fields = '__all__'
-
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
         fields = '__all__'
+
+class ReservationSerializer(serializers.ModelSerializer):
+    client = ClientSerializer()
+    tarif = TarifSerializer()
+    class Meta:
+        model = Tarifs
+        fields = '__all__'
+
 
 class ExpertSerializer(serializers.ModelSerializer):
     class Meta:

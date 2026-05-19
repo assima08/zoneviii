@@ -59,6 +59,7 @@ class Expert(models.Model):
     nomExpert = models.CharField(max_length =100)
     telephone = models.CharField(max_length =20)
     email = models.EmailField(max_length = 254)
+    photo = models.ImageField(upload_to='experts/',null=True, blank=True)
     def __str__(self):
         return self.nomExpert
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
 import "../styles/service.css";
 
 interface Tarif {
@@ -24,6 +25,7 @@ interface Service {
 }
 
 function Services() {
+    const navigate = useNavigate();
 
     const [services, setServices] = useState<Service[]>([]);
 
@@ -58,17 +60,49 @@ function Services() {
                         className="service-card"
                     >
 
-                        <h2>
+                        <div className="service-header">
 
-                            {service.nomService}
+                            <div className="service-icon">
 
-                        </h2>
+                                🎚
+
+                            </div>
+
+                            <h2>
+
+                                {service.nomService}
+
+                            </h2>
+
+                        </div>
 
                         <p>
 
                             {service.description}
 
                         </p>
+
+                        <div className="service-features">
+
+                            <span>
+
+                                ✓ Haute qualité audio
+
+                            </span>
+
+                            <span>
+
+                                ✓ Livraison rapide
+
+                            </span>
+
+                            <span>
+
+                                ✓ Révisions incluses
+
+                            </span>
+
+                        </div>
 
                         <div className="tarifs-container">
 
@@ -92,11 +126,28 @@ function Services() {
                                     </strong>
 
                                 </div>
+
                             ))}
 
                         </div>
 
+                        <button className="service-button" onClick={() =>
+                            navigate(
+                                "/reservations",
+                                {
+                                    state: {
+                                        service: service.nomService
+                                    }
+                                }
+                            )
+                        }>
+
+                            Réserver maintenant
+
+                        </button>
+
                     </div>
+
                 ))}
 
             </div>
