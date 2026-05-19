@@ -1,0 +1,32 @@
+.reservations-page {
+
+    min-height: 100vh;
+
+    padding: 180px 70px 120px;
+}
+
+
+.reservations-title {
+
+    font-size: 5rem;
+
+    font-weight: 900;
+
+    text-align: center;
+
+    margin-bottom: 70px;
+
+    color: #111;
+}
+
+
+.reservations-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+
+    gap: 40px;
+
+    justify-items: center;
+}

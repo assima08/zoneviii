@@ -1,0 +1,173 @@
+.reservation-card {
+
+    width: 420px;
+
+    padding: 40px;
+
+    border-radius: 32px;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+            0 10px 40px rgba(0,0,0,0.15);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+
+.reservation-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+            radial-gradient(
+                    circle at top right,
+                    rgba(45,72,255,0.25),
+                    transparent 40%
+            );
+
+    pointer-events: none;
+}
+
+
+
+.reservation-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+
+.reservation-top h2 {
+
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    color: #111;
+}
+
+
+
+.reservation-badge {
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    background: #2d48ff;
+
+    color: white;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+}
+
+
+
+.reservation-tarif {
+
+    color: #666;
+
+    font-size: 1rem;
+}
+
+
+
+.reservation-price {
+
+    font-size: 3rem;
+
+    color: #2d48ff;
+
+    font-weight: 900;
+}
+
+
+
+.reservation-inputs {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+
+.reservation-inputs input {
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 0 20px;
+
+    background: rgba(255,255,255,0.7);
+
+    font-size: 1rem;
+
+    outline: none;
+}
+
+
+
+.reservation-button {
+
+    height: 62px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+            135deg,
+            #2d48ff,
+            #5f74ff
+    );
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+
+.reservation-button:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+            0 10px 25px rgba(45,72,255,0.35);
+}
