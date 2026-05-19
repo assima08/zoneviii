@@ -26,6 +26,22 @@ body {
 
     overflow-x: hidden;
 }
+.app-layout {
+
+    min-height: 100vh;
+
+    background-image: url("frontend/public/bgstudio2.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+
+    position: relative;
+}
 :root {
 
     --electric-blue: #2140ff;

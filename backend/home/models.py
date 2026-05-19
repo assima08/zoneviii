@@ -51,7 +51,7 @@ class Reservation(models.Model):
         default='attente'
     )
     def __str__(self):
-        return f"{self.client} - {self.date} - {self.heure} - {self.tarif}"
+        return f"{self.client} | {self.date.strftime('%d/%m/%Y')} à {self.heure.strftime('%H:%M')} | {self.tarif}"
 
 class Expert(models.Model):
     nomExpert = models.CharField(max_length =100)
@@ -64,5 +64,5 @@ class ExpertService(models.Model):
     expert = models.ForeignKey(Expert, on_delete = models.CASCADE)
     service = models.ForeignKey(Service, on_delete = models.CASCADE)
     def __str__(self):
-        return f"{self.nomExpert} - {self.service}"
+        return f"{self.expert} - {self.service}"
 

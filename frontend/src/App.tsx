@@ -1,21 +1,8 @@
-import Navbar from "./components/navbar"
-import Vinyl from "./components/vinyl"
-import Footer from "./components/footer"
-import Hero from "./components/hero"
-
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
 
-  return (
-
-    <div className="app">
-
-      <Navbar />
-      <Vinyl/>
-      <Hero/>
-      <Footer/>
-    </div>
-  )
+    return <AppRoutes />;
 }
 
-export default App
+export default App;
