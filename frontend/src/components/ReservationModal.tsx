@@ -17,11 +17,11 @@ interface ReservationModalProps {
 
 function ReservationModal({
 
-                              tarif,
+    tarif,
 
-                              onClose
+    onClose
 
-                          }: ReservationModalProps) {
+}: ReservationModalProps) {
 
 
 
@@ -34,15 +34,43 @@ function ReservationModal({
     const [email, setEmail]
         = useState("");
 
-    const [dateReservation, setDateReservation]
+    const [date, setDate]
         = useState("");
 
-    const [heureReservation, setHeureReservation]
+    const [heure, setHeure]
+        = useState("");
+
+    const [duree, setDuree]
+        = useState("");
+
+
+
+    const [loading, setLoading]
+        = useState(false);
+
+
+
+    const [successMessage, setSuccessMessage]
+        = useState("");
+
+
+
+    const [errorMessage, setErrorMessage]
         = useState("");
 
 
 
     async function handleReservation() {
+
+
+
+        setLoading(true);
+
+        setErrorMessage("");
+
+        setSuccessMessage("");
+
+
 
         const reservationData = {
 
@@ -52,12 +80,18 @@ function ReservationModal({
 
             email,
 
-            dateReservation,
+            date,
 
-            heureReservation,
+            heure,
+
+            duree,
 
             tarif: tarif?.id
         };
+
+
+
+        console.log(reservationData);
 
 
 
@@ -73,7 +107,8 @@ function ReservationModal({
 
                     headers: {
 
-                        "Content-Type": "application/json"
+                        "Content-Type":
+                            "application/json"
                     },
 
                     body: JSON.stringify(
@@ -84,27 +119,65 @@ function ReservationModal({
 
 
 
+            const data =
+                await response.json();
+
+
+
+            console.log(data);
+
+
+
             if (response.ok) {
 
-                alert(
-                    "Réservation confirmée"
+
+
+                setSuccessMessage(
+
+                    "Réservation confirmée."
                 );
 
-                onClose();
+
+
+                setTimeout(() => {
+
+                    onClose();
+
+                }, 1500);
             }
 
             else {
 
-                alert(
-                    "Erreur lors de la réservation"
+
+
+                setErrorMessage(
+
+                    data.non_field_errors?.[0]
+
+                    ||
+
+                    "Erreur lors de la réservation."
                 );
             }
         }
 
         catch (error) {
 
+
+
             console.log(error);
+
+
+
+            setErrorMessage(
+
+                "Impossible de contacter le serveur."
+            );
         }
+
+
+
+        setLoading(false);
     }
 
 
@@ -130,7 +203,9 @@ function ReservationModal({
 
                 <h2>
 
-                    Réserver une session
+                    Réserver une
+                    <br />
+                    session
 
                 </h2>
 
@@ -144,6 +219,8 @@ function ReservationModal({
 
                     </span>
 
+
+
                     <strong>
 
                         {tarif?.prix}$
@@ -156,6 +233,8 @@ function ReservationModal({
 
                 <div className="modal-form">
 
+
+
                     <input
 
                         type="text"
@@ -165,6 +244,7 @@ function ReservationModal({
                         value={nomClient}
 
                         onChange={(e) =>
+
                             setNomClient(
                                 e.target.value
                             )
@@ -182,6 +262,7 @@ function ReservationModal({
                         value={prenomClient}
 
                         onChange={(e) =>
+
                             setPrenomClient(
                                 e.target.value
                             )
@@ -199,6 +280,7 @@ function ReservationModal({
                         value={email}
 
                         onChange={(e) =>
+
                             setEmail(
                                 e.target.value
                             )
@@ -211,10 +293,11 @@ function ReservationModal({
 
                         type="date"
 
-                        value={dateReservation}
+                        value={date}
 
                         onChange={(e) =>
-                            setDateReservation(
+
+                            setDate(
                                 e.target.value
                             )
                         }
@@ -226,14 +309,61 @@ function ReservationModal({
 
                         type="time"
 
-                        value={heureReservation}
+                        value={heure}
 
                         onChange={(e) =>
-                            setHeureReservation(
+
+                            setHeure(
                                 e.target.value
                             )
                         }
                     />
+
+
+
+                    <input
+
+                        type="time"
+
+                        value={duree}
+
+                        onChange={(e) =>
+
+                            setDuree(
+                                e.target.value
+                            )
+                        }
+
+                        placeholder="Durée"
+                    />
+
+
+
+                    {
+
+                        errorMessage && (
+
+                            <p className="reservation-error">
+
+                                {errorMessage}
+
+                            </p>
+                        )
+                    }
+
+
+
+                    {
+
+                        successMessage && (
+
+                            <p className="reservation-success">
+
+                                {successMessage}
+
+                            </p>
+                        )
+                    }
 
 
 
@@ -244,9 +374,22 @@ function ReservationModal({
                         onClick={
                             handleReservation
                         }
+
+                        disabled={loading}
                     >
 
-                        Confirmer la réservation
+                        {
+
+                            loading
+
+                                ?
+
+                                "Chargement..."
+
+                                :
+
+                                "Confirmer la réservation"
+                        }
 
                     </button>
 

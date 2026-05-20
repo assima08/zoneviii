@@ -39,6 +39,8 @@ class ExpertServiceSerializer(serializers.ModelSerializer):
         model = ExpertSerializer
         fields = '__all__'
 
+#cette classe permet d'envoyer des données a Django via un formulaire JS (le lien entre les deux)
+
 class ReservationCreateSerializer(serializers.ModelSerializer):
 
     nomClient = serializers.CharField(write_only=True)
@@ -59,6 +61,8 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
             "heure",
 
+            "duree",
+
             "tarif",
 
             "nomClient",
@@ -67,6 +71,96 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
             "email"
         ]
+
+
+
+    def validate(self, data):
+
+        from datetime import datetime
+        from datetime import timedelta
+
+
+
+        reservation_date = data["date"]
+
+        reservation_heure = data["heure"]
+
+        reservation_duree = data["duree"]
+
+
+
+        nouvelle_heure_debut = datetime.combine(
+
+            reservation_date,
+
+            reservation_heure
+        )
+
+
+
+        nouvelle_heure_fin = (
+
+            nouvelle_heure_debut
+
+            + reservation_duree
+        )
+
+
+
+        reservations = Reservation.objects.filter(
+
+            date=reservation_date
+        )
+
+
+
+        for reservation in reservations:
+
+
+
+            ancienne_heure_debut = datetime.combine(
+
+                reservation.date,
+
+                reservation.heure
+            )
+
+
+
+            ancienne_heure_fin = (
+
+                ancienne_heure_debut
+
+                + reservation.duree
+            )
+
+
+
+            conflit = (
+
+                nouvelle_heure_debut
+
+                < ancienne_heure_fin
+
+                and
+
+                nouvelle_heure_fin
+
+                > ancienne_heure_debut
+            )
+
+
+
+            if conflit:
+
+                raise serializers.ValidationError(
+
+                    "Ce créneau horaire est déjà réservé."
+                )
+
+
+
+        return data
 
 
 
@@ -102,9 +196,12 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
             heure=validated_data["heure"],
 
+            duree=validated_data["duree"],
+
             tarif=validated_data["tarif"]
         )
 
 
 
         return reservation
+
