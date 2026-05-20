@@ -205,3 +205,8 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
         return reservation
 
+
+class FormationSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model = Formation
+        fields = '__all__'

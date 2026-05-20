@@ -69,3 +69,16 @@ class ExpertService(models.Model):
     def __str__(self):
         return f"{self.expert} - {self.service}"
 
+#model formation
+class Formation(models.Model):
+    nomFormation = models.CharField(max_length=100)
+    expert = models.ForeignKey(Expert, on_delete=models.CASCADE)
+    cout = models.DecimalField(
+        max_digits = 10,
+        decimal_places =2
+    )
+    duree = models.DurationField()
+#fonction qui permettra d'afficher chaque instance de la BD par le nom de la formation
+    def __str__(self):
+        return self.nomFormation
+
