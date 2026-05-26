@@ -1,17 +1,13 @@
+import Hero from "../components/hero";
+import Vinyl from "../components/vinyl";
 
-import Vinyl from "../components/vinyl.tsx";
-import Hero from "../components/hero.tsx";
-import Footer from "../components/footer.tsx";
-
-function Home(){
+function Home() {
     return (
         <div className="app">
-
-
-            <Vinyl/>
-            <Hero/>
-            <Footer/>
+            <Vinyl />
+            <Hero />
         </div>
-    )
+    );
 }
+
 export default Home;

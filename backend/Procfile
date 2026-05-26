@@ -1,0 +1,1 @@
+web: gunicorn zoneviii.wsgi:application

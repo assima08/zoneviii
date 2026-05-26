@@ -1,74 +1,49 @@
-import {
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-    BrowserRouter,
-
-    Routes,
-
-    Route
-
-} from "react-router-dom";
-
+import Footer from "../components/footer";
+import Navbar from "../components/navbar";
+import Contact from "../pages/Contact";
+import Home from "../pages/Home";
+import Reservations from "../pages/Reservations";
+import Services from "../pages/Services";
+import Tarifs from "../pages/Tarifs";
 import "../styles/global.css";
 
-
-import Navbar from "../components/navbar.tsx";
-
-import Footer from "../components/footer.tsx";
-
-import Home from "../pages/Home";
-
-import Services from "../pages/Services";
-
-import Tarifs from "../pages/Tarifs";
-
-import Reservations from "../pages/Reservations";
-
-import Contact from "../pages/Contact";
-
-
 function AppRoutes() {
-
     return (
-
         <BrowserRouter>
-
             <div className="app-layout">
-
                 <Navbar />
 
                 <Routes>
-
                     <Route
                         path="/"
                         element={<Home />}
                     />
-
                     <Route
                         path="/services"
                         element={<Services />}
                     />
-
                     <Route
                         path="/tarifs"
                         element={<Tarifs />}
                     />
-
                     <Route
                         path="/reservations"
                         element={<Reservations />}
                     />
-
                     <Route
                         path="/contact"
                         element={<Contact />}
                     />
-
+                    <Route
+                        path="*"
+                        element={<Home />}
+                    />
                 </Routes>
 
                 <Footer />
-
             </div>
-
         </BrowserRouter>
     );
 }

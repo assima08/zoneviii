@@ -6,5 +6,7 @@ export interface Client {
 
     prenomClient: string;
 
+    telephone: string;
+
     email: string;
 }

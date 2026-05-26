@@ -1,71 +1,56 @@
 # ZoneVIII
 
-Plateforme web de studio audio développée avec React, TypeScript, Django REST Framework et PostgreSQL.
+Plateforme web de studio audio construite avec React, TypeScript, Django REST Framework et PostgreSQL.
 
-ZoneVIII permet :
-- d’afficher les services du studio
-- de consulter les tarifs
-- de réserver une session
-- de gérer les réservations depuis Django Admin
+## Fonctionnalites
 
----
-
-# Stack technique
-
-## Frontend
-- React
-- TypeScript
-- Vite
-- CSS
-
-## Backend
-- Django
-- Django REST Framework
-- PostgreSQL
-
----
-
-# Fonctionnalités actuelles
+- Affichage des services et tarifs depuis l'API Django
+- Systeme de reservation maison conserve
+- Validation anti-conflit des creneaux cote backend
+- Etats de chargement et d'erreur cote frontend
+- Configuration par variables d'environnement
+- Structure prete pour Vercel et Railway
 
 ## Frontend
-- Routing React Router
-- Hero section moderne
-- Navbar responsive
-- Footer glassmorphism
-- Liste des services dynamique
-- Cartes de réservation
-- Modal de réservation premium
-- Communication API avec Django
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Variable a configurer sur Vercel:
+
+```env
+VITE_API_BASE_URL=https://your-railway-app.up.railway.app
+```
 
 ## Backend
-- API REST Django
-- PostgreSQL
-- Gestion des services
-- Gestion des tarifs
-- Gestion des clients
-- Gestion des réservations
-- Django Admin
 
----
+```bash
+cd backend
+python -m venv .venv
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
 
-# Structure du projet
+Variables a configurer sur Railway:
 
-```txt
-frontend/
-│
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── interfaces/
-│   ├── routes/
-│   ├── styles/
-│   └── assets/
-│
-backend/
-│
-├── home/
-│   ├── models.py
-│   ├── serializers.py
-│   ├── views.py
-│   ├── urls.py
-│   └── admin.py
+```env
+DJANGO_SECRET_KEY=change-me
+DJANGO_DEBUG=False
+DJANGO_ALLOWED_HOSTS=your-railway-app.up.railway.app
+CORS_ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
+CSRF_TRUSTED_ORIGINS=https://your-vercel-app.vercel.app
+DATABASE_URL=postgresql://user:password@host:5432/database
+```
+
+## Endpoints principaux
+
+- `GET /services/`
+- `GET /tarifs/`
+- `GET /reservations/`
+- `POST /reservations/create/`
+- `GET /experts/`
+- `GET /formations/`

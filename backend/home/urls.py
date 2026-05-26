@@ -1,10 +1,13 @@
 from django.urls import path
+
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('services/',views.service_list),
-    path('reservations/', views.create_reservation),
-    path("reservations/create/",views.ReservationCreateView.as_view()),
-    path('experts/', views.experts_list),
+    path("", views.health_check, name="health-check"),
+    path("services/", views.ServiceListView.as_view(), name="service-list"),
+    path("tarifs/", views.TarifListView.as_view(), name="tarif-list"),
+    path("experts/", views.ExpertListView.as_view(), name="expert-list"),
+    path("formations/", views.FormationListView.as_view(), name="formation-list"),
+    path("reservations/", views.ReservationListView.as_view(), name="reservation-list"),
+    path("reservations/create/", views.ReservationCreateView.as_view(), name="reservation-create"),
 ]

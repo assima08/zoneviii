@@ -1,22 +1,42 @@
-import "../styles/footer.css"
+import facebookIcon from "../assets/icons/facebook.png";
+import instagramIcon from "../assets/icons/instagram.png";
+import tiktokIcon from "../assets/icons/tiktok.png";
+import xIcon from "../assets/icons/x.png";
+import "../styles/footer.css";
 
-const navlinks = [
-    { label: "facebook", href: "https://www.facebook.com/", img:"src/assets/icons/facebook.png" },
-    { label: "instagram", href: "https://www.instagram.com/", img:"src/assets/icons/instagram.png"},
-    { label: "x", href: "https://www.x.com/", img:"src/assets/icons/x.png"},
-    { label: "TikTok", href: "https://www.tiktok.com/", img:"src/assets/icons/tiktok.png"},
+const navLinks = [
+    { label: "Facebook", href: "https://www.facebook.com/", img: facebookIcon },
+    { label: "Instagram", href: "https://www.instagram.com/", img: instagramIcon },
+    { label: "X", href: "https://www.x.com/", img: xIcon },
+    { label: "TikTok", href: "https://www.tiktok.com/", img: tiktokIcon },
 ];
-function footer() {
+
+function Footer() {
     return (
         <footer className="foot">
-            {navlinks.map((link:{label:string;href:string;img:string}) => (
-                <div className="menu-item" key={link.href}>
-                    <a className="nav-link" href={link.href}>
-                        <img src={link.img} alt="logo" width={40} height={40} />
+            {navLinks.map((link) => (
+                <div
+                    className="menu-item"
+                    key={link.href}
+                >
+                    <a
+                        className="nav-link"
+                        href={link.href}
+                        aria-label={link.label}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img
+                            src={link.img}
+                            alt=""
+                            width={40}
+                            height={40}
+                        />
                     </a>
                 </div>
             ))}
         </footer>
-    )
+    );
 }
-export default footer;
+
+export default Footer;

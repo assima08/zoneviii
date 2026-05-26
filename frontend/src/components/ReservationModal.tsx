@@ -1,406 +1,176 @@
 import { useState } from "react";
 
+import type { Tarif } from "../interfaces/Tarif";
+import { createReservation, getApiErrorMessage } from "../services/api";
 import "../styles/ReservationModal.css";
 
-import type { Tarif } from "../interfaces/Tarif";
-
-
-
 interface ReservationModalProps {
-
     tarif: Tarif | null;
-
     onClose: () => void;
 }
 
-
-
 function ReservationModal({
-
     tarif,
-
-    onClose
-
+    onClose,
 }: ReservationModalProps) {
-
-
-
-    const [nomClient, setNomClient]
-        = useState("");
-
-    const [prenomClient, setPrenomClient]
-        = useState("");
-
-    const [email, setEmail]
-        = useState("");
-
-    const [date, setDate]
-        = useState("");
-
-    const [heure, setHeure]
-        = useState("");
-
-    const [duree, setDuree]
-        = useState("");
-
-
-
-    const [loading, setLoading]
-        = useState(false);
-
-
-
-    const [successMessage, setSuccessMessage]
-        = useState("");
-
-
-
-    const [errorMessage, setErrorMessage]
-        = useState("");
-
-
+    const [nomClient, setNomClient] = useState("");
+    const [prenomClient, setPrenomClient] = useState("");
+    const [email, setEmail] = useState("");
+    const [telephone, setTelephone] = useState("");
+    const [date, setDate] = useState("");
+    const [heure, setHeure] = useState("");
+    const [duree, setDuree] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     async function handleReservation() {
-
-
+        if (!tarif) {
+            setErrorMessage("Aucun tarif selectionne.");
+            return;
+        }
 
         setLoading(true);
-
         setErrorMessage("");
-
         setSuccessMessage("");
 
-
-
-        const reservationData = {
-
-            nomClient,
-
-            prenomClient,
-
-            email,
-
-            date,
-
-            heure,
-
-            duree,
-
-            tarif: tarif?.id
-        };
-
-
-
-        console.log(reservationData);
-
-
-
         try {
+            await createReservation({
+                nomClient,
+                prenomClient,
+                email,
+                telephone,
+                date,
+                heure,
+                duree: normalizeDuration(duree),
+                tarif: tarif.id,
+            });
 
-            const response = await fetch(
+            setSuccessMessage("Reservation confirmee.");
 
-                "http://127.0.0.1:8000/reservations/create/",
-
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify(
-                        reservationData
-                    )
-                }
-            );
-
-
-
-            const data =
-                await response.json();
-
-
-
-            console.log(data);
-
-
-
-            if (response.ok) {
-
-
-
-                setSuccessMessage(
-
-                    "Réservation confirmée."
-                );
-
-
-
-                setTimeout(() => {
-
-                    onClose();
-
-                }, 1500);
-            }
-
-            else {
-
-
-
-                setErrorMessage(
-
-                    data.non_field_errors?.[0]
-
-                    ||
-
-                    "Erreur lors de la réservation."
-                );
-            }
+            window.setTimeout(() => {
+                onClose();
+            }, 1500);
         }
-
         catch (error) {
-
-
-
-            console.log(error);
-
-
-
-            setErrorMessage(
-
-                "Impossible de contacter le serveur."
-            );
+            setErrorMessage(getApiErrorMessage(error));
         }
-
-
-
-        setLoading(false);
+        finally {
+            setLoading(false);
+        }
     }
 
-
-
     return (
-
         <div className="modal-overlay">
-
             <div className="reservation-modal">
-
                 <button
-
                     className="close-button"
-
                     onClick={onClose}
+                    type="button"
                 >
-
-                    ×
-
+                    x
                 </button>
 
-
-
                 <h2>
-
-                    Réserver une
+                    Reserver une
                     <br />
                     session
-
                 </h2>
 
-
-
                 <div className="selected-tarif">
-
-                    <span>
-
-                        {tarif?.nomTarif}
-
-                    </span>
-
-
-
-                    <strong>
-
-                        {tarif?.prix}$
-
-                    </strong>
-
+                    <span>{tarif?.nomTarif}</span>
+                    <strong>{tarif?.prix}$</strong>
                 </div>
-
-
 
                 <div className="modal-form">
-
-
-
                     <input
-
                         type="text"
-
                         placeholder="Nom"
-
                         value={nomClient}
-
-                        onChange={(e) =>
-
-                            setNomClient(
-                                e.target.value
-                            )
-                        }
+                        onChange={(event) => setNomClient(event.target.value)}
+                        required
                     />
 
-
-
                     <input
-
                         type="text"
-
-                        placeholder="Prénom"
-
+                        placeholder="Prenom"
                         value={prenomClient}
-
-                        onChange={(e) =>
-
-                            setPrenomClient(
-                                e.target.value
-                            )
-                        }
+                        onChange={(event) => setPrenomClient(event.target.value)}
+                        required
                     />
 
-
-
                     <input
-
                         type="email"
-
                         placeholder="Email"
-
                         value={email}
-
-                        onChange={(e) =>
-
-                            setEmail(
-                                e.target.value
-                            )
-                        }
+                        onChange={(event) => setEmail(event.target.value)}
+                        required
                     />
 
-
+                    <input
+                        type="tel"
+                        placeholder="Telephone"
+                        value={telephone}
+                        onChange={(event) => setTelephone(event.target.value)}
+                        required
+                    />
 
                     <input
-
                         type="date"
-
                         value={date}
-
-                        onChange={(e) =>
-
-                            setDate(
-                                e.target.value
-                            )
-                        }
+                        onChange={(event) => setDate(event.target.value)}
+                        required
                     />
 
-
-
                     <input
-
                         type="time"
-
                         value={heure}
-
-                        onChange={(e) =>
-
-                            setHeure(
-                                e.target.value
-                            )
-                        }
+                        onChange={(event) => setHeure(event.target.value)}
+                        required
                     />
-
-
 
                     <input
-
                         type="time"
-
                         value={duree}
-
-                        onChange={(e) =>
-
-                            setDuree(
-                                e.target.value
-                            )
-                        }
-
-                        placeholder="Durée"
+                        onChange={(event) => setDuree(event.target.value)}
+                        placeholder="Duree"
+                        required
                     />
 
+                    {errorMessage && (
+                        <p className="reservation-error">{errorMessage}</p>
+                    )}
 
-
-                    {
-
-                        errorMessage && (
-
-                            <p className="reservation-error">
-
-                                {errorMessage}
-
-                            </p>
-                        )
-                    }
-
-
-
-                    {
-
-                        successMessage && (
-
-                            <p className="reservation-success">
-
-                                {successMessage}
-
-                            </p>
-                        )
-                    }
-
-
+                    {successMessage && (
+                        <p className="reservation-success">{successMessage}</p>
+                    )}
 
                     <button
-
                         className="confirm-button"
-
-                        onClick={
-                            handleReservation
-                        }
-
+                        onClick={handleReservation}
                         disabled={loading}
+                        type="button"
                     >
-
-                        {
-
-                            loading
-
-                                ?
-
-                                "Chargement..."
-
-                                :
-
-                                "Confirmer la réservation"
-                        }
-
+                        {loading ? "Chargement..." : "Confirmer la reservation"}
                     </button>
-
                 </div>
-
             </div>
-
         </div>
     );
 }
 
+function normalizeDuration(duration: string) {
+    if (!duration) {
+        return duration;
+    }
 
+    const parts = duration.split(":");
+
+    if (parts.length === 2) {
+        return `${parts[0]}:${parts[1]}:00`;
+    }
+
+    return duration;
+}
 
 export default ReservationModal;

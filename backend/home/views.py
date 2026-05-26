@@ -1,59 +1,48 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from django.http import JsonResponse
 from rest_framework import generics
 
-from .models import *
-from .serializers import *
-
-def home():
-    pass
-
-@api_view(['GET'])
-def service_list(request):
-
-    services = Service.objects.all()
-
-    serializer = ServiceSerializer(
-        services,
-        many = True
-    )
-    return Response(serializer.data)
+from .models import Expert, Formation, Reservation, Service, Tarifs
+from .serializers import (
+    ExpertSerializer,
+    FormationSerializer,
+    ReservationCreateSerializer,
+    ReservationSerializer,
+    ServiceSerializer,
+    TarifSerializer,
+)
 
 
-@api_view(['GET'])
-def experts_list(request):
-
-    experts = Expert.objects.all()
-
-    serializer = ExpertSerializer(
-        experts,
-        many = True
-    )
-    return Response(serializer.data)
-
-@api_view(['POST'])
-def create_reservation(request):
-
-    serializer = ReservationSerializer(data = request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    
-    return Response(serializer.errors)
+def health_check(_request):
+    return JsonResponse({"status": "ok", "service": "zoneviii"})
 
 
-@api_view(['GET'])
-def tarifs_list(request):
-    tarifs = Tarifs.objects.all()
-    serializer = TarifSerializer(
-        Tarifs,
-        many = True
-    )
-    return Response(serializer.data)
+class ServiceListView(generics.ListAPIView):
+    serializer_class = ServiceSerializer
+
+    def get_queryset(self):
+        return Service.objects.prefetch_related("tarifs").order_by("id")
+
+
+class TarifListView(generics.ListAPIView):
+    serializer_class = TarifSerializer
+    queryset = Tarifs.objects.select_related("service").order_by("id")
+
+
+class ExpertListView(generics.ListAPIView):
+    serializer_class = ExpertSerializer
+    queryset = Expert.objects.order_by("id")
+
+
+class FormationListView(generics.ListAPIView):
+    serializer_class = FormationSerializer
+    queryset = Formation.objects.select_related("expert").order_by("id")
+
+
+class ReservationListView(generics.ListAPIView):
+    serializer_class = ReservationSerializer
+    queryset = Reservation.objects.select_related("client", "tarif").order_by("-date", "-heure")
+
 
 class ReservationCreateView(generics.CreateAPIView):
-
-    queryset = Reservation.objects.all()
-
     serializer_class = ReservationCreateSerializer
+    queryset = Reservation.objects.select_related("client", "tarif")

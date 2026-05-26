@@ -57,6 +57,66 @@
     flex-wrap: wrap;
 }
 
+.tarif-card {
+
+    width: 280px;
+
+    min-height: 220px;
+
+    padding: 32px;
+
+    border-radius: 28px;
+
+    background: #111;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.tarif-card span {
+
+    color: #8fa0ff;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+.tarif-card h2 {
+
+    font-size: 1.6rem;
+
+    line-height: 1.1;
+}
+
+.tarif-card strong {
+
+    font-size: 2.2rem;
+
+    color: #ffffff;
+}
+
+.tarifs-state {
+
+    width: 100%;
+
+    font-size: 1.1rem;
+
+    font-weight: 700;
+
+    color: #111;
+}
+
+.tarifs-state-error {
+
+    color: #c01818;
+}
+
 
 /* =========================
    RESPONSIVE

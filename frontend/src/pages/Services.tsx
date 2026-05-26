@@ -1,157 +1,107 @@
 import { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import type { Service } from "../interfaces/Service";
+import { getApiErrorMessage, getServices } from "../services/api";
 import "../styles/service.css";
-
-interface Tarif {
-
-    id: number;
-
-    nomTarif: string;
-
-    prix: string;
-
-    typeTarif: string;
-}
-
-interface Service {
-
-    id: number;
-
-    nomService: string;
-
-    description: string;
-
-    tarifs: Tarif[];
-}
 
 function Services() {
     const navigate = useNavigate();
-
     const [services, setServices] = useState<Service[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
+        let isMounted = true;
 
-        fetch("http://127.0.0.1:8000/services/")
+        async function loadServices() {
+            try {
+                const data = await getServices();
 
-            .then((response) => response.json())
+                if (isMounted) {
+                    setServices(data);
+                }
+            }
+            catch (error) {
+                if (isMounted) {
+                    setErrorMessage(getApiErrorMessage(error));
+                }
+            }
+            finally {
+                if (isMounted) {
+                    setLoading(false);
+                }
+            }
+        }
 
-            .then((data) => setServices(data))
+        loadServices();
 
-            .catch((error) => console.error(error));
-
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     return (
-
         <div className="services-page">
-
-            <h1 className="services-title">
-
-                NOS SERVICES
-
-            </h1>
+            <h1 className="services-title">NOS SERVICES</h1>
 
             <div className="services-grid">
+                {loading && (
+                    <p className="page-state">Chargement des services...</p>
+                )}
 
-                {services.map((service) => (
+                {errorMessage && (
+                    <p className="page-state page-state-error">{errorMessage}</p>
+                )}
 
+                {!loading && !errorMessage && services.map((service) => (
                     <div
                         key={service.id}
                         className="service-card"
                     >
-
                         <div className="service-header">
-
-                            <div className="service-icon">
-
-                                🎚
-
-                            </div>
-
-                            <h2>
-
-                                {service.nomService}
-
-                            </h2>
-
+                            <div className="service-icon">ST</div>
+                            <h2>{service.nomService}</h2>
                         </div>
 
-                        <p>
-
-                            {service.description}
-
-                        </p>
+                        <p>{service.description}</p>
 
                         <div className="service-features">
-
-                            <span>
-
-                                ✓ Haute qualité audio
-
-                            </span>
-
-                            <span>
-
-                                ✓ Livraison rapide
-
-                            </span>
-
-                            <span>
-
-                                ✓ Révisions incluses
-
-                            </span>
-
+                            <span>Haute qualite audio</span>
+                            <span>Livraison rapide</span>
+                            <span>Revisions incluses</span>
                         </div>
 
                         <div className="tarifs-container">
-
                             {service.tarifs.map((tarif) => (
-
                                 <div
                                     key={tarif.id}
                                     className="tarif-item"
                                 >
-
-                                    <span>
-
-                                        {tarif.nomTarif}
-
-                                    </span>
-
-                                    <strong>
-
-                                        {tarif.prix}$
-
-                                    </strong>
-
+                                    <span>{tarif.nomTarif}</span>
+                                    <strong>{tarif.prix}$</strong>
                                 </div>
-
                             ))}
-
                         </div>
 
-                        <button className="service-button" onClick={() =>
-                            navigate(
-                                "/reservations",
-                                {
-                                    state: {
-                                        service: service.nomService
-                                    }
-                                }
-                            )
-                        }>
-
-                            Réserver maintenant
-
+                        <button
+                            className="service-button"
+                            onClick={() =>
+                                navigate(
+                                    "/reservations",
+                                    {
+                                        state: {
+                                            service: service.nomService,
+                                        },
+                                    },
+                                )
+                            }
+                        >
+                            Reserver maintenant
                         </button>
-
                     </div>
-
                 ))}
-
             </div>
-
         </div>
     );
 }
