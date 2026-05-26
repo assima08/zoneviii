@@ -90,29 +90,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "zoneviii.wsgi.application"
 
-DATABASE_URL = os.getenv("DATABASE_URL") or os.getenv("DATABASE_PUBLIC_URL")
 
-if DATABASE_URL:
-    DATABASES = {
-        "default": dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("DB_NAME") or sys.exit("ERROR: DB_NAME not set"),
-            "USER": os.getenv("DB_USER") or sys.exit("ERROR: DB_USER not set"),
-            "PASSWORD": os.getenv("DB_PASSWORD") or sys.exit("ERROR: DB_PASSWORD not set"),
-            "HOST": os.getenv("DB_HOST") or sys.exit("ERROR: DB_HOST not set"),
-            "PORT": os.getenv("DB_PORT", "5432"),
-            "CONN_MAX_AGE": 600,
-            "CONN_HEALTH_CHECKS": True,
-        }
-    }
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+DATABASES = {
+    "default": dj_database_url.parse(DATABASE_URL)
+}
+
+ALLOWED_HOSTS = os.getenv(
+    "ALLOWED_HOSTS",
+    ".railway.app"
+).split(",")
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
