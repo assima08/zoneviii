@@ -92,17 +92,12 @@ TEMPLATES = [
 WSGI_APPLICATION = "zoneviii.wsgi.application"
 
 DATABASE_URL = os.getenv("DATABASE_URL") or os.getenv("DATABASE_PUBLIC_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
     DATABASES = {
-        "default": dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
+        "default": dj_database_url.parse(DATABASE_URL)
     }
-elif IS_RAILWAY:
-    raise ImproperlyConfigured("DATABASE_URL is required on Railway. Link a PostgreSQL database or add a DATABASE_URL variable to the backend service.")
 else:
     DATABASES = {
         "default": {
@@ -112,8 +107,6 @@ else:
             "PASSWORD": os.getenv("DB_PASSWORD", ""),
             "HOST": os.getenv("DB_HOST", "localhost"),
             "PORT": os.getenv("DB_PORT", "5432"),
-            "CONN_MAX_AGE": 600,
-            "CONN_HEALTH_CHECKS": True,
         }
     }
 
