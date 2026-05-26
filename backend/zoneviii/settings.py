@@ -5,7 +5,10 @@ import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
-if os.getenv("RAILWAY_ENVIRONMENT") is None:
+RAILWAY_ENV_KEYS = ("RAILWAY_ENVIRONMENT", "RAILWAY_ENVIRONMENT_NAME", "RAILWAY_PROJECT_ID", "RAILWAY_SERVICE_ID")
+IS_RAILWAY = any(os.getenv(key) for key in RAILWAY_ENV_KEYS)
+
+if not IS_RAILWAY:
     load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,7 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "zoneviii.wsgi.application"
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL") or os.getenv("DATABASE_PUBLIC_URL")
 
 if DATABASE_URL:
     DATABASES = {
@@ -98,6 +101,8 @@ if DATABASE_URL:
             conn_health_checks=True,
         )
     }
+elif IS_RAILWAY:
+    raise ImproperlyConfigured("DATABASE_URL is required on Railway. Link a PostgreSQL database or add a DATABASE_URL variable to the backend service.")
 else:
     DATABASES = {
         "default": {
