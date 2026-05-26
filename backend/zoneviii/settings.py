@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from urllib.parse import urlparse
-
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
@@ -131,7 +131,9 @@ def railway_database_config():
 
 
 DATABASES = {
-    "default": railway_database_config(),
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL")
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
