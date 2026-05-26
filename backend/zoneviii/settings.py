@@ -2,7 +2,6 @@ import os
 import sys
 from pathlib import Path
 
-import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
@@ -27,14 +26,13 @@ def env_list(name, default=""):
     return [item.strip() for item in os.getenv(name, default).split(",") if item.strip()]
 
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-dev-secret-key")
-DEBUG = env_bool("DJANGO_DEBUG", "DEBUG", default=True)
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", os.getenv("SECRET_KEY", "unsafe-dev-secret-key"))
+DEBUG = env_bool("DJANGO_DEBUG", "DEBUG", default=False)
 
 if not DEBUG and SECRET_KEY == "unsafe-dev-secret-key":
     raise ImproperlyConfigured("DJANGO_SECRET_KEY must be set when DEBUG=False.")
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS") or os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")
-ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS.split(",") if host.strip()]
+ALLOWED_HOSTS = env_list("ALLOWED_HOSTS", "localhost,127.0.0.1")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -90,17 +88,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "zoneviii.wsgi.application"
 
+# --- Base de données ---
+# Utilise les variables DB_* individuelles (définies dans Railway → Variables)
+_db_name = os.getenv("DB_NAME")
+_db_user = os.getenv("DB_USER")
+_db_password = os.getenv("DB_PASSWORD")
+_db_host = os.getenv("DB_HOST")
+_db_port = os.getenv("DB_PORT", "5432")
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+_missing = [k for k, v in {
+    "DB_NAME": _db_name,
+    "DB_USER": _db_user,
+    "DB_PASSWORD": _db_password,
+    "DB_HOST": _db_host,
+}.items() if not v]
+
+if _missing:
+    raise ImproperlyConfigured(f"Variables d'environnement manquantes : {', '.join(_missing)}")
 
 DATABASES = {
-    "default": dj_database_url.parse(DATABASE_URL)
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": _db_name,
+        "USER": _db_user,
+        "PASSWORD": _db_password,
+        "HOST": _db_host,
+        "PORT": _db_port,
+    }
 }
-
-ALLOWED_HOSTS = os.getenv(
-    "ALLOWED_HOSTS",
-    ".railway.app"
-).split(",")
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
