@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from rest_framework import generics
 
-from .models import Expert, Formation, Reservation, Service, Tarifs
+from .models import ContactMessage, Expert, Formation, Reservation, Service, Tarifs
 from .serializers import (
+    ContactMessageSerializer,
     ExpertSerializer,
     FormationSerializer,
     ReservationCreateSerializer,
@@ -46,3 +47,8 @@ class ReservationListView(generics.ListAPIView):
 class ReservationCreateView(generics.CreateAPIView):
     serializer_class = ReservationCreateSerializer
     queryset = Reservation.objects.select_related("client", "tarif")
+
+
+class ContactMessageCreateView(generics.CreateAPIView):
+    serializer_class = ContactMessageSerializer
+    queryset = ContactMessage.objects.all()

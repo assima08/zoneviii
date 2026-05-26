@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import type { ContactMessagePayload } from "../interfaces/ContactMessage";
+import type { Expert } from "../interfaces/Expert";
 import type { Service } from "../interfaces/Service";
 import type { ReservationCreatePayload } from "../interfaces/Reservation";
 import type { Tarif } from "../interfaces/Tarif";
@@ -25,8 +27,18 @@ export async function getTarifs() {
     return response.data;
 }
 
+export async function getExperts() {
+    const response = await api.get<Expert[]>("/experts/");
+    return response.data;
+}
+
 export async function createReservation(payload: ReservationCreatePayload) {
     const response = await api.post("/reservations/create/", payload);
+    return response.data;
+}
+
+export async function sendContactMessage(payload: ContactMessagePayload) {
+    const response = await api.post("/contact/", payload);
     return response.data;
 }
 

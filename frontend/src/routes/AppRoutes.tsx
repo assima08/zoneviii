@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Contact from "../pages/Contact";
+import Experts from "../pages/Experts";
 import Home from "../pages/Home";
 import Reservations from "../pages/Reservations";
 import Services from "../pages/Services";
@@ -31,6 +32,10 @@ function AppRoutes() {
                     <Route
                         path="/reservations"
                         element={<Reservations />}
+                    />
+                    <Route
+                        path="/experts"
+                        element={<Experts />}
                     />
                     <Route
                         path="/contact"

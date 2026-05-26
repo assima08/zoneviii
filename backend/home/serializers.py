@@ -1,9 +1,20 @@
 from datetime import datetime
+from urllib.parse import urljoin
 
+from django.conf import settings
 from django.db import transaction
 from rest_framework import serializers
 
-from .models import Client, Expert, ExpertService, Formation, Reservation, Service, Tarifs
+from .models import (
+    Client,
+    ContactMessage,
+    Expert,
+    ExpertService,
+    Formation,
+    Reservation,
+    Service,
+    Tarifs,
+)
 
 
 class TarifSerializer(serializers.ModelSerializer):
@@ -111,9 +122,37 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
 
 class ExpertSerializer(serializers.ModelSerializer):
+    imageUrl = serializers.SerializerMethodField()
+
     class Meta:
         model = Expert
-        fields = ["id", "nomExpert", "telephone", "email", "photo"]
+        fields = [
+            "id",
+            "nomExpert",
+            "role",
+            "specialite",
+            "description",
+            "telephone",
+            "email",
+            "photo",
+            "image",
+            "imageUrl",
+            "instagram",
+        ]
+
+    def get_imageUrl(self, obj):
+        image = obj.image or obj.photo
+
+        if not image:
+            return ""
+
+        request = self.context.get("request")
+        url = urljoin(settings.MEDIA_URL, image.name)
+
+        if request:
+            return request.build_absolute_uri(url)
+
+        return url
 
 
 class ExpertServiceSerializer(serializers.ModelSerializer):
@@ -126,3 +165,35 @@ class FormationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Formation
         fields = ["id", "nomFormation", "expert", "cout", "duree"]
+
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = ["id", "nom", "prenom", "email", "sujet", "message", "created_at"]
+        read_only_fields = ["id", "created_at"]
+
+    def validate_nom(self, value):
+        return self._clean_short_text(value, "nom")
+
+    def validate_prenom(self, value):
+        return self._clean_short_text(value, "prenom")
+
+    def validate_sujet(self, value):
+        return self._clean_short_text(value, "sujet")
+
+    def validate_message(self, value):
+        cleaned = value.strip()
+
+        if len(cleaned) < 10:
+            raise serializers.ValidationError("Le message doit contenir au moins 10 caracteres.")
+
+        return cleaned
+
+    def _clean_short_text(self, value, field_name):
+        cleaned = value.strip()
+
+        if len(cleaned) < 2:
+            raise serializers.ValidationError(f"Le champ {field_name} est trop court.")
+
+        return cleaned

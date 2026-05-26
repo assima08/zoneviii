@@ -63,9 +63,14 @@ class Reservation(models.Model):
 
 class Expert(models.Model):
     nomExpert = models.CharField(max_length=100)
+    role = models.CharField(max_length=120, blank=True)
+    specialite = models.CharField(max_length=160, blank=True)
+    description = models.TextField(blank=True)
     telephone = models.CharField(max_length=20)
     email = models.EmailField(max_length=254)
     photo = models.ImageField(upload_to="experts/", null=True, blank=True)
+    image = models.ImageField(upload_to="experts/", null=True, blank=True)
+    instagram = models.URLField(max_length=255, blank=True)
 
     def __str__(self):
         return self.nomExpert
@@ -87,3 +92,19 @@ class Formation(models.Model):
 
     def __str__(self):
         return self.nomFormation
+
+
+class ContactMessage(models.Model):
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    sujet = models.CharField(max_length=160)
+    message = models.TextField(max_length=2500)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.prenom} {self.nom} - {self.sujet}"

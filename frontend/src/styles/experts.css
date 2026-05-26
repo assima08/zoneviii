@@ -1,0 +1,338 @@
+.experts-page {
+    min-height: 100vh;
+    padding: 130px 70px 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.experts-page::before {
+    content: "";
+    position: absolute;
+    inset: 70px -180px auto auto;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, rgba(33,64,255,0.25), transparent 70%);
+    pointer-events: none;
+}
+
+.experts-page::after {
+    content: "";
+    position: absolute;
+    left: 7%;
+    top: 410px;
+    width: 76%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(33,64,255,0.45), transparent);
+    pointer-events: none;
+}
+
+.experts-hero {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin-bottom: 70px;
+    animation: expertsRise 0.65s ease both;
+}
+
+.experts-hero p {
+    color: #2140ff;
+    font-size: 0.86rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.experts-hero h1 {
+    max-width: 950px;
+    margin: 18px 0 24px;
+    color: #111;
+    font-size: 5.7rem;
+    line-height: 0.94;
+    font-weight: 900;
+}
+
+.experts-hero span {
+    display: block;
+    max-width: 720px;
+    color: rgba(0,0,0,0.68);
+    font-size: 1.12rem;
+    line-height: 1.9;
+}
+
+.experts-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 34px;
+}
+
+.expert-card {
+    min-height: 620px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 36px;
+    background: rgba(255,255,255,0.34);
+    border: 1px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    box-shadow:
+        0 24px 70px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.72);
+    transform: translateY(24px);
+    opacity: 0;
+    animation: expertsRise 0.6s ease forwards;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.expert-card:hover {
+    transform: translateY(-10px);
+    box-shadow:
+        0 28px 80px rgba(33,64,255,0.22),
+        0 12px 35px rgba(0,0,0,0.14);
+}
+
+.expert-card::before {
+    content: "";
+    position: absolute;
+    inset: auto -90px 180px auto;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(33,64,255,0.34), transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.expert-image-wrap {
+    height: 390px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #101010, #263cff);
+}
+
+.expert-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.95) contrast(1.08);
+    transition:
+        transform 0.65s ease,
+        filter 0.65s ease;
+}
+
+.expert-card:hover .expert-image-wrap img {
+    transform: scale(1.07);
+    filter: saturate(1.1) contrast(1.12);
+}
+
+.expert-image-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 42%, rgba(0,0,0,0.58));
+}
+
+.expert-image-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.26), transparent 36%),
+        linear-gradient(145deg, #111, #2140ff);
+}
+
+.expert-image-fallback span {
+    width: 148px;
+    height: 148px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        0 24px 70px rgba(0,0,0,0.18);
+}
+
+.expert-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+}
+
+.expert-content span {
+    color: #2140ff;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 2.6px;
+    text-transform: uppercase;
+}
+
+.expert-content h2 {
+    margin: 12px 0 8px;
+    color: #111;
+    font-size: 2.45rem;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.expert-content strong {
+    display: block;
+    color: rgba(0,0,0,0.64);
+    font-size: 1rem;
+    margin-bottom: 18px;
+}
+
+.expert-content p {
+    color: rgba(0,0,0,0.68);
+    line-height: 1.75;
+}
+
+.expert-content a {
+    display: inline-flex;
+    margin-top: 24px;
+    color: white;
+    text-decoration: none;
+    background: #111;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.expert-content a:hover {
+    transform: translateY(-3px);
+    background: #2140ff;
+}
+
+.experts-empty {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    padding: 44px;
+    border-radius: 34px;
+    background: rgba(255,255,255,0.42);
+    border: 1px solid rgba(255,255,255,0.54);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+.experts-empty h2 {
+    color: #111;
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+}
+
+.experts-empty p {
+    color: rgba(0,0,0,0.68);
+    line-height: 1.8;
+}
+
+.experts-error h2 {
+    color: #b32626;
+}
+
+.expert-card-skeleton {
+    padding: 28px;
+    display: grid;
+    gap: 22px;
+    align-content: end;
+}
+
+.expert-card-skeleton div,
+.expert-card-skeleton span,
+.expert-card-skeleton strong,
+.expert-card-skeleton p {
+    display: block;
+    border-radius: 20px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0.72), rgba(255,255,255,0.35));
+    background-size: 220% 100%;
+    animation: expertSkeleton 1.2s ease-in-out infinite;
+}
+
+.expert-card-skeleton div {
+    height: 330px;
+}
+
+.expert-card-skeleton span {
+    width: 42%;
+    height: 18px;
+}
+
+.expert-card-skeleton strong {
+    width: 72%;
+    height: 38px;
+}
+
+.expert-card-skeleton p {
+    height: 90px;
+}
+
+@keyframes expertsRise {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes expertSkeleton {
+    from {
+        background-position: 0% 0;
+    }
+    to {
+        background-position: -220% 0;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .experts-page {
+        padding: 120px 28px 90px;
+    }
+
+    .experts-hero h1 {
+        font-size: 4.1rem;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .experts-page {
+        padding: 105px 18px 80px;
+    }
+
+    .experts-hero h1 {
+        font-size: 3rem;
+    }
+
+    .expert-card {
+        min-height: auto;
+        border-radius: 28px;
+    }
+
+    .expert-image-wrap {
+        height: 320px;
+    }
+
+    .expert-content {
+        padding: 24px;
+    }
+
+    .expert-content h2 {
+        font-size: 2rem;
+    }
+}

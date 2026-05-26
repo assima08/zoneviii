@@ -5,6 +5,8 @@ Plateforme web de studio audio construite avec React, TypeScript, Django REST Fr
 ## Fonctionnalites
 
 - Affichage des services et tarifs depuis l'API Django
+- Page Nos Experts alimentee par l'API Django
+- Page Nous contacter avec formulaire connecte a Django REST
 - Systeme de reservation maison conserve
 - Validation anti-conflit des creneaux cote backend
 - Etats de chargement et d'erreur cote frontend
@@ -54,3 +56,4 @@ DATABASE_URL=postgresql://user:password@host:5432/database
 - `POST /reservations/create/`
 - `GET /experts/`
 - `GET /formations/`
+- `POST /contact/`
