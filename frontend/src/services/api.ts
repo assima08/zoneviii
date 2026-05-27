@@ -6,8 +6,11 @@ import type { Service } from "../interfaces/Service";
 import type { ReservationCreatePayload } from "../interfaces/Reservation";
 import type { Tarif } from "../interfaces/Tarif";
 
-const API_BASE_URL =
-    import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
+export const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+if (!API_BASE_URL) {
+    throw new Error("VITE_API_URL is not configured.");
+}
 
 const api = axios.create({
     baseURL: API_BASE_URL,

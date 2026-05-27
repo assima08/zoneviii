@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 
 import type { Expert } from "../interfaces/Expert";
-import { getApiErrorMessage, getExperts } from "../services/api";
+import { API_BASE_URL, getApiErrorMessage, getExperts } from "../services/api";
 import "../styles/experts.css";
 
 function Experts() {
@@ -178,10 +178,7 @@ function resolveExpertImageUrl(expert: Expert) {
         return rawUrl;
     }
 
-    const apiBaseUrl =
-        import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
-
-    return new URL(rawUrl, apiBaseUrl).toString();
+    return new URL(rawUrl, API_BASE_URL).toString();
 }
 
 function getInitials(name: string) {
