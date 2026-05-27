@@ -14,8 +14,10 @@ const initialForm: ContactMessagePayload = {
     nom: "",
     prenom: "",
     email: "",
+    telephone: "",
     sujet: "",
     message: "",
+    website: "",
 };
 
 function Contact() {
@@ -28,6 +30,7 @@ function Contact() {
             form.nom.trim().length >= 2
             && form.prenom.trim().length >= 2
             && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
+            && /^[0-9+().\-\s]{6,30}$/.test(form.telephone.trim())
             && form.sujet.trim().length >= 2
             && form.message.trim().length >= 10
         );
@@ -59,8 +62,10 @@ function Contact() {
                 nom: form.nom.trim(),
                 prenom: form.prenom.trim(),
                 email: form.email.trim(),
+                telephone: form.telephone.trim(),
                 sujet: form.sujet.trim(),
                 message: form.message.trim(),
+                website: form.website?.trim(),
             });
 
             setForm(initialForm);
@@ -104,7 +109,7 @@ function Contact() {
                     <div className="contact-meta-grid">
                         <div>
                             <span>Email</span>
-                            <strong>booking@zoneviii.studio</strong>
+                            <strong>info@zooneviii.com</strong>
                         </div>
                         <div>
                             <span>Reponse</span>
@@ -130,6 +135,7 @@ function Contact() {
                                 onChange={(event) => updateField("nom", event.target.value)}
                                 disabled={loading}
                                 autoComplete="family-name"
+                                required
                             />
                         </label>
 
@@ -140,18 +146,44 @@ function Contact() {
                                 onChange={(event) => updateField("prenom", event.target.value)}
                                 disabled={loading}
                                 autoComplete="given-name"
+                                required
                             />
                         </label>
                     </div>
 
-                    <label>
-                        <span>Email</span>
+                    <div className="contact-form-row">
+                        <label>
+                            <span>Email</span>
+                            <input
+                                type="email"
+                                value={form.email}
+                                onChange={(event) => updateField("email", event.target.value)}
+                                disabled={loading}
+                                autoComplete="email"
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            <span>Telephone</span>
+                            <input
+                                type="tel"
+                                value={form.telephone}
+                                onChange={(event) => updateField("telephone", event.target.value)}
+                                disabled={loading}
+                                autoComplete="tel"
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <label className="contact-honeypot" aria-hidden="true">
+                        <span>Site web</span>
                         <input
-                            type="email"
-                            value={form.email}
-                            onChange={(event) => updateField("email", event.target.value)}
-                            disabled={loading}
-                            autoComplete="email"
+                            value={form.website || ""}
+                            onChange={(event) => updateField("website", event.target.value)}
+                            tabIndex={-1}
+                            autoComplete="off"
                         />
                     </label>
 
@@ -161,6 +193,7 @@ function Contact() {
                             value={form.sujet}
                             onChange={(event) => updateField("sujet", event.target.value)}
                             disabled={loading}
+                            required
                         />
                     </label>
 
@@ -171,12 +204,13 @@ function Contact() {
                             onChange={(event) => updateField("message", event.target.value)}
                             disabled={loading}
                             rows={6}
+                            required
                         />
                     </label>
 
                     <button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading || !isValid}
                     >
                         {loading ? "Envoi en cours..." : "Envoyer"}
                     </button>

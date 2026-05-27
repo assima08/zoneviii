@@ -98,6 +98,7 @@ class ContactMessage(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
+    telephone = models.CharField(max_length=30)
     sujet = models.CharField(max_length=160)
     message = models.TextField(max_length=2500)
     created_at = models.DateTimeField(auto_now_add=True)

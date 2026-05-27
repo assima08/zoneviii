@@ -41,7 +41,7 @@ export async function createReservation(payload: ReservationCreatePayload) {
 }
 
 export async function sendContactMessage(payload: ContactMessagePayload) {
-    const response = await api.post("/contact/", payload);
+    const response = await api.post("/api/contact/", payload);
     return response.data;
 }
 

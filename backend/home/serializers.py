@@ -1,8 +1,10 @@
 from datetime import datetime
+import re
 from urllib.parse import urljoin
 
 from django.conf import settings
 from django.db import transaction
+from django.utils.html import strip_tags
 from rest_framework import serializers
 
 from .models import (
@@ -168,9 +170,21 @@ class FormationSerializer(serializers.ModelSerializer):
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):
+    website = serializers.CharField(required=False, allow_blank=True, write_only=True)
+
     class Meta:
         model = ContactMessage
-        fields = ["id", "nom", "prenom", "email", "sujet", "message", "created_at"]
+        fields = [
+            "id",
+            "nom",
+            "prenom",
+            "email",
+            "telephone",
+            "sujet",
+            "message",
+            "created_at",
+            "website",
+        ]
         read_only_fields = ["id", "created_at"]
 
     def validate_nom(self, value):
@@ -182,16 +196,33 @@ class ContactMessageSerializer(serializers.ModelSerializer):
     def validate_sujet(self, value):
         return self._clean_short_text(value, "sujet")
 
+    def validate_telephone(self, value):
+        cleaned = self._clean_short_text(value, "telephone")
+
+        if not re.fullmatch(r"[0-9+().\-\s]{6,30}", cleaned):
+            raise serializers.ValidationError("Le numero de telephone est invalide.")
+
+        return cleaned
+
     def validate_message(self, value):
-        cleaned = value.strip()
+        cleaned = strip_tags(value).strip()
 
         if len(cleaned) < 10:
             raise serializers.ValidationError("Le message doit contenir au moins 10 caracteres.")
 
+        if len(cleaned) > 2500:
+            raise serializers.ValidationError("Le message est trop long.")
+
         return cleaned
 
+    def validate(self, attrs):
+        if attrs.pop("website", ""):
+            raise serializers.ValidationError("Votre message n'a pas pu etre envoye.")
+
+        return attrs
+
     def _clean_short_text(self, value, field_name):
-        cleaned = value.strip()
+        cleaned = strip_tags(value).strip()
 
         if len(cleaned) < 2:
             raise serializers.ValidationError(f"Le champ {field_name} est trop court.")

@@ -2,6 +2,7 @@ import os
 import sys
 from pathlib import Path
 
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
@@ -27,12 +28,12 @@ def env_list(name, default=""):
 
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", os.getenv("SECRET_KEY", "unsafe-dev-secret-key"))
-DEBUG = env_bool("DJANGO_DEBUG", "DEBUG", default=False)
+DEBUG = env_bool("DJANGO_DEBUG", "DEBUG", default=not IS_RAILWAY)
 
-if not DEBUG and SECRET_KEY == "unsafe-dev-secret-key":
-    raise ImproperlyConfigured("DJANGO_SECRET_KEY must be set when DEBUG=False.")
+if IS_RAILWAY and not DEBUG and SECRET_KEY == "unsafe-dev-secret-key":
+    raise ImproperlyConfigured("DJANGO_SECRET_KEY must be set on Railway when DEBUG=False.")
 
-ALLOWED_HOSTS = env_list("ALLOWED_HOSTS", "localhost,127.0.0.1")
+ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1"))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -60,7 +61,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = env_list(
     "CORS_ALLOWED_ORIGINS",
-    "http://localhost:5173,http://127.0.0.1:5173",
+    "http://localhost:5173,http://127.0.0.1:5173,https://zooneviii.com,https://www.zooneviii.com,https://zoneviii.vercel.app",
 )
 
 frontend_url = os.getenv("FRONTEND_URL", "").strip()
@@ -88,34 +89,40 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "zoneviii.wsgi.application"
 
-# --- Base de données ---
-# Utilise les variables DB_* individuelles (définies dans Railway → Variables)
+# --- Base de donnees ---
+DATABASE_URL = os.getenv("DATABASE_URL")
 _db_name = os.getenv("DB_NAME")
 _db_user = os.getenv("DB_USER")
 _db_password = os.getenv("DB_PASSWORD")
 _db_host = os.getenv("DB_HOST")
 _db_port = os.getenv("DB_PORT", "5432")
 
-_missing = [k for k, v in {
-    "DB_NAME": _db_name,
-    "DB_USER": _db_user,
-    "DB_PASSWORD": _db_password,
-    "DB_HOST": _db_host,
-}.items() if not v]
-
-if _missing:
-    raise ImproperlyConfigured(f"Variables d'environnement manquantes : {', '.join(_missing)}")
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": _db_name,
-        "USER": _db_user,
-        "PASSWORD": _db_password,
-        "HOST": _db_host,
-        "PORT": _db_port,
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL)
     }
-}
+elif all([_db_name, _db_user, _db_password, _db_host]):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": _db_name,
+            "USER": _db_user,
+            "PASSWORD": _db_password,
+            "HOST": _db_host,
+            "PORT": _db_port,
+        }
+    }
+elif IS_RAILWAY:
+    raise ImproperlyConfigured(
+        "DATABASE_URL or DB_NAME, DB_USER, DB_PASSWORD and DB_HOST must be set on Railway."
+    )
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -160,6 +167,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_THROTTLE_RATES": {
         "anon": os.getenv("DRF_ANON_THROTTLE_RATE", "100/hour"),
+        "contact": os.getenv("DRF_CONTACT_THROTTLE_RATE", "5/minute"),
     },
 }
 
@@ -171,5 +179,15 @@ SECURE_HSTS_SECONDS = int(os.getenv("DJANGO_SECURE_HSTS_SECONDS", "0"))
 SECURE_HSTS_INCLUDE_SUBDOMAINS = SECURE_HSTS_SECONDS > 0
 SECURE_HSTS_PRELOAD = SECURE_HSTS_SECONDS > 0
 X_FRAME_OPTIONS = "DENY"
+
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", default=True)
+EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL", default=False)
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER or "noreply@zooneviii.com")
+CONTACT_EMAIL_TO = os.getenv("CONTACT_EMAIL_TO", "info@zooneviii.com")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
