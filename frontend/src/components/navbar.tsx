@@ -1,28 +1,58 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../styles/navbar.css";
 
+const navLinks = [
+    { label: "SERVICES", to: "/services" },
+    { label: "TARIFS", to: "/tarifs" },
+    { label: "NOS EXPERTS", to: "/experts" },
+    { label: "RESERVATIONS", to: "/reservations" },
+    { label: "NOUS CONTACTER", to: "/contact" },
+];
+
 function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    function closeMenu() {
+        setIsOpen(false);
+    }
+
     return (
         <nav className="navbar">
             <div className="logo">
-                <Link to="/">ZONEVIII</Link>
+                <Link
+                    to="/"
+                    onClick={closeMenu}
+                >
+                    ZONEVIII
+                </Link>
             </div>
 
-            <ul className="nav-links">
-                <li><Link to="/services">SERVICES</Link></li>
-                <li><Link to="/tarifs">TARIFS</Link></li>
-                <li><Link to="/experts">NOS EXPERTS</Link></li>
-                <li><Link to="/reservations">RESERVATIONS</Link></li>
-                <li><Link to="/contact">NOUS CONTACTER</Link></li>
-            </ul>
-
-            <div
-                className="menu-icon"
-                aria-hidden="true"
+            <button
+                className={`menu-icon ${isOpen ? "menu-icon-open" : ""}`}
+                type="button"
+                aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-expanded={isOpen}
+                onClick={() => setIsOpen((currentValue) => !currentValue)}
             >
-                Menu
-            </div>
+                <span />
+                <span />
+                <span />
+            </button>
+
+            <ul className={`nav-links ${isOpen ? "nav-links-open" : ""}`}>
+                {navLinks.map((link) => (
+                    <li key={link.to}>
+                        <Link
+                            to={link.to}
+                            onClick={closeMenu}
+                        >
+                            {link.label}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </nav>
     );
 }

@@ -13,7 +13,7 @@ const navLinks = [
 
 function Footer() {
     return (
-        <footer className="foot">
+        <footer className="footer">
             {navLinks.map((link) => (
                 <div
                     className="menu-item"

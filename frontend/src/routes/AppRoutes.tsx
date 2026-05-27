@@ -9,6 +9,7 @@ import Reservations from "../pages/Reservations";
 import Services from "../pages/Services";
 import Tarifs from "../pages/Tarifs";
 import "../styles/global.css";
+import "../styles/responsive.css";
 
 function AppRoutes() {
     return (
