@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
+import SeoManager from "../components/SeoManager";
 import Contact from "../pages/Contact";
 import Experts from "../pages/Experts";
 import Home from "../pages/Home";
@@ -15,6 +16,7 @@ function AppRoutes() {
     return (
         <BrowserRouter>
             <div className="app-layout">
+                <SeoManager />
                 <Navbar />
 
                 <Routes>

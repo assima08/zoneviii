@@ -134,8 +134,9 @@ function ExpertCard({
                 {shouldShowImage ? (
                     <img
                         src={imageUrl}
-                        alt={expert.nomExpert}
+                        alt={`Portrait de ${expert.nomExpert}, ${expert.role || "expert ZoneVIII"}`}
                         loading="lazy"
+                        decoding="async"
                         onError={onImageError}
                     />
                 ) : (
@@ -158,6 +159,7 @@ function ExpertCard({
                         href={expert.instagram}
                         target="_blank"
                         rel="noreferrer"
+                        aria-label={`Voir le profil Instagram de ${expert.nomExpert}`}
                     >
                         Instagram
                     </a>

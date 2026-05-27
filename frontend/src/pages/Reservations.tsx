@@ -55,7 +55,7 @@ function Reservations() {
     }
 
     return (
-        <div className="reservations-page">
+        <main className="reservations-page">
             <h1 className="reservations-title">Reserver une session</h1>
 
             {loading && (
@@ -89,7 +89,7 @@ function Reservations() {
                     onClose={closeModal}
                 />
             )}
-        </div>
+        </main>
     );
 }
 

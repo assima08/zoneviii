@@ -42,7 +42,7 @@ function Services() {
     }, []);
 
     return (
-        <div className="services-page">
+        <main className="services-page">
             <h1 className="services-title">NOS SERVICES</h1>
 
             <div className="services-grid">
@@ -86,6 +86,7 @@ function Services() {
 
                         <button
                             className="service-button"
+                            aria-label={`Reserver le service ${service.nomService}`}
                             onClick={() =>
                                 navigate(
                                     "/reservations",
@@ -102,7 +103,7 @@ function Services() {
                     </div>
                 ))}
             </div>
-        </div>
+        </main>
     );
 }
 

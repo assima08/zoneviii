@@ -23,6 +23,7 @@ function Hero() {
                 <div className="hero-buttons-container">
                     <button
                         className="hero-primary-btn"
+                        aria-label="Reserver une session creative ZoneVIII"
                         onClick={() => navigate("/reservations")}
                         type="button"
                     >
@@ -32,6 +33,7 @@ function Hero() {
 
                     <button
                         className="hero-secondary-btn"
+                        aria-label="Decouvrir les services creatifs ZoneVIII"
                         onClick={() => navigate("/services")}
                         type="button"
                     >

@@ -3,10 +3,10 @@ import Vinyl from "../components/vinyl";
 
 function Home() {
     return (
-        <div className="app">
+        <main className="app">
             <Vinyl />
             <Hero />
-        </div>
+        </main>
     );
 }
 

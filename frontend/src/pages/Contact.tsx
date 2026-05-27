@@ -184,7 +184,11 @@ function Contact() {
             </section>
 
             {toast && (
-                <div className={`contact-toast contact-toast-${toast.type}`}>
+                <div
+                    className={`contact-toast contact-toast-${toast.type}`}
+                    role={toast.type === "error" ? "alert" : "status"}
+                    aria-live="polite"
+                >
                     {toast.message}
                 </div>
             )}

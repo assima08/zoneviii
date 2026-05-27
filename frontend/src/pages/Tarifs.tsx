@@ -40,7 +40,7 @@ function Tarifs() {
     }, []);
 
     return (
-        <div className="tarifs-page">
+        <main className="tarifs-page">
             <header className="tarifs-header">
                 <p className="tarifs-subtitle">ZONEVIII</p>
                 <h1 className="tarifs-title">Tarifs</h1>
@@ -66,7 +66,7 @@ function Tarifs() {
                     </article>
                 ))}
             </div>
-        </div>
+        </main>
     );
 }
 
