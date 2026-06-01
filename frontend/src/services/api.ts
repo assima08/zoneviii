@@ -7,11 +7,13 @@ import type { ReservationCreatePayload } from "../interfaces/Reservation";
 import type { Tarif } from "../interfaces/Tarif";
 import type { Realisation } from "../interfaces/Realisation";
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL;
+const rawApiUrl = import.meta.env.VITE_API_URL;
 
-if (!API_BASE_URL) {
+if (!rawApiUrl) {
     throw new Error("VITE_API_URL is not configured.");
 }
+
+export const API_BASE_URL = rawApiUrl.replace(/\/+$/, "");
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -46,6 +48,11 @@ export async function sendContactMessage(payload: ContactMessagePayload) {
     return response.data;
 }
 
+export async function getRealisations() {
+    const response = await api.get<Realisation[]>("/api/realisations/");
+    return response.data;
+}
+
 export function getApiErrorMessage(error: unknown) {
     if (axios.isAxiosError(error)) {
         const data = error.response?.data;
@@ -67,16 +74,11 @@ export function getApiErrorMessage(error: unknown) {
         }
 
         if (error.code === "ECONNABORTED") {
-            return "Le serveur met trop de temps a repondre.";
+            return "Le serveur met trop de temps à répondre.";
         }
     }
 
     return "Impossible de contacter le serveur.";
-}
-
-export async function getRealisations() {
-    const response = await api.get<Realisation[]>("/realisations/");
-    return response.data;
 }
 
 export default api;
