@@ -16,6 +16,7 @@ from .models import (
     Reservation,
     Service,
     Tarifs,
+    Realisation
 )
 
 
@@ -228,3 +229,37 @@ class ContactMessageSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(f"Le champ {field_name} est trop court.")
 
         return cleaned
+
+class RealisationSerializer(serializers.ModelSerializer):
+    expert_nom = serializers.CharField(source="expert.nom", read_only=True)
+    services_noms = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Realisation
+        fields = [
+            "id",
+            "titre",
+            "description",
+            "expert",
+            "expert_nom",
+            "services",
+            "services_noms",
+            "categorie",
+            "image",
+            "image_url",
+            "lien",
+            "date_realisation",
+            "est_publiee",
+            "created_at",
+        ]
+
+    def get_services_noms(self, obj):
+        return [service.nomService for service in obj.services.all()]
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+        if obj.image and request:
+            return request.build_absolute_uri(obj.image.url)
+        return None
+    

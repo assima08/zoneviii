@@ -109,3 +109,52 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.prenom} {self.nom} - {self.sujet}"
+
+class Realisation(models.Model):
+    titre = models.CharField(max_length=150)
+    description = models.TextField()
+
+    expert = models.ForeignKey(
+        Expert,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="realisations"
+    )
+
+    services = models.ManyToManyField(
+        Service,
+        related_name="realisations",
+        blank=True
+    )
+
+    categorie = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    image = models.ImageField(
+        upload_to="realisations/",
+        blank=True,
+        null=True
+    )
+
+    lien = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    date_realisation = models.DateField(
+        blank=True,
+        null=True
+    )
+
+    est_publiee = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titre
+    
+    

@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from .views import RealisationListView
 
 urlpatterns = [
     path("", views.health_check, name="health-check"),
@@ -11,4 +12,5 @@ urlpatterns = [
     path("formations/", views.FormationListView.as_view(), name="formation-list"),
     path("reservations/", views.ReservationListView.as_view(), name="reservation-list"),
     path("reservations/create/", views.ReservationCreateView.as_view(), name="reservation-create"),
+    path("realisations/", RealisationListView.as_view(), name="realisations"),
 ]
