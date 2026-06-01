@@ -7,6 +7,7 @@ const navLinks = [
     { label: "SERVICES", to: "/services" },
     { label: "TARIFS", to: "/tarifs" },
     { label: "NOS EXPERTS", to: "/experts" },
+    { label: "NOS RÉALISATION", to:"/realisations"},
     { label: "RESERVATIONS", to: "/reservations" },
     { label: "NOUS CONTACTER", to: "/contact" },
 ];
