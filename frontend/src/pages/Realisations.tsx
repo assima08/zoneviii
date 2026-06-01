@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import type { Realisation } from "../interfaces/Realisation";
-import { getApiErrorMessage, getRealisations, resolveMediaUrl } from "../services/api";
+import { getApiErrorMessage, getRealisations } from "../services/api";
 
 import "../styles/realisations.css";
 
@@ -10,9 +10,7 @@ function Realisations() {
     const [selectedCategory, setSelectedCategory] = useState("Tous");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [brokenImageIds, setBrokenImageIds] = useState<Set<number>>(
-        () => new Set()
-    );
+    const [brokenImages, setBrokenImages] = useState<number[]>([]);
 
     useEffect(() => {
         async function fetchRealisations() {
@@ -50,14 +48,6 @@ function Realisations() {
             (realisation) => realisation.categorie === selectedCategory
         );
     }, [realisations, selectedCategory]);
-
-    function markImageAsBroken(id: number) {
-        setBrokenImageIds((currentIds) => {
-            const nextIds = new Set(currentIds);
-            nextIds.add(id);
-            return nextIds;
-        });
-    }
 
     return (
         <main className="realisations-page">
@@ -118,23 +108,26 @@ function Realisations() {
             {!loading && !error && filteredRealisations.length > 0 && (
                 <section className="realisations-grid" aria-label="Liste des realisations ZoneVIII">
                     {filteredRealisations.map((realisation) => {
-                        const imageUrl = resolveMediaUrl(realisation.image_url || realisation.image);
-                        const shouldShowImage = imageUrl && !brokenImageIds.has(realisation.id);
-
                         return (
                             <article
                                 key={realisation.id}
                                 className="realisation-card"
                             >
                                 <div className="realisation-image-wrapper">
-                                    {shouldShowImage ? (
+                                    {realisation.image_url && !brokenImages.includes(realisation.id) ? (
                                         <img
-                                            src={imageUrl}
+                                            src={realisation.image_url}
                                             alt={realisation.titre}
                                             className="realisation-image"
                                             loading="lazy"
                                             decoding="async"
-                                            onError={() => markImageAsBroken(realisation.id)}
+                                            onError={() =>
+                                                setBrokenImages((previous) =>
+                                                    previous.includes(realisation.id)
+                                                        ? previous
+                                                        : [...previous, realisation.id]
+                                                )
+                                            }
                                         />
                                     ) : (
                                         <div
