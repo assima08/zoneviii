@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import type { Realisation } from "../interfaces/Realisation";
-
-import { API_BASE_URL } from "../services/api";
-
+import { getRealisations, getApiErrorMessage } from "../services/api";
 import "../styles/realisations.css";
 
 function Realisations() {
@@ -22,41 +20,40 @@ function Realisations() {
 
     useEffect(() => {
 
+        let isMounted = true;
+
         async function fetchRealisations() {
 
             try {
 
                 setLoading(true);
 
-                const response = await fetch(`${API_BASE_URL}/api/realisations/`.replace('/api/api/', '/api/'));
+                const data = await getRealisations();
 
-                if (!response.ok) {
-
-                    throw new Error(
-                        "Impossible de charger les réalisations."
-                    );
+                if (isMounted) {
+                    setRealisations(data);
                 }
 
-                const data: Realisation[] =
-                    await response.json();
+            } catch (err) {
 
-                setRealisations(data);
-
-            } catch (error) {
-
-                console.error(error);
-
-                setError(
-                    "Une erreur est survenue pendant le chargement des réalisations."
-                );
+                if (isMounted) {
+                    console.error(err);
+                    setError(getApiErrorMessage(err));
+                }
 
             } finally {
 
-                setLoading(false);
+                if (isMounted) {
+                    setLoading(false);
+                }
             }
         }
 
         fetchRealisations();
+
+        return () => {
+            isMounted = false;
+        };
 
     }, []);
 
@@ -76,7 +73,6 @@ function Realisations() {
     const filteredRealisations = useMemo(() => {
 
         if (selectedCategory === "Tous") {
-
             return realisations;
         }
 

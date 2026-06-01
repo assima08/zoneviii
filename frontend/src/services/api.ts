@@ -5,6 +5,7 @@ import type { Expert } from "../interfaces/Expert";
 import type { Service } from "../interfaces/Service";
 import type { ReservationCreatePayload } from "../interfaces/Reservation";
 import type { Tarif } from "../interfaces/Tarif";
+import type { Realisation } from "../interfaces/Realisation";
 
 export const API_BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -71,6 +72,11 @@ export function getApiErrorMessage(error: unknown) {
     }
 
     return "Impossible de contacter le serveur.";
+}
+
+export async function getRealisations() {
+    const response = await api.get<Realisation[]>("/realisations/");
+    return response.data;
 }
 
 export default api;
