@@ -15,23 +15,6 @@ if not IS_RAILWAY:
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME", "")
-CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY", "")
-CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET", "")
-USE_CLOUDINARY_STORAGE = all([
-    CLOUDINARY_CLOUD_NAME,
-    CLOUDINARY_API_KEY,
-    CLOUDINARY_API_SECRET,
-])
-
-if USE_CLOUDINARY_STORAGE:
-    cloudinary.config(
-        cloud_name=CLOUDINARY_CLOUD_NAME,
-        api_key=CLOUDINARY_API_KEY,
-        api_secret=CLOUDINARY_API_SECRET,
-        secure=True,
-    )
-
 
 def env_bool(*names, default=False):
     for name in names:
@@ -43,6 +26,36 @@ def env_bool(*names, default=False):
 
 def env_list(name, default=""):
     return [item.strip() for item in os.getenv(name, default).split(",") if item.strip()]
+
+
+CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME", "")
+CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY", "")
+CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET", "")
+CLOUDINARY_ENV = {
+    "CLOUDINARY_CLOUD_NAME": CLOUDINARY_CLOUD_NAME,
+    "CLOUDINARY_API_KEY": CLOUDINARY_API_KEY,
+    "CLOUDINARY_API_SECRET": CLOUDINARY_API_SECRET,
+}
+CLOUDINARY_CONFIGURED = all(CLOUDINARY_ENV.values())
+CLOUDINARY_REQUESTED = env_bool("USE_CLOUDINARY_STORAGE", default=CLOUDINARY_CONFIGURED)
+USE_CLOUDINARY_STORAGE = CLOUDINARY_REQUESTED and CLOUDINARY_CONFIGURED
+
+if CLOUDINARY_REQUESTED and not CLOUDINARY_CONFIGURED:
+    missing_cloudinary_vars = [
+        name for name, value in CLOUDINARY_ENV.items() if not value
+    ]
+    raise ImproperlyConfigured(
+        "USE_CLOUDINARY_STORAGE=True but missing environment variables: "
+        + ", ".join(missing_cloudinary_vars)
+    )
+
+if USE_CLOUDINARY_STORAGE:
+    cloudinary.config(
+        cloud_name=CLOUDINARY_CLOUD_NAME,
+        api_key=CLOUDINARY_API_KEY,
+        api_secret=CLOUDINARY_API_SECRET,
+        secure=True,
+    )
 
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", os.getenv("SECRET_KEY", "unsafe-dev-secret-key"))
@@ -59,8 +72,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "cloudinary_storage",
     "django.contrib.staticfiles",
+    "cloudinary_storage",
     "cloudinary",
     "rest_framework",
     "corsheaders",
@@ -162,16 +175,19 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 static_dir = BASE_DIR / "static"
 STATICFILES_DIRS = [static_dir] if static_dir.exists() else []
 
+DEFAULT_FILE_STORAGE = (
+    "cloudinary_storage.storage.MediaCloudinaryStorage"
+    if USE_CLOUDINARY_STORAGE
+    else "django.core.files.storage.FileSystemStorage"
+)
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 STORAGES = {
     "default": {
-        "BACKEND": (
-            "cloudinary_storage.storage.MediaCloudinaryStorage"
-            if USE_CLOUDINARY_STORAGE
-            else "django.core.files.storage.FileSystemStorage"
-        ),
+        "BACKEND": DEFAULT_FILE_STORAGE,
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": STATICFILES_STORAGE,
     },
 }
 
