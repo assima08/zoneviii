@@ -28,7 +28,7 @@ function Realisations() {
 
                 setLoading(true);
 
-                const response = await fetch(`${API_BASE_URL}/api/realisations/`);
+                const response = await fetch(`${API_BASE_URL}/api/realisations/`.replace('/api/api/', '/api/'));
 
                 if (!response.ok) {
 
