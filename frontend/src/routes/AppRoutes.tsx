@@ -25,10 +25,12 @@ function AppRoutes() {
                         path="/"
                         element={<Home />}
                     />
-                    <Route
+                    
+                   <Route
                         path="/services"
                         element={<Services />}
                     />
+                    
                     <Route
                         path="/tarifs"
                         element={<Tarifs />}
