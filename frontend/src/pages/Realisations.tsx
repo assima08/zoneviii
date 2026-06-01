@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import type { Realisation } from "../interfaces/Realisation";
-import { getRealisations, resolveMediaUrl } from "../services/api";
+import { getApiErrorMessage, getRealisations, resolveMediaUrl } from "../services/api";
 
 import "../styles/realisations.css";
 
@@ -10,6 +10,9 @@ function Realisations() {
     const [selectedCategory, setSelectedCategory] = useState("Tous");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [brokenImageIds, setBrokenImageIds] = useState<Set<number>>(
+        () => new Set()
+    );
 
     useEffect(() => {
         async function fetchRealisations() {
@@ -20,12 +23,8 @@ function Realisations() {
                 const data = await getRealisations();
 
                 setRealisations(data);
-            } catch (error) {
-                console.error(error);
-
-                setError(
-                    "Une erreur est survenue pendant le chargement des réalisations."
-                );
+            } catch (requestError) {
+                setError(getApiErrorMessage(requestError));
             } finally {
                 setLoading(false);
             }
@@ -52,27 +51,35 @@ function Realisations() {
         );
     }, [realisations, selectedCategory]);
 
+    function markImageAsBroken(id: number) {
+        setBrokenImageIds((currentIds) => {
+            const nextIds = new Set(currentIds);
+            nextIds.add(id);
+            return nextIds;
+        });
+    }
+
     return (
         <main className="realisations-page">
             <section className="realisations-hero">
                 <div className="realisations-hero-content">
                     <span className="realisations-eyebrow">
-                        Nos réalisations
+                        Portfolio ZoneVIII
                     </span>
 
                     <h1>
-                        Nos réalisations
+                        Nos realisations
                     </h1>
                 </div>
 
                 <p>
-                    Découvrez une sélection de projets mixés, produits et
-                    accompagnés par ZoneVIII. Chaque réalisation reflète notre
-                    exigence sonore et notre vision créative.
+                    Decouvrez une selection de projets mixes, produits et
+                    accompagnes par ZoneVIII. Chaque realisation reflete notre
+                    exigence sonore et notre vision creative.
                 </p>
             </section>
 
-            <section className="realisations-filters">
+            <section className="realisations-filters" aria-label="Filtrer les realisations">
                 {categories.map((category) => (
                     <button
                         key={category}
@@ -82,6 +89,7 @@ function Realisations() {
                                 ? "filter-button active"
                                 : "filter-button"
                         }
+                        aria-pressed={selectedCategory === category}
                         onClick={() => setSelectedCategory(category)}
                     >
                         {category}
@@ -91,7 +99,7 @@ function Realisations() {
 
             {loading && (
                 <p className="realisations-status">
-                    Chargement des réalisations...
+                    Chargement des realisations...
                 </p>
             )}
 
@@ -103,14 +111,15 @@ function Realisations() {
 
             {!loading && !error && filteredRealisations.length === 0 && (
                 <p className="realisations-status">
-                    Aucune réalisation disponible pour le moment.
+                    Aucune realisation disponible pour le moment.
                 </p>
             )}
 
             {!loading && !error && filteredRealisations.length > 0 && (
-                <section className="realisations-grid">
+                <section className="realisations-grid" aria-label="Liste des realisations ZoneVIII">
                     {filteredRealisations.map((realisation) => {
                         const imageUrl = resolveMediaUrl(realisation.image_url || realisation.image);
+                        const shouldShowImage = imageUrl && !brokenImageIds.has(realisation.id);
 
                         return (
                             <article
@@ -118,16 +127,21 @@ function Realisations() {
                                 className="realisation-card"
                             >
                                 <div className="realisation-image-wrapper">
-                                    {imageUrl ? (
+                                    {shouldShowImage ? (
                                         <img
                                             src={imageUrl}
                                             alt={realisation.titre}
                                             className="realisation-image"
                                             loading="lazy"
                                             decoding="async"
+                                            onError={() => markImageAsBroken(realisation.id)}
                                         />
                                     ) : (
-                                        <div className="realisation-image-placeholder">
+                                        <div
+                                            className="realisation-image-placeholder"
+                                            aria-label={`Image indisponible pour ${realisation.titre}`}
+                                            role="img"
+                                        >
                                             ZVIII
                                         </div>
                                     )}
@@ -187,12 +201,12 @@ function Realisations() {
             <section className="realisations-cta">
                 <div>
                     <h2>
-                        Vous avez un projet à concrétiser ?
+                        Vous avez un projet a concretiser ?
                     </h2>
 
                     <p>
-                        Réservez une session ou contactez-nous pour discuter de
-                        votre vision. Ensemble, donnons vie à votre son.
+                        Reservez une session ou contactez-nous pour discuter de
+                        votre vision. Ensemble, donnons vie a votre son.
                     </p>
                 </div>
 
@@ -201,14 +215,14 @@ function Realisations() {
                         href="/reservations"
                         className="primary"
                     >
-                        Réserver une session →
+                        Reserver une session
                     </a>
 
                     <a
                         href="/contact"
                         className="secondary"
                     >
-                        Nous contacter →
+                        Nous contacter
                     </a>
                 </div>
             </section>

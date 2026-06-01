@@ -9,7 +9,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
 
-from .models import ContactMessage, Expert, Formation, Reservation, Service, Tarifs , Realisation
+from .models import ContactMessage, Expert, Formation, Realisation, Reservation, Service, Tarifs
 from .serializers import (
     ContactMessageSerializer,
     ExpertSerializer,
@@ -18,7 +18,7 @@ from .serializers import (
     ReservationSerializer,
     ServiceSerializer,
     TarifSerializer,
-    RealisationSerializer
+    RealisationSerializer,
 )
 
 logger = logging.getLogger(__name__)
@@ -142,13 +142,17 @@ class ContactMessageCreateView(generics.CreateAPIView):
 
         return request.META.get("REMOTE_ADDR", "unknown")
 
-"""Vue des realisations on utilisera le Serializer pour l'envoyer vers React
-"""
 class RealisationListView(generics.ListAPIView):
     serializer_class = RealisationSerializer
 
     def get_queryset(self):
-        queryset = Realisation.objects.filter(est_publiee=True).order_by("-created_at")
+        queryset = (
+            Realisation.objects
+            .filter(est_publiee=True)
+            .select_related("expert")
+            .prefetch_related("services")
+            .order_by("-created_at")
+        )
 
         categorie = self.request.query_params.get("categorie")
         service = self.request.query_params.get("service")
