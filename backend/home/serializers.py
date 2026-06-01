@@ -7,6 +7,27 @@ from django.db import transaction
 from django.utils.html import strip_tags
 from rest_framework import serializers
 
+def build_image_url(image, request=None):
+    if not image:
+        return ""
+
+    try:
+        url = image.url
+    except ValueError:
+        return ""
+
+    if not url:
+        return ""
+
+    if url.startswith(("http://", "https://")):
+        return url
+
+    if request:
+        return request.build_absolute_uri(url)
+
+    return urljoin(settings.MEDIA_URL, image.name)
+
+
 from .models import (
     Client,
     ContactMessage,
@@ -144,18 +165,7 @@ class ExpertSerializer(serializers.ModelSerializer):
         ]
 
     def get_imageUrl(self, obj):
-        image = obj.image or obj.photo
-
-        if not image:
-            return ""
-
-        request = self.context.get("request")
-        url = urljoin(settings.MEDIA_URL, image.name)
-
-        if request:
-            return request.build_absolute_uri(url)
-
-        return url
+        return build_image_url(obj.image or obj.photo, self.context.get("request"))
 
 
 class ExpertServiceSerializer(serializers.ModelSerializer):
@@ -231,7 +241,7 @@ class ContactMessageSerializer(serializers.ModelSerializer):
         return cleaned
 
 class RealisationSerializer(serializers.ModelSerializer):
-    expert_nom = serializers.CharField(source="expert.nom", read_only=True)
+    expert_nom = serializers.CharField(source="expert.nomExpert", read_only=True)
     services_noms = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
 
@@ -258,8 +268,4 @@ class RealisationSerializer(serializers.ModelSerializer):
         return [service.nomService for service in obj.services.all()]
 
     def get_image_url(self, obj):
-        request = self.context.get("request")
-        if obj.image and request:
-            return request.build_absolute_uri(obj.image.url)
-        return None
-    
+        return build_image_url(obj.image, self.context.get("request")) or None

@@ -6,7 +6,7 @@ import "../styles/footer.css";
 
 const navLinks = [
     { label: "Facebook", href: "https://www.facebook.com/", img: facebookIcon },
-    { label: "Instagram", href: "https://www.instagram.com/", img: instagramIcon },
+    { label: "Instagram", href: "https://www.instagram.com/zooneviii", img: instagramIcon },
     { label: "X", href: "https://www.x.com/", img: xIcon },
     { label: "TikTok", href: "https://www.tiktok.com/", img: tiktokIcon },
 ];

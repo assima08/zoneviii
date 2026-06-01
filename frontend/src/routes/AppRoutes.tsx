@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
@@ -7,7 +7,6 @@ import Contact from "../pages/Contact";
 import Experts from "../pages/Experts";
 import Home from "../pages/Home";
 import Reservations from "../pages/Reservations";
-import Services from "../pages/Services";
 import Tarifs from "../pages/Tarifs";
 import "../styles/global.css";
 import "../styles/responsive.css";
@@ -28,7 +27,7 @@ function AppRoutes() {
                     
                    <Route
                         path="/services"
-                        element={<Services />}
+                        element={<Navigate to="/tarifs" replace />}
                     />
                     
                     <Route

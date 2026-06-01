@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 
 import type { Expert } from "../interfaces/Expert";
-import { API_BASE_URL, getApiErrorMessage, getExperts } from "../services/api";
+import { getApiErrorMessage, getExperts, resolveMediaUrl } from "../services/api";
 import "../styles/experts.css";
 
 function Experts() {
@@ -176,11 +176,7 @@ function resolveExpertImageUrl(expert: Expert) {
         return "";
     }
 
-    if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
-        return rawUrl;
-    }
-
-    return new URL(rawUrl, API_BASE_URL).toString();
+    return resolveMediaUrl(rawUrl);
 }
 
 function getInitials(name: string) {

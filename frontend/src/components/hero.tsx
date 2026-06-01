@@ -33,12 +33,12 @@ function Hero() {
 
                     <button
                         className="hero-secondary-btn"
-                        aria-label="Decouvrir les services creatifs ZoneVIII"
-                        onClick={() => navigate("/services")}
+                        aria-label="Decouvrir les tarifs creatifs ZoneVIII"
+                        onClick={() => navigate("/tarifs")}
                         type="button"
                     >
                         <span aria-hidden="true">play</span>
-                        DECOUVRIR LES SERVICES
+                        VOIR LES TARIFS
                     </button>
                 </div>
             </div>

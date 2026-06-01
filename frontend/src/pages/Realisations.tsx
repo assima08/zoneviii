@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import type { Realisation } from "../interfaces/Realisation";
-import { getRealisations } from "../services/api";
+import { getRealisations, resolveMediaUrl } from "../services/api";
 
 import "../styles/realisations.css";
 
@@ -109,73 +109,78 @@ function Realisations() {
 
             {!loading && !error && filteredRealisations.length > 0 && (
                 <section className="realisations-grid">
-                    {filteredRealisations.map((realisation) => (
-                        <article
-                            key={realisation.id}
-                            className="realisation-card"
-                        >
-                            <div className="realisation-image-wrapper">
-                                {realisation.image_url ? (
-                                    <img
-                                        src={realisation.image_url}
-                                        alt={realisation.titre}
-                                        className="realisation-image"
-                                        loading="lazy"
-                                    />
-                                ) : (
-                                    <div className="realisation-image-placeholder">
-                                        ZVIII
-                                    </div>
-                                )}
+                    {filteredRealisations.map((realisation) => {
+                        const imageUrl = resolveMediaUrl(realisation.image_url || realisation.image);
 
-                                {realisation.categorie && (
-                                    <span className="realisation-category">
-                                        {realisation.categorie}
-                                    </span>
-                                )}
-                            </div>
+                        return (
+                            <article
+                                key={realisation.id}
+                                className="realisation-card"
+                            >
+                                <div className="realisation-image-wrapper">
+                                    {imageUrl ? (
+                                        <img
+                                            src={imageUrl}
+                                            alt={realisation.titre}
+                                            className="realisation-image"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                    ) : (
+                                        <div className="realisation-image-placeholder">
+                                            ZVIII
+                                        </div>
+                                    )}
 
-                            <div className="realisation-content">
-                                <h2>
-                                    {realisation.titre}
-                                </h2>
+                                    {realisation.categorie && (
+                                        <span className="realisation-category">
+                                            {realisation.categorie}
+                                        </span>
+                                    )}
+                                </div>
 
-                                <p>
-                                    {realisation.description}
-                                </p>
+                                <div className="realisation-content">
+                                    <h2>
+                                        {realisation.titre}
+                                    </h2>
 
-                                {realisation.expert_nom && (
-                                    <span className="realisation-expert">
-                                        Expert : {realisation.expert_nom}
-                                    </span>
-                                )}
+                                    <p>
+                                        {realisation.description}
+                                    </p>
 
-                                {realisation.services_noms.length > 0 && (
-                                    <div className="realisation-services">
-                                        {realisation.services_noms.map(
-                                            (service) => (
-                                                <span key={service}>
-                                                    {service}
-                                                </span>
-                                            )
-                                        )}
-                                    </div>
-                                )}
+                                    {realisation.expert_nom && (
+                                        <span className="realisation-expert">
+                                            Expert : {realisation.expert_nom}
+                                        </span>
+                                    )}
 
-                                {realisation.lien && (
-                                    <a
-                                        href={realisation.lien}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="realisation-link"
-                                        aria-label={`Voir le projet ${realisation.titre}`}
-                                    >
-                                        Voir le projet
-                                    </a>
-                                )}
-                            </div>
-                        </article>
-                    ))}
+                                    {realisation.services_noms.length > 0 && (
+                                        <div className="realisation-services">
+                                            {realisation.services_noms.map(
+                                                (service) => (
+                                                    <span key={service}>
+                                                        {service}
+                                                    </span>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {realisation.lien && (
+                                        <a
+                                            href={realisation.lien}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="realisation-link"
+                                            aria-label={`Voir le projet ${realisation.titre}`}
+                                        >
+                                            Voir le projet
+                                        </a>
+                                    )}
+                                </div>
+                            </article>
+                        );
+                    })}
                 </section>
             )}
 

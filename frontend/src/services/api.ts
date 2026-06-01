@@ -15,6 +15,17 @@ if (!rawApiUrl) {
 
 export const API_BASE_URL = rawApiUrl.replace(/\/+$/, "");
 
+export function resolveMediaUrl(rawUrl?: string | null) {
+    if (!rawUrl) {
+        return "";
+    }
+
+    if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
+        return rawUrl;
+    }
+
+    return new URL(rawUrl.replace(/^\/+/, ""), `${API_BASE_URL}/`).toString();
+}
 const api = axios.create({
     baseURL: API_BASE_URL,
     headers: {
