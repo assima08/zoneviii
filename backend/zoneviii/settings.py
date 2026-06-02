@@ -236,4 +236,9 @@ EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL", default=False)
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER or "noreply@zooneviii.com")
 CONTACT_EMAIL_TO = os.getenv("CONTACT_EMAIL_TO", "info@zooneviii.com")
 
+GOOGLE_CALENDAR_ID = os.getenv("GOOGLE_CALENDAR_ID", "")
+GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "")
+GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "")
+GOOGLE_CALENDAR_TIME_ZONE = os.getenv("GOOGLE_CALENDAR_TIME_ZONE", "America/Toronto")
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

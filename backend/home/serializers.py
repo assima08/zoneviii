@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 import re
 from urllib.parse import urljoin
 
@@ -6,6 +7,12 @@ from django.conf import settings
 from django.db import transaction
 from django.utils.html import strip_tags
 from rest_framework import serializers
+
+from .services.google_calendar import create_google_calendar_event
+
+
+logger = logging.getLogger(__name__)
+
 
 def build_image_url(image, request=None):
     if not image:
@@ -67,7 +74,16 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reservation
-        fields = ["id", "date", "heure", "duree", "client", "tarif", "statut"]
+        fields = [
+            "id",
+            "date",
+            "heure",
+            "duree",
+            "client",
+            "tarif",
+            "statut",
+            "google_calendar_event_id",
+        ]
 
 
 class ReservationCreateSerializer(serializers.ModelSerializer):
@@ -136,13 +152,34 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
             },
         )
 
-        return Reservation.objects.create(
+        reservation = Reservation.objects.create(
             client=client,
             **validated_data,
         )
 
+        try:
+            event_id = create_google_calendar_event(reservation)
+            reservation.google_calendar_event_id = event_id
+            reservation.save(update_fields=["google_calendar_event_id"])
+        except Exception:
+            logger.exception(
+                "Google Calendar sync failed for reservation %s",
+                reservation.id,
+            )
+            reservation.google_calendar_sync_warning = (
+                "La reservation est creee, mais la synchronisation Google Calendar a echoue."
+            )
+
+        return reservation
+
     def to_representation(self, instance):
-        return ReservationSerializer(instance).data
+        data = ReservationSerializer(instance).data
+        warning = getattr(instance, "google_calendar_sync_warning", "")
+
+        if warning:
+            data["google_calendar_warning"] = warning
+
+        return data
 
 
 class ExpertSerializer(serializers.ModelSerializer):

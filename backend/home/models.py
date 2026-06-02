@@ -56,6 +56,11 @@ class Reservation(models.Model):
         choices=TYPE_STATUT,
         default="attente",
     )
+    google_calendar_event_id = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return f"{self.client} | {self.date.strftime('%d/%m/%Y')} a {self.heure.strftime('%H:%M')} | {self.tarif}"
@@ -156,5 +161,3 @@ class Realisation(models.Model):
 
     def __str__(self):
         return self.titre
-    
-    
