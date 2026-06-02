@@ -23,13 +23,13 @@ function ReservationCard({
             </div>
 
             <p className="reservation-tarif">{tarif}</p>
-            <h3 className="reservation-price">{prix}$</h3>
+            <h3 className="reservation-price" aria-placeholder="Heure de reservation">{prix}$</h3>
 
             <button
                 className="reservation-button"
                 onClick={onReserve}
                 type="button"
-            >
+            > 
                 Reserver maintenant
             </button>
         </div>
