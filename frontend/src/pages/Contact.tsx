@@ -58,7 +58,7 @@ function Contact() {
         setToast(null);
 
         try {
-            await sendContactMessage({
+            const response = await sendContactMessage({
                 nom: form.nom.trim(),
                 prenom: form.prenom.trim(),
                 email: form.email.trim(),
@@ -71,7 +71,7 @@ function Contact() {
             setForm(initialForm);
             setToast({
                 type: "success",
-                message: "Message envoye. L'equipe ZoneVIII te repondra rapidement.",
+                message: response.message || "Message envoye. L'equipe ZoneVIII te repondra rapidement.",
             });
         }
         catch (error) {

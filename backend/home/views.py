@@ -80,7 +80,11 @@ class ContactMessageCreateView(generics.CreateAPIView):
         if cache.get(spam_cache_key):
             logger.warning("Contact form throttled for ip=%s email=%s", client_ip, email)
             return Response(
-                {"detail": "Merci de patienter avant de renvoyer un message."},
+                {
+                    "status": "error",
+                    "message": "Merci de patienter avant de renvoyer un message.",
+                    "detail": "Merci de patienter avant de renvoyer un message.",
+                },
                 status=status.HTTP_429_TOO_MANY_REQUESTS,
             )
 
@@ -93,16 +97,19 @@ class ContactMessageCreateView(generics.CreateAPIView):
             logger.exception("Contact email failed for message_id=%s", message.id)
             return Response(
                 {
-                    "detail": "Votre message est enregistre, mais l'email n'a pas pu etre envoye. L'equipe a ete notifiee.",
+                    "status": "warning",
+                    "message": "Votre message a bien ete enregistre. L'email n'a pas pu etre envoye automatiquement.",
+                    "warning": "email_delivery_failed",
                     "id": message.id,
                 },
-                status=status.HTTP_502_BAD_GATEWAY,
+                status=status.HTTP_201_CREATED,
             )
 
         logger.info("Contact email sent for message_id=%s email=%s", message.id, message.email)
         return Response(
             {
-                "detail": "Message envoye avec succes.",
+                "status": "success",
+                "message": "Votre message a bien ete envoye.",
                 "id": message.id,
             },
             status=status.HTTP_201_CREATED,
@@ -110,7 +117,7 @@ class ContactMessageCreateView(generics.CreateAPIView):
 
     def _send_contact_email(self, message):
         created_at = date_filter(message.created_at, "Y-m-d H:i:s T")
-        subject = f"[ZoneVIII] {message.sujet}"
+        subject = "Nouveau message depuis le site ZoneVIII"
         body = "\n".join(
             [
                 "Nouveau message depuis le formulaire ZoneVIII",

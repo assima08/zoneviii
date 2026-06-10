@@ -76,6 +76,14 @@ export function getApiErrorMessage(error: unknown) {
             return data.non_field_errors[0];
         }
 
+        if (typeof data?.message === "string") {
+            return data.message;
+        }
+
+        if (typeof data?.detail === "string") {
+            return data.detail;
+        }
+
         if (data && typeof data === "object") {
             const firstError = Object.values(data)[0];
 

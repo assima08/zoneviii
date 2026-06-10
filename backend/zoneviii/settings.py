@@ -101,7 +101,13 @@ frontend_url = os.getenv("FRONTEND_URL", "").strip()
 if frontend_url and frontend_url not in CORS_ALLOWED_ORIGINS:
     CORS_ALLOWED_ORIGINS.append(frontend_url)
 
-CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS", frontend_url)
+CSRF_TRUSTED_ORIGINS = env_list(
+    "CSRF_TRUSTED_ORIGINS",
+    "https://zooneviii.com,https://www.zooneviii.com,https://zoneviii-production.up.railway.app",
+)
+
+if frontend_url and frontend_url not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append(frontend_url)
 
 ROOT_URLCONF = "zoneviii.urls"
 
@@ -234,7 +240,11 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", default=True)
 EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL", default=False)
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER or "noreply@zooneviii.com")
-CONTACT_EMAIL_TO = os.getenv("CONTACT_EMAIL_TO", "info@zooneviii.com")
+CONTACT_RECEIVER_EMAIL = os.getenv(
+    "CONTACT_RECEIVER_EMAIL",
+    os.getenv("CONTACT_EMAIL_TO", "info@zooneviii.com"),
+)
+CONTACT_EMAIL_TO = CONTACT_RECEIVER_EMAIL
 
 GOOGLE_CALENDAR_ID = os.getenv("GOOGLE_CALENDAR_ID", "")
 GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "")
