@@ -123,4 +123,12 @@ def _build_event_payload(reservation):
             "dateTime": end_at.isoformat(),
             "timeZone": calendar_timezone,
         },
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {"method": "email", "minutes": 1440},
+                {"method": "popup", "minutes": 60},
+                {"method": "popup", "minutes": 30},
+            ],
+        },
     }

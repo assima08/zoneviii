@@ -9,6 +9,7 @@ from django.utils.html import strip_tags
 from rest_framework import serializers
 
 from .services.google_calendar import create_google_calendar_event
+from .services.reservation_notifications import send_reservation_notification_emails
 
 
 logger = logging.getLogger(__name__)
@@ -170,6 +171,11 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
                 "La reservation est creee, mais la synchronisation Google Calendar a echoue."
             )
 
+        email_warnings = send_reservation_notification_emails(reservation)
+
+        if email_warnings:
+            reservation.email_notification_warnings = email_warnings
+
         return reservation
 
     def to_representation(self, instance):
@@ -178,6 +184,11 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
 
         if warning:
             data["google_calendar_warning"] = warning
+
+        email_warnings = getattr(instance, "email_notification_warnings", [])
+
+        if email_warnings:
+            data["email_notification_warnings"] = email_warnings
 
         return data
 
