@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zoneviii.vercel.app/sitemap.xml
+Sitemap: https://zooneviii.com/sitemap.xml

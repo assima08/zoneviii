@@ -11,9 +11,25 @@ const navLinks = [
     { label: "TikTok", href: "https://www.tiktok.com/", img: tiktokIcon },
 ];
 
+const footerLinks = [
+    { label: "A propos", href: "/a-propos" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Tarifs", href: "/tarifs" },
+    { label: "Formations", href: "/formations" },
+    { label: "Contact", href: "/contact" },
+];
+
 function Footer() {
     return (
         <footer className="footer">
+            <nav className="footer-links" aria-label="Navigation secondaire">
+                {footerLinks.map((link) => (
+                    <a key={link.href} href={link.href}>
+                        {link.label}
+                    </a>
+                ))}
+            </nav>
+
             {navLinks.map((link) => (
                 <div
                     className="menu-item"

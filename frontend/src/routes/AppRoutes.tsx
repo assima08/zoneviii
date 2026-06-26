@@ -1,20 +1,19 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-//importation des components
+
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import SeoManager from "../components/SeoManager";
-//importation des pages
+import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Experts from "../pages/Experts";
+import FAQ from "../pages/FAQ";
+import Formations from "../pages/Formations";
 import Home from "../pages/Home";
+import Realisations from "../pages/Realisations";
 import Reservations from "../pages/Reservations";
 import Tarifs from "../pages/Tarifs";
-import Realisations from "../pages/Realisations";
-//importation des styles
 import "../styles/global.css";
 import "../styles/responsive.css";
-import Formation from "../pages/Formations";
-
 
 function AppRoutes() {
     return (
@@ -24,42 +23,18 @@ function AppRoutes() {
                 <Navbar />
 
                 <Routes>
-                    <Route
-                        path="/"
-                        element={<Home />}
-                    />
-                    
-                   <Route
-                        path="/services"
-                        element={<Navigate to="/tarifs" replace />}
-                    />
-                    
-                    <Route
-                        path="/tarifs"
-                        element={<Tarifs />}
-                    />
-                    <Route
-                        path="/reservations"
-                        element={<Reservations />}
-                    />
-                    <Route 
-                        path="/realisations" 
-                        element={<Realisations />} />
-                    <Route 
-                        path="/Formations" 
-                        element={<Formation />} />
-                    <Route
-                        path="/experts"
-                        element={<Experts />}
-                    />
-                    <Route
-                        path="/contact"
-                        element={<Contact />}
-                    />
-                    <Route
-                        path="*"
-                        element={<Home />}
-                    />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/services" element={<Navigate to="/tarifs" replace />} />
+                    <Route path="/tarifs" element={<Tarifs />} />
+                    <Route path="/reservations" element={<Reservations />} />
+                    <Route path="/realisations" element={<Realisations />} />
+                    <Route path="/formations" element={<Formations />} />
+                    <Route path="/Formations" element={<Navigate to="/formations" replace />} />
+                    <Route path="/a-propos" element={<About />} />
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="/experts" element={<Experts />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<Home />} />
                 </Routes>
 
                 <Footer />

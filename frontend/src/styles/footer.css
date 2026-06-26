@@ -1,222 +1,123 @@
 .footer {
-
     position: fixed;
-
     bottom: 22px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
-    width: 760px;
-
-    height: 95px;
-
+    width: min(1040px, calc(100% - 32px));
+    min-height: 95px;
+    padding: 16px 28px;
     border-radius: 34px;
-
-    background: rgba(20,20,20,0.42);
-
+    background: rgba(20, 20, 20, 0.42);
     backdrop-filter: blur(24px);
-
     -webkit-backdrop-filter: blur(24px);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
+    border: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
-    gap: 32px;
-
+    gap: 28px;
     z-index: 10;
-
     overflow: hidden;
-
-    box-shadow:
-            0 12px 45px rgba(0,0,0,0.28);
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.28);
 }
 
-
-
-/* =========================
-   BLUE GLOW
-========================= */
-
 .footer::before {
-
     content: "";
-
     position: absolute;
-
     inset: 0;
-
-    background:
-
-            radial-gradient(
-
-                    circle at center,
-
-                    rgba(45,72,255,0.32),
-
-                    transparent 62%
-            );
-
+    background: radial-gradient(circle at center, rgba(45, 72, 255, 0.32), transparent 62%);
     pointer-events: none;
 }
 
+.footer-links {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
 
+.footer-links a {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 
-/* =========================
-   MENU ITEM
-========================= */
+.footer-links a:hover {
+    color: #ffffff;
+}
 
 .menu-item {
-
     position: relative;
-
     z-index: 2;
 }
 
-
-
-/* =========================
-   SOCIAL BUTTON
-========================= */
-
 .nav-link {
-
     width: 62px;
-
     height: 62px;
-
     border-radius: 50%;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
-    background: rgba(255,255,255,0.08);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
-
     -webkit-backdrop-filter: blur(10px);
-
-    transition:
-            transform 0.3s ease,
-            background 0.3s ease,
-            box-shadow 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
-
-
-
-/* =========================
-   HOVER
-========================= */
 
 .nav-link:hover {
-
-    transform:
-            translateY(-5px)
-            scale(1.06);
-
-    background:
-            rgba(45,72,255,0.28);
-
-    box-shadow:
-
-            0 0 30px rgba(45,72,255,0.45);
+    transform: translateY(-5px) scale(1.06);
+    background: rgba(45, 72, 255, 0.28);
+    box-shadow: 0 0 30px rgba(45, 72, 255, 0.45);
 }
-
-
-
-/* =========================
-   ICONS
-========================= */
 
 .nav-link img {
-
     width: 24px;
-
     height: 24px;
-
     object-fit: contain;
-
-    filter:
-            brightness(0)
-            invert(1);
-
-    transition:
-            transform 0.3s ease;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
 }
 
-
-
-/* =========================
-   ICON HOVER
-========================= */
-
 .nav-link:hover img {
-
     transform: scale(1.12);
 }
 
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media screen and (max-width: 900px) {
-
     .footer {
-
-        width: 92%;
-
-        height: 82px;
-
+        min-height: 82px;
         gap: 20px;
-
         bottom: 16px;
     }
 
+    .footer-links {
+        display: none;
+    }
+
     .nav-link {
-
         width: 54px;
-
         height: 54px;
     }
 
     .nav-link img {
-
         width: 20px;
-
         height: 20px;
     }
 }
 
-
-
 @media screen and (max-width: 600px) {
-
     .footer {
-
         border-radius: 26px;
-
-        height: 74px;
-
+        min-height: 74px;
         gap: 14px;
     }
 
     .nav-link {
-
         width: 48px;
-
         height: 48px;
     }
 }

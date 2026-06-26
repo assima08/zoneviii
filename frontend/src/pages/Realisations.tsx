@@ -108,6 +108,12 @@ function Realisations() {
             {!loading && !error && filteredRealisations.length > 0 && (
                 <section className="realisations-grid" aria-label="Liste des realisations ZoneVIII">
                     {filteredRealisations.map((realisation) => {
+                        const imageAlt = [
+                            realisation.titre,
+                            realisation.services_noms.join(", "),
+                            "ZoneVIII Quebec",
+                        ].filter(Boolean).join(" - ");
+
                         return (
                             <article
                                 key={realisation.id}
@@ -117,7 +123,7 @@ function Realisations() {
                                     {realisation.image_url && !brokenImages.includes(realisation.id) ? (
                                         <img
                                             src={realisation.image_url}
-                                            alt={realisation.titre}
+                                            alt={imageAlt}
                                             className="realisation-image"
                                             loading="lazy"
                                             decoding="async"

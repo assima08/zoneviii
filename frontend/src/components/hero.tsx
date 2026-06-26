@@ -15,7 +15,8 @@ function Hero() {
                 </h1>
 
                 <p className="hero-description">
-                    Mix, mastering et production audio
+                    Studio d'enregistrement a Quebec : mix, mastering,
+                    beatmaking, podcast et production audio
                     <br />
                     pour artistes ambitieux.
                 </p>

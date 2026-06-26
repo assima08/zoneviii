@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 
 const navLinks = [
-    
     { label: "TARIFS", to: "/tarifs" },
-    { label: "NOS EXPERTS", to: "/experts" },
-    { label: "NOS RÉALISATION", to:"/realisations"},
-    {label: "FORMATIONS", to: "/formations"},
+    { label: "EXPERTS", to: "/experts" },
+    { label: "REALISATIONS", to: "/realisations" },
+    { label: "FORMATIONS", to: "/formations" },
+    { label: "A PROPOS", to: "/a-propos" },
+    { label: "FAQ", to: "/faq" },
     { label: "RESERVATIONS", to: "/reservations" },
-    { label: "NOUS CONTACTER", to: "/contact" },
+    { label: "CONTACT", to: "/contact" },
 ];
 
 function Navbar() {
@@ -21,7 +22,7 @@ function Navbar() {
     }
 
     return (
-        <nav className="navbar">
+        <nav className="navbar" aria-label="Navigation principale">
             <div className="logo">
                 <Link
                     to="/"
