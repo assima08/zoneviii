@@ -73,8 +73,7 @@ function BlogArticleRecordingTips() {
                         <span>5 min</span>
                     </div>
                     <h1>
-                        Comment bien s'enregistrer en studio : distance, niveau
-                        d'entree et preparation vocale
+                        Comment bien s'enregistrer
                     </h1>
                     <p>
                         Un bon enregistrement vocal ne depend pas seulement du
