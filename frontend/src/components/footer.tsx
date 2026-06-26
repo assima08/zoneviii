@@ -16,6 +16,7 @@ const footerLinks = [
     { label: "FAQ", href: "/faq" },
     { label: "Tarifs", href: "/tarifs" },
     { label: "Formations", href: "/formations" },
+    { label: "Academy", href: "/blog" },
     { label: "Contact", href: "/contact" },
 ];
 

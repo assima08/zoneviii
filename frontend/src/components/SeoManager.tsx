@@ -7,6 +7,7 @@ const OG_IMAGE = `${SITE_URL}/og-image.png`;
 type SeoConfig = {
     title: string;
     description: string;
+    type?: "website" | "article";
     jsonLd?: Record<string, unknown>[];
 };
 
@@ -107,6 +108,71 @@ const faqJsonLd = {
     })),
 };
 
+const recordingArticleCanonical = `${SITE_URL}/blog/comment-bien-senregistrer-en-studio`;
+const recordingArticleDescription =
+    "Decouvrez comment reussir un enregistrement vocal en studio : distance avec le micro, niveau d'entree, filtre anti-pop, preparation vocale et conseils de prise de son.";
+
+const recordingArticleFaqItems = [
+    {
+        question: "Quelle distance garder avec le micro pour enregistrer une voix ?",
+        answer:
+            "Une distance d'environ 15 a 20 cm est un bon point de depart, mais elle peut varier selon la puissance de la voix, le style musical et le micro utilise.",
+    },
+    {
+        question: "Quel niveau d'entree viser pour une voix ?",
+        answer:
+            "Il est recommande de garder une marge de securite et de viser des pics autour de -12 dB a -6 dB afin d'eviter la saturation et de faciliter le mix.",
+    },
+    {
+        question: "Pourquoi utiliser un filtre anti-pop ?",
+        answer:
+            "Le filtre anti-pop aide a reduire les coups d'air causes par certaines consonnes comme P ou B, ce qui rend la prise vocale plus propre.",
+    },
+    {
+        question: "Faut-il etre parfaitement prepare avant une session studio ?",
+        answer:
+            "Il est fortement recommande de connaitre son texte, ses intentions et ses passages difficiles avant la session afin de gagner du temps et d'obtenir une meilleure performance.",
+    },
+];
+
+const recordingArticleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline:
+        "Comment bien s'enregistrer en studio : distance, niveau d'entree et preparation vocale",
+    description: recordingArticleDescription,
+    author: {
+        "@type": "Organization",
+        name: "ZoneVIII",
+        url: SITE_URL,
+    },
+    publisher: {
+        "@type": "Organization",
+        name: "ZoneVIII",
+        logo: {
+            "@type": "ImageObject",
+            url: `${SITE_URL}/favicon.svg`,
+        },
+    },
+    datePublished: "2026-06-25",
+    dateModified: "2026-06-25",
+    mainEntityOfPage: recordingArticleCanonical,
+    image: OG_IMAGE,
+};
+
+const recordingArticleFaqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: recordingArticleFaqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+        },
+    })),
+};
+
 const seoByPath: Record<string, SeoConfig> = {
     "/": {
         title: "Studio d'enregistrement, mix et mastering a Quebec | ZoneVIII",
@@ -144,6 +210,17 @@ const seoByPath: Record<string, SeoConfig> = {
         title: "Contacter ZoneVIII | Studio d'enregistrement a Quebec",
         description:
             "Contactez ZoneVIII pour reserver une session, discuter d'un projet musical, planifier un podcast ou obtenir des informations sur les formations audio.",
+    },
+    "/blog": {
+        title: "ZoneVIII Academy | Guides audio, studio et production musicale",
+        description:
+            "Guides ZoneVIII pour mieux enregistrer, produire, mixer et finaliser vos projets audio en studio a Quebec.",
+    },
+    "/blog/comment-bien-senregistrer-en-studio": {
+        title: "Comment bien s'enregistrer en studio | Guide vocal ZoneVIII",
+        description: recordingArticleDescription,
+        type: "article",
+        jsonLd: [recordingArticleJsonLd, recordingArticleFaqJsonLd],
     },
     "/a-propos": {
         title: "A propos de ZoneVIII | Studio creatif a Quebec",
@@ -194,6 +271,7 @@ function SeoManager() {
         setMetaAttribute('meta[property="og:title"]', "content", config.title);
         setMetaAttribute('meta[property="og:description"]', "content", config.description);
         setMetaAttribute('meta[property="og:url"]', "content", canonicalUrl);
+        setMetaAttribute('meta[property="og:type"]', "content", config.type ?? "website");
         setMetaAttribute('meta[property="og:image"]', "content", OG_IMAGE);
         setMetaAttribute('meta[name="twitter:title"]', "content", config.title);
         setMetaAttribute('meta[name="twitter:description"]', "content", config.description);

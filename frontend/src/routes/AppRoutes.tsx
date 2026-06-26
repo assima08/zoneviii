@@ -4,6 +4,8 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import SeoManager from "../components/SeoManager";
 import About from "../pages/About";
+import Blog from "../pages/Blog";
+import BlogArticleRecordingTips from "../pages/BlogArticleRecordingTips";
 import Contact from "../pages/Contact";
 import Experts from "../pages/Experts";
 import FAQ from "../pages/FAQ";
@@ -32,6 +34,8 @@ function AppRoutes() {
                     <Route path="/Formations" element={<Navigate to="/formations" replace />} />
                     <Route path="/a-propos" element={<About />} />
                     <Route path="/faq" element={<FAQ />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/comment-bien-senregistrer-en-studio" element={<BlogArticleRecordingTips />} />
                     <Route path="/experts" element={<Experts />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="*" element={<Home />} />

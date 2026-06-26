@@ -1,0 +1,244 @@
+.blog-page,
+.article-page {
+    min-height: 100vh;
+    padding: 140px 72px 96px;
+    color: #ffffff;
+    background:
+        radial-gradient(circle at 18% 10%, rgba(33, 64, 255, 0.24), transparent 30%),
+        radial-gradient(circle at 86% 24%, rgba(255, 255, 255, 0.07), transparent 24%),
+        linear-gradient(180deg, #020205 0%, #07070b 48%, #030305 100%);
+}
+
+.blog-hero,
+.blog-grid,
+.article-shell {
+    width: min(1120px, 100%);
+    margin-inline: auto;
+}
+
+.blog-hero {
+    margin-bottom: 36px;
+}
+
+.blog-hero span,
+.article-back,
+.article-meta span {
+    color: #2d58ff;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.blog-hero h1,
+.article-header h1 {
+    max-width: 940px;
+    margin: 14px 0 20px;
+    font-size: clamp(3rem, 7vw, 6.8rem);
+    font-weight: 950;
+    line-height: 0.94;
+    letter-spacing: 0;
+}
+
+.blog-hero p,
+.article-header p {
+    max-width: 780px;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    line-height: 1.8;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.blog-card,
+.article-shell {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(4, 4, 7, 0.94);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+}
+
+.blog-card {
+    padding: 30px;
+}
+
+.blog-card-meta,
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.blog-card-meta span,
+.article-meta span {
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(45, 88, 255, 0.12);
+}
+
+.blog-card h2 {
+    margin: 0 0 14px;
+    font-size: clamp(1.45rem, 2.4vw, 2.3rem);
+    line-height: 1.08;
+}
+
+.blog-card p {
+    margin: 0 0 24px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.75;
+}
+
+.blog-card a,
+.article-cta a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: #2140ff;
+    box-shadow: 0 16px 34px rgba(33, 64, 255, 0.28);
+}
+
+.article-shell {
+    max-width: 940px;
+    padding: clamp(28px, 5vw, 58px);
+}
+
+.article-back {
+    display: inline-flex;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.article-header {
+    margin-bottom: 42px;
+}
+
+.article-shell section {
+    margin-top: 42px;
+}
+
+.article-shell h2 {
+    margin: 0 0 18px;
+    color: #ffffff;
+    font-size: clamp(1.75rem, 3vw, 2.65rem);
+    line-height: 1.08;
+}
+
+.article-shell h3 {
+    margin: 0 0 8px;
+    font-size: 1.08rem;
+}
+
+.article-shell p {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+.article-callout {
+    margin: 26px 0;
+    padding: 22px 24px;
+    border-left: 3px solid #2d58ff;
+    border-radius: 8px;
+    color: #ffffff;
+    background: rgba(45, 88, 255, 0.12);
+    line-height: 1.75;
+}
+
+.article-tips,
+.article-checklist {
+    display: grid;
+    gap: 10px;
+    padding: 0;
+    margin: 22px 0 0;
+    list-style: none;
+}
+
+.article-tips li,
+.article-checklist li {
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.045);
+}
+
+.article-checklist {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.article-faq {
+    padding-top: 14px;
+}
+
+.article-faq div {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.article-cta {
+    margin-top: 48px;
+    padding: 30px;
+    border: 1px solid rgba(45, 88, 255, 0.38);
+    border-radius: 8px;
+    background:
+        radial-gradient(circle at 8% 50%, rgba(33, 64, 255, 0.24), transparent 24%),
+        rgba(255, 255, 255, 0.045);
+}
+
+.article-cta div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.article-cta a:nth-child(n+2) {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: none;
+}
+
+@media screen and (max-width: 900px) {
+    .blog-page,
+    .article-page {
+        padding: 118px 24px 82px;
+    }
+
+    .blog-grid,
+    .article-checklist {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .blog-page,
+    .article-page {
+        padding-inline: 16px;
+    }
+
+    .blog-card,
+    .article-shell {
+        padding: 24px;
+    }
+
+    .article-cta a,
+    .blog-card a {
+        width: 100%;
+    }
+}
