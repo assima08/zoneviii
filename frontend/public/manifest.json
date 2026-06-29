@@ -1,7 +1,7 @@
 {
-  "name": "ZoneVIII | Studio creatif premium",
-  "short_name": "ZoneVIII",
-  "description": "ZoneVIII est un studio creatif premium specialise en photographie, production visuelle, branding, reservation de services creatifs et experiences artistiques.",
+  "name": "ZooneVIII | Studio creatif premium",
+  "short_name": "ZooneVIII",
+  "description": "ZooneVIII est un studio creatif premium specialise en photographie, production visuelle, branding, reservation de services creatifs et experiences artistiques.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

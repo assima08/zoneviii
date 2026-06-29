@@ -1,5 +1,5 @@
 /* ================================
-   PAGE NOS RÉALISATIONS — ZONEVIII
+   PAGE NOS RÃ‰ALISATIONS â€” ZooneVIII
 ================================ */
 
 .realisations-page {
@@ -14,7 +14,7 @@
     position: relative;
 }
 
-/* Grand 8 décoratif à droite */
+/* Grand 8 dÃ©coratif Ã  droite */
 .realisations-page::before {
     content: "8";
     position: absolute;
@@ -371,7 +371,7 @@
 }
 
 .realisation-expert::before {
-    content: "✦";
+    content: "âœ¦";
     margin-right: 8px;
     color: #2454ff;
 }
@@ -396,7 +396,7 @@
 }
 
 .realisation-services span::before {
-    content: "✣";
+    content: "âœ£";
     color: #2454ff;
     font-size: 0.72rem;
 }
@@ -425,7 +425,7 @@
 }
 
 .realisation-link::after {
-    content: "→";
+    content: "â†’";
     color: #2454ff;
     font-size: 1.3rem;
     font-weight: 900;
@@ -444,7 +444,7 @@
 
 /* ================================
    CTA FINAL OPTIONNEL
-   À utiliser si tu ajoutes une section CTA
+   Ã€ utiliser si tu ajoutes une section CTA
 ================================ */
 
 .realisations-cta {

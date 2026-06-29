@@ -1,4 +1,4 @@
-# ZoneVIII
+# ZooneVIII
 
 Plateforme web de studio audio construite avec React, TypeScript, Django REST Framework et PostgreSQL.
 

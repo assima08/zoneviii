@@ -24,7 +24,7 @@ function Hero() {
                 <div className="hero-buttons-container">
                     <button
                         className="hero-primary-btn"
-                        aria-label="Reserver une session creative ZoneVIII"
+                        aria-label="Reserver une session creative ZooneVIII"
                         onClick={() => navigate("/reservations")}
                         type="button"
                     >
@@ -34,11 +34,11 @@ function Hero() {
 
                     <button
                         className="hero-secondary-btn"
-                        aria-label="Decouvrir les tarifs creatifs ZoneVIII"
+                        aria-label="Decouvrir les tarifs creatifs ZooneVIII"
                         onClick={() => navigate("/tarifs")}
                         type="button"
                     >
-                        <span className="play-icon" aria-hidden="true">▶</span>
+                        <span className="play-icon" aria-hidden="true">â–¶</span>
                         <span>VOIR LES TARIFS</span>
                     </button>
                 </div>

@@ -32,10 +32,10 @@ def send_reservation_notification_emails(reservation):
 
 
 def _send_internal_email(reservation):
-    subject = "Nouvelle reservation ZoneVIII"
+    subject = "Nouvelle reservation ZooneVIII"
     body = "\n".join(
         [
-            "Nouvelle demande de reservation ZoneVIII",
+            "Nouvelle demande de reservation ZooneVIII",
             "",
             *_reservation_details(reservation),
             "",
@@ -54,18 +54,18 @@ def _send_internal_email(reservation):
 
 def _send_client_email(reservation):
     client = reservation.client
-    subject = "Votre demande de reservation ZoneVIII a bien ete recue"
+    subject = "Votre demande de reservation ZooneVIII a bien ete recue"
     body = "\n".join(
         [
             f"Bonjour {client.prenomClient},",
             "",
-            "Votre demande de reservation ZoneVIII a bien ete recue.",
+            "Votre demande de reservation ZooneVIII a bien ete recue.",
             "Notre equipe reviendra vers vous rapidement pour la suite.",
             "",
             *_client_reservation_details(reservation),
             "",
             "Merci pour votre confiance.",
-            "ZoneVIII",
+            "ZooneVIII",
         ]
     )
 

@@ -42,7 +42,7 @@ function Tarifs() {
     return (
         <main className="tarifs-page">
             <header className="tarifs-header">
-                <p className="tarifs-subtitle">ZONEVIII</p>
+                <p className="tarifs-subtitle">ZooneVIII</p>
                 <h1 className="tarifs-title">Tarifs</h1>
             </header>
 

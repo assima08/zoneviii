@@ -6,12 +6,12 @@ const faqs = [
     {
         question: "Combien coute une session studio a Quebec ?",
         answer:
-            "Les tarifs varient selon le service choisi, la duree de la session et le niveau d'accompagnement souhaite. ZoneVIII propose des options pour l'enregistrement, le mix, le mastering, la production musicale, le podcast et les formations. Vous pouvez consulter la page Tarifs ou nous contacter pour une recommandation adaptee a votre projet.",
+            "Les tarifs varient selon le service choisi, la duree de la session et le niveau d'accompagnement souhaite. ZooneVIII propose des options pour l'enregistrement, le mix, le mastering, la production musicale, le podcast et les formations. Vous pouvez consulter la page Tarifs ou nous contacter pour une recommandation adaptee a votre projet.",
     },
     {
-        question: "Est-ce que ZoneVIII fait le mix et le mastering ?",
+        question: "Est-ce que ZooneVIII fait le mix et le mastering ?",
         answer:
-            "Oui. ZoneVIII propose des services de mixage et de mastering afin d'ameliorer la clarte, l'equilibre, la puissance et la finition professionnelle de vos morceaux.",
+            "Oui. ZooneVIII propose des services de mixage et de mastering afin d'ameliorer la clarte, l'equilibre, la puissance et la finition professionnelle de vos morceaux.",
     },
     {
         question: "Peut-on reserver une session d'enregistrement vocal ?",
@@ -19,29 +19,29 @@ const faqs = [
             "Oui. Les artistes peuvent reserver une session d'enregistrement vocal pour singles, EP, albums, demos, voix off ou projets creatifs.",
     },
     {
-        question: "Est-ce que ZoneVIII accompagne les artistes debutants ?",
+        question: "Est-ce que ZooneVIII accompagne les artistes debutants ?",
         answer:
             "Oui. Le studio accompagne autant les artistes debutants que les artistes plus avances. L'objectif est d'aider chaque createur a structurer son projet, ameliorer son son et avancer avec une methode professionnelle.",
     },
     {
-        question: "Est-ce que ZoneVIII offre des services de beatmaking ?",
+        question: "Est-ce que ZooneVIII offre des services de beatmaking ?",
         answer:
-            "Oui. ZoneVIII propose de la creation instrumentale, du beatmaking et de l'accompagnement en production musicale selon l'univers artistique du projet.",
+            "Oui. ZooneVIII propose de la creation instrumentale, du beatmaking et de l'accompagnement en production musicale selon l'univers artistique du projet.",
     },
     {
-        question: "Peut-on enregistrer un podcast chez ZoneVIII ?",
+        question: "Peut-on enregistrer un podcast chez ZooneVIII ?",
         answer:
-            "Oui. ZoneVIII peut accompagner les createurs, entrepreneurs et marques dans l'enregistrement, le montage et l'amelioration sonore de podcasts.",
+            "Oui. ZooneVIII peut accompagner les createurs, entrepreneurs et marques dans l'enregistrement, le montage et l'amelioration sonore de podcasts.",
     },
     {
         question: "Offrez-vous des formations en production musicale ?",
         answer:
-            "Oui. ZoneVIII propose des formations liees a la production musicale, au beatmaking, au mix, a l'enregistrement vocal et aux bases de la creation audio.",
+            "Oui. ZooneVIII propose des formations liees a la production musicale, au beatmaking, au mix, a l'enregistrement vocal et aux bases de la creation audio.",
     },
     {
-        question: "Ou est situe ZoneVIII ?",
+        question: "Ou est situe ZooneVIII ?",
         answer:
-            "ZoneVIII est base a Quebec et s'adresse aux artistes, producteurs, createurs de contenu et entrepreneurs de la region de Quebec et des environs.",
+            "ZooneVIII est base a Quebec et s'adresse aux artistes, producteurs, createurs de contenu et entrepreneurs de la region de Quebec et des environs.",
     },
     {
         question: "Comment reserver une session ?",
@@ -49,9 +49,9 @@ const faqs = [
             "Vous pouvez reserver une session directement depuis la page Reservations ou nous contacter pour discuter de votre projet avant de choisir un service.",
     },
     {
-        question: "Quels types de projets peut-on realiser chez ZoneVIII ?",
+        question: "Quels types de projets peut-on realiser chez ZooneVIII ?",
         answer:
-            "ZoneVIII peut accompagner des singles, EP, albums, podcasts, voix off, projets de contenu, sessions d'ecriture, productions instrumentales, mix, mastering et formations.",
+            "ZooneVIII peut accompagner des singles, EP, albums, podcasts, voix off, projets de contenu, sessions d'ecriture, productions instrumentales, mix, mastering et formations.",
     },
 ];
 
@@ -60,7 +60,7 @@ function FAQ() {
         <main className="editorial-page">
             <section className="editorial-hero">
                 <span>Questions frequentes</span>
-                <h1>FAQ ZoneVIII</h1>
+                <h1>FAQ ZooneVIII</h1>
                 <p>
                     Reponses claires sur le studio, les tarifs, les reservations,
                     le mix, le mastering, le podcast, le beatmaking et les

@@ -67,7 +67,7 @@ function BlogArticleRecordingTips() {
         <main className="article-page">
             <article className="article-shell">
                 <header className="article-header">
-                    <Link to="/blog" className="article-back">ZoneVIII Academy</Link>
+                    <Link to="/blog" className="article-back">ZooneVIII Academy</Link>
                     <div className="article-meta">
                         <span>Enregistrement vocal</span>
                         <span>5 min</span>
@@ -80,7 +80,7 @@ function BlogArticleRecordingTips() {
                         micro ou du studio. La qualite finale commence par la
                         facon dont l'artiste se place devant le micro, le niveau
                         d'entree choisi, la preparation de la voix et la maniere
-                        d'interpreter le morceau. Chez ZoneVIII, studio
+                        d'interpreter le morceau. Chez ZooneVIII, studio
                         d'enregistrement a Quebec, nous accompagnons les artistes
                         pour obtenir des prises vocales propres, expressives et
                         faciles a mixer.
@@ -165,7 +165,7 @@ function BlogArticleRecordingTips() {
                         bon feeling donnera de la force au morceau.
                     </p>
                     <p>
-                        Pendant une session chez ZoneVIII, l'objectif est d'aider
+                        Pendant une session chez ZooneVIII, l'objectif est d'aider
                         l'artiste a trouver le bon equilibre entre performance,
                         precision et emotion.
                     </p>
@@ -204,7 +204,7 @@ function BlogArticleRecordingTips() {
                         morceau ont un impact direct sur la qualite finale.
                     </p>
                     <p>
-                        ZoneVIII accompagne les artistes, producteurs et
+                        ZooneVIII accompagne les artistes, producteurs et
                         createurs a Quebec dans leurs sessions d'enregistrement
                         vocal, de mix, de mastering et de production musicale. Si
                         vous preparez un single, un EP, un album ou un projet
@@ -224,7 +224,7 @@ function BlogArticleRecordingTips() {
                 </section>
 
                 <footer className="article-cta">
-                    <h2>Preparer une session chez ZoneVIII</h2>
+                    <h2>Preparer une session chez ZooneVIII</h2>
                     <p>
                         Passez de la preparation a la prise avec un cadre
                         professionnel pour votre session studio a Quebec.

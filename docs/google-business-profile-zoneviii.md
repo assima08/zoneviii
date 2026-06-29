@@ -1,8 +1,8 @@
-# Google Business Profile - ZoneVIII
+# Google Business Profile - ZooneVIII
 
 ## Nom
 
-ZoneVIII
+ZooneVIII
 
 ## Categorie principale
 
@@ -17,7 +17,7 @@ Studio d'enregistrement
 
 ## Description courte optimisee
 
-ZoneVIII est un studio creatif a Quebec specialise en enregistrement vocal, mix, mastering, beatmaking, production musicale, podcast et formations audio. Le studio accompagne les artistes, producteurs, createurs de contenu et entrepreneurs dans la creation de projets audio professionnels.
+ZooneVIII est un studio creatif a Quebec specialise en enregistrement vocal, mix, mastering, beatmaking, production musicale, podcast et formations audio. Le studio accompagne les artistes, producteurs, createurs de contenu et entrepreneurs dans la creation de projets audio professionnels.
 
 ## Services a ajouter
 

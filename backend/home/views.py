@@ -29,7 +29,7 @@ class ContactAnonThrottle(AnonRateThrottle):
 
 
 def health_check(_request):
-    return JsonResponse({"status": "ok", "service": "zoneviii"})
+    return JsonResponse({"status": "ok", "service": "ZooneVIII"})
 
 
 class ServiceListView(generics.ListAPIView):
@@ -117,10 +117,10 @@ class ContactMessageCreateView(generics.CreateAPIView):
 
     def _send_contact_email(self, message):
         created_at = date_filter(message.created_at, "Y-m-d H:i:s T")
-        subject = "Nouveau message depuis le site ZoneVIII"
+        subject = "Nouveau message depuis le site ZooneVIII"
         body = "\n".join(
             [
-                "Nouveau message depuis le formulaire ZoneVIII",
+                "Nouveau message depuis le formulaire ZooneVIII",
                 "",
                 f"Date: {created_at}",
                 f"Nom: {message.prenom} {message.nom}",

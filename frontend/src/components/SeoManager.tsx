@@ -28,7 +28,7 @@ const businessJsonLd = {
     "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${SITE_URL}/#studio`,
     name: studioName,
-    alternateName: "ZoneVIII",
+    alternateName: "ZooneVIII",
     url: SITE_URL,
     email: "info@zooneviii.com",
     image: OG_IMAGE,
@@ -51,7 +51,7 @@ const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
-    name: "ZoneVIII",
+    name: "ZooneVIII",
     alternateName: "ZooneVIII",
     url: SITE_URL,
     email: "info@zooneviii.com",
@@ -66,7 +66,7 @@ const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${SITE_URL}/tarifs#services`,
-    name: "Services audio ZoneVIII",
+    name: "Services audio ZooneVIII",
     provider: {
         "@id": `${SITE_URL}/#organization`,
     },
@@ -80,12 +80,12 @@ const faqItems = [
     {
         question: "Combien coute une session studio a Quebec ?",
         answer:
-            "Les tarifs varient selon le service choisi, la duree de la session et le niveau d'accompagnement souhaite. ZoneVIII propose des options pour l'enregistrement, le mix, le mastering, la production musicale, le podcast et les formations.",
+            "Les tarifs varient selon le service choisi, la duree de la session et le niveau d'accompagnement souhaite. ZooneVIII propose des options pour l'enregistrement, le mix, le mastering, la production musicale, le podcast et les formations.",
     },
     {
-        question: "Est-ce que ZoneVIII fait le mix et le mastering ?",
+        question: "Est-ce que ZooneVIII fait le mix et le mastering ?",
         answer:
-            "Oui. ZoneVIII propose des services de mixage et de mastering afin d'ameliorer la clarte, l'equilibre, la puissance et la finition professionnelle de vos morceaux.",
+            "Oui. ZooneVIII propose des services de mixage et de mastering afin d'ameliorer la clarte, l'equilibre, la puissance et la finition professionnelle de vos morceaux.",
     },
     {
         question: "Peut-on reserver une session d'enregistrement vocal ?",
@@ -93,9 +93,9 @@ const faqItems = [
             "Oui. Les artistes peuvent reserver une session d'enregistrement vocal pour singles, EP, albums, demos, voix off ou projets creatifs.",
     },
     {
-        question: "Ou est situe ZoneVIII ?",
+        question: "Ou est situe ZooneVIII ?",
         answer:
-            "ZoneVIII est base a Quebec et s'adresse aux artistes, producteurs, createurs de contenu et entrepreneurs de la region de Quebec et des environs.",
+            "ZooneVIII est base a Quebec et s'adresse aux artistes, producteurs, createurs de contenu et entrepreneurs de la region de Quebec et des environs.",
     },
 ];
 
@@ -147,12 +147,12 @@ const recordingArticleJsonLd = {
     description: recordingArticleDescription,
     author: {
         "@type": "Organization",
-        name: "ZoneVIII",
+        name: "ZooneVIII",
         url: SITE_URL,
     },
     publisher: {
         "@type": "Organization",
-        name: "ZoneVIII",
+        name: "ZooneVIII",
         logo: {
             "@type": "ImageObject",
             url: `${SITE_URL}/favicon.svg`,
@@ -179,63 +179,63 @@ const recordingArticleFaqJsonLd = {
 
 const seoByPath: Record<string, SeoConfig> = {
     "/": {
-        title: "Studio d'enregistrement, mix et mastering a Quebec | ZoneVIII",
+        title: "Studio d'enregistrement, mix et mastering a Quebec | ZooneVIII",
         description:
-            "ZoneVIII est un studio creatif a Quebec specialise en enregistrement vocal, mix, mastering, beatmaking, production musicale, podcast et formations audio.",
+            "ZooneVIII est un studio creatif a Quebec specialise en enregistrement vocal, mix, mastering, beatmaking, production musicale, podcast et formations audio.",
         jsonLd: [organizationJsonLd, businessJsonLd],
     },
     "/tarifs": {
-        title: "Tarifs studio, mix, mastering et production musicale | ZoneVIII",
+        title: "Tarifs studio, mix, mastering et production musicale | ZooneVIII",
         description:
-            "Decouvrez les tarifs ZoneVIII pour l'enregistrement vocal, le mix, le mastering, la production musicale, le podcast et les formations audio a Quebec.",
+            "Decouvrez les tarifs ZooneVIII pour l'enregistrement vocal, le mix, le mastering, la production musicale, le podcast et les formations audio a Quebec.",
         jsonLd: [serviceJsonLd],
     },
     "/reservations": {
-        title: "Reserver une session studio a Quebec | ZoneVIII",
+        title: "Reserver une session studio a Quebec | ZooneVIII",
         description:
-            "Reservez une session chez ZoneVIII pour l'enregistrement, le mix, le mastering, la production musicale, le podcast ou une formation audio.",
+            "Reservez une session chez ZooneVIII pour l'enregistrement, le mix, le mastering, la production musicale, le podcast ou une formation audio.",
     },
     "/realisations": {
-        title: "Realisations audio, mix, mastering et production | ZoneVIII",
+        title: "Realisations audio, mix, mastering et production | ZooneVIII",
         description:
-            "Decouvrez les projets realises chez ZoneVIII : enregistrement, mix, mastering, production musicale, podcast et accompagnement artistique.",
+            "Decouvrez les projets realises chez ZooneVIII : enregistrement, mix, mastering, production musicale, podcast et accompagnement artistique.",
     },
     "/experts": {
-        title: "Experts audio, beatmakers et ingenieurs du son | ZoneVIII",
+        title: "Experts audio, beatmakers et ingenieurs du son | ZooneVIII",
         description:
-            "Rencontrez les experts ZoneVIII specialises en production musicale, beatmaking, enregistrement vocal, mix, mastering et accompagnement creatif.",
+            "Rencontrez les experts ZooneVIII specialises en production musicale, beatmaking, enregistrement vocal, mix, mastering et accompagnement creatif.",
     },
     "/formations": {
-        title: "Formations en production musicale, mix et beatmaking | ZoneVIII",
+        title: "Formations en production musicale, mix et beatmaking | ZooneVIII",
         description:
-            "ZoneVIII propose des formations en production musicale, beatmaking, enregistrement vocal, mix, mastering et creation audio a Quebec.",
+            "ZooneVIII propose des formations en production musicale, beatmaking, enregistrement vocal, mix, mastering et creation audio a Quebec.",
     },
     "/contact": {
-        title: "Contacter ZoneVIII | Studio d'enregistrement a Quebec",
+        title: "Contacter ZooneVIII | Studio d'enregistrement a Quebec",
         description:
-            "Contactez ZoneVIII pour reserver une session, discuter d'un projet musical, planifier un podcast ou obtenir des informations sur les formations audio.",
+            "Contactez ZooneVIII pour reserver une session, discuter d'un projet musical, planifier un podcast ou obtenir des informations sur les formations audio.",
     },
     "/blog": {
-        title: "ZoneVIII Academy | Guides audio, studio et production musicale",
+        title: "ZooneVIII Academy | Guides audio, studio et production musicale",
         description:
-            "Guides ZoneVIII pour mieux enregistrer, produire, mixer et finaliser vos projets audio en studio a Quebec.",
+            "Guides ZooneVIII pour mieux enregistrer, produire, mixer et finaliser vos projets audio en studio a Quebec.",
     },
     "/blog/comment-bien-senregistrer-en-studio": {
-        title: "Comment bien s'enregistrer en studio | Guide vocal ZoneVIII",
+        title: "Comment bien s'enregistrer en studio | Guide vocal ZooneVIII",
         description: recordingArticleDescription,
         type: "article",
         jsonLd: [recordingArticleJsonLd, recordingArticleFaqJsonLd],
     },
     "/a-propos": {
-        title: "A propos de ZoneVIII | Studio creatif a Quebec",
+        title: "A propos de ZooneVIII | Studio creatif a Quebec",
         description:
-            "Decouvrez ZoneVIII, un studio creatif a Quebec specialise en enregistrement, mix, mastering, production musicale, podcast et formations audio.",
+            "Decouvrez ZooneVIII, un studio creatif a Quebec specialise en enregistrement, mix, mastering, production musicale, podcast et formations audio.",
         jsonLd: [organizationJsonLd, businessJsonLd],
     },
     "/faq": {
-        title: "FAQ ZoneVIII | Studio, tarifs, reservations et formations",
+        title: "FAQ ZooneVIII | Studio, tarifs, reservations et formations",
         description:
-            "Trouvez les reponses aux questions frequentes sur les services ZoneVIII : studio, tarifs, reservations, mix, mastering, podcast et formations.",
+            "Trouvez les reponses aux questions frequentes sur les services ZooneVIII : studio, tarifs, reservations, mix, mastering, podcast et formations.",
         jsonLd: [faqJsonLd],
     },
 };

@@ -18,7 +18,7 @@ function Formations() {
                 <span>Formations audio</span>
                 <h1>NOS FORMATIONS</h1>
                 <p>
-                    ZoneVIII propose des formations audio a Quebec pour les
+                    ZooneVIII propose des formations audio a Quebec pour les
                     artistes, producteurs, beatmakers et createurs qui veulent
                     comprendre, produire et finaliser un son professionnel.
                 </p>
@@ -41,7 +41,7 @@ function Formations() {
                 <div>
                     <h2>Construire ton son avec une methode claire</h2>
                     <p>
-                        Contactez ZoneVIII pour choisir une formation audio, une
+                        Contactez ZooneVIII pour choisir une formation audio, une
                         formation beatmaking ou une formation mix adaptee a votre
                         projet.
                     </p>

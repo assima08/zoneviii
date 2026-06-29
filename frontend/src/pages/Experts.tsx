@@ -48,7 +48,7 @@ function Experts() {
                 <h1>Un collectif sonore pour pousser chaque detail.</h1>
                 <span>
                     Direction artistique, prise de voix, mix, mastering et
-                    identite audio: ZoneVIII rassemble des profils precis,
+                    identite audio: ZooneVIII rassemble des profils precis,
                     creatifs et exigeants.
                 </span>
             </section>
@@ -134,7 +134,7 @@ function ExpertCard({
                 {shouldShowImage ? (
                     <img
                         src={imageUrl}
-                        alt={`Portrait de ${expert.nomExpert}, ${expert.role || "expert ZoneVIII"}`}
+                        alt={`Portrait de ${expert.nomExpert}, ${expert.role || "expert ZooneVIII"}`}
                         loading="lazy"
                         decoding="async"
                         onError={onImageError}
@@ -147,7 +147,7 @@ function ExpertCard({
             </div>
 
             <div className="expert-content">
-                <span>{expert.specialite || "ZoneVIII Studio"}</span>
+                <span>{expert.specialite || "ZooneVIII Studio"}</span>
                 <h2>{expert.nomExpert}</h2>
                 <strong>{expert.role || "Expert audio"}</strong>
                 <p>

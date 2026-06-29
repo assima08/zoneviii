@@ -100,7 +100,7 @@ def _build_event_payload(reservation):
     client_name = f"{client.prenomClient} {client.nomClient}".strip()
 
     description_lines = [
-        "Nouvelle reservation ZoneVIII",
+        "Nouvelle reservation ZooneVIII",
         "",
         f"Client: {client_name}",
         f"Email: {client.email}",
@@ -113,7 +113,7 @@ def _build_event_payload(reservation):
     ]
 
     return {
-        "summary": f"Reservation ZoneVIII - {client_name}",
+        "summary": f"Reservation ZooneVIII - {client_name}",
         "description": "\n".join(description_lines),
         "start": {
             "dateTime": start_at.isoformat(),

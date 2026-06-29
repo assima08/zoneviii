@@ -1,6 +1,6 @@
-# ZoneVIII Frontend
+# ZooneVIII Frontend
 
-Interface React + TypeScript du studio creatif premium ZoneVIII.
+Interface React + TypeScript du studio creatif premium ZooneVIII.
 
 ## Production
 
@@ -21,4 +21,4 @@ npm run lint
 
 ## SEO
 
-Les fichiers publics `robots.txt`, `sitemap.xml`, `manifest.json`, `favicon.svg` et `og-image.png` sont prepares pour l'indexation Google, le partage social et le branding ZoneVIII.
+Les fichiers publics `robots.txt`, `sitemap.xml`, `manifest.json`, `favicon.svg` et `og-image.png` sont prepares pour l'indexation Google, le partage social et le branding ZooneVIII.

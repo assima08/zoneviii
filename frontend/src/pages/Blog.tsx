@@ -18,14 +18,14 @@ function Blog() {
         <main className="blog-page">
             <section className="blog-hero">
                 <span>Ressources audio</span>
-                <h1>ZoneVIII Academy</h1>
+                <h1>ZooneVIII Academy</h1>
                 <p>
                     Guides, conseils et ressources pour mieux enregistrer,
                     produire et finaliser vos projets audio.
                 </p>
             </section>
 
-            <section className="blog-grid" aria-label="Articles ZoneVIII Academy">
+            <section className="blog-grid" aria-label="Articles ZooneVIII Academy">
                 {articles.map((article) => (
                     <article className="blog-card" key={article.to}>
                         <div className="blog-card-meta">

@@ -54,7 +54,7 @@ function Realisations() {
             <section className="realisations-hero">
                 <div className="realisations-hero-content">
                     <span className="realisations-eyebrow">
-                        Portfolio ZoneVIII
+                        Portfolio ZooneVIII
                     </span>
 
                     <h1>
@@ -64,7 +64,7 @@ function Realisations() {
 
                 <p>
                     Decouvrez une selection de projets mixes, produits et
-                    accompagnes par ZoneVIII. Chaque realisation reflete notre
+                    accompagnes par ZooneVIII. Chaque realisation reflete notre
                     exigence sonore et notre vision creative.
                 </p>
             </section>
@@ -106,12 +106,12 @@ function Realisations() {
             )}
 
             {!loading && !error && filteredRealisations.length > 0 && (
-                <section className="realisations-grid" aria-label="Liste des realisations ZoneVIII">
+                <section className="realisations-grid" aria-label="Liste des realisations ZooneVIII">
                     {filteredRealisations.map((realisation) => {
                         const imageAlt = [
                             realisation.titre,
                             realisation.services_noms.join(", "),
-                            "ZoneVIII Quebec",
+                            "ZooneVIII Quebec",
                         ].filter(Boolean).join(" - ");
 
                         return (

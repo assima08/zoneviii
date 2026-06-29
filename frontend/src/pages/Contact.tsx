@@ -78,7 +78,7 @@ function Contact() {
             setForm(initialForm);
             setToast({
                 type: "success",
-                message: response.message || "Message envoye. L'equipe ZoneVIII te repondra rapidement.",
+                message: response.message || "Message envoye. L'equipe ZooneVIII te repondra rapidement.",
             });
         }
         catch (error) {
@@ -99,7 +99,7 @@ function Contact() {
                 <h1>Parlons de ton prochain son.</h1>
                 <p>
                     Session studio, mix, mastering ou direction artistique:
-                    l'equipe ZoneVIII te repond avec une approche claire,
+                    l'equipe ZooneVIII te repond avec une approche claire,
                     rapide et sur mesure.
                 </p>
             </section>
