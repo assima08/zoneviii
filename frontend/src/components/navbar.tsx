@@ -28,7 +28,7 @@ function Navbar() {
                     to="/"
                     onClick={closeMenu}
                 >
-                    ZONEVIII
+                    ZOONEVIII
                 </Link>
             </div>
 
