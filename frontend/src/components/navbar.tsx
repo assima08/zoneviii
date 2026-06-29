@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 
 const navLinks = [
-    { label: "TARIFS", to: "/tarifs" },
+    //{ label: "TARIFS", to: "/tarifs" },
     { label: "EXPERTS", to: "/experts" },
     { label: "REALISATIONS", to: "/realisations" },
     { label: "FORMATIONS", to: "/formations" },
