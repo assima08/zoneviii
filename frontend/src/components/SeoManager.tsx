@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import { studioName } from "../config/studioLocation";
+
 const SITE_URL = "https://zooneviii.com";
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
@@ -25,21 +27,23 @@ const businessJsonLd = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${SITE_URL}/#studio`,
-    name: "ZoneVIII",
-    alternateName: "ZooneVIII",
+    name: studioName,
+    alternateName: "ZoneVIII",
     url: SITE_URL,
     email: "info@zooneviii.com",
     image: OG_IMAGE,
     priceRange: "$$",
     address: {
         "@type": "PostalAddress",
+        streetAddress: "25 Rue Bigouette",
         addressLocality: "Quebec",
         addressRegion: "QC",
+        postalCode: "G1K 6V5",
         addressCountry: "CA",
     },
     areaServed: "Quebec et environs",
     description:
-        "ZoneVIII est un studio creatif a Quebec specialise en enregistrement vocal, mix, mastering, beatmaking, production musicale, podcast et formations audio.",
+        "ZooneVIII est un studio d'enregistrement a Quebec specialise en enregistrement vocal, mix, mastering, production musicale, podcast, beatmaking et formations audio.",
     serviceType: services,
 };
 

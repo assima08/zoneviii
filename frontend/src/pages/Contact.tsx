@@ -1,6 +1,13 @@
 import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
 
+import {
+    googleMapsEmbedUrl,
+    googleMapsShareUrl,
+    studioAddressDisplay,
+    studioName,
+    studioType,
+} from "../config/studioLocation";
 import type { ContactMessagePayload } from "../interfaces/ContactMessage";
 import { getApiErrorMessage, sendContactMessage } from "../services/api";
 import "../styles/contact.css";
@@ -100,10 +107,12 @@ function Contact() {
             <section className="contact-shell">
                 <aside className="contact-panel">
                     <span className="contact-panel-label">Studio premium</span>
-                    <h2>ZoneVIII</h2>
+                    <h2>{studioName}</h2>
                     <p>
-                        Un point d'entree simple pour les artistes, managers et
-                        equipes creatives qui veulent avancer proprement.
+                        {studioName} est un studio d'enregistrement a Quebec
+                        specialise en enregistrement vocal, mix, mastering,
+                        production musicale, podcast, beatmaking et formations
+                        audio.
                     </p>
 
                     <div className="contact-meta-grid">
@@ -114,6 +123,10 @@ function Contact() {
                         <div>
                             <span>Reponse</span>
                             <strong>24-48h</strong>
+                        </div>
+                        <div>
+                            <span>Adresse</span>
+                            <strong>{studioAddressDisplay}</strong>
                         </div>
                         <div>
                             <span>Services</span>
@@ -215,6 +228,55 @@ function Contact() {
                         {loading ? "Envoi en cours..." : "Envoyer"}
                     </button>
                 </form>
+            </section>
+
+            <section className="contact-map-section">
+                <div className="contact-map-card">
+                    <div className="contact-map-info">
+                        <span>{studioType}</span>
+                        <h2>Nous trouver</h2>
+                        <p>
+                            {studioName} est un studio d'enregistrement situe a
+                            Quebec. Cliquez sur le bouton ou sur la carte pour
+                            ouvrir l'itineraire dans Google Maps.
+                        </p>
+                        <p className="contact-map-seo">
+                            {studioName} est un studio d'enregistrement a Quebec
+                            specialise en enregistrement vocal, mix, mastering,
+                            production musicale, podcast, beatmaking et
+                            formations audio.
+                        </p>
+                        <address className="contact-map-address">
+                            {studioAddressDisplay}
+                        </address>
+                        <a
+                            href={googleMapsShareUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="maps-button"
+                        >
+                            Ouvrir dans Google Maps
+                        </a>
+                    </div>
+
+                    <div className="contact-map-frame-link">
+                        <iframe
+                            title="Localisation de ZooneVIII sur Google Maps"
+                            src={googleMapsEmbedUrl}
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            className="contact-map-frame"
+                        />
+                        <a
+                            href={googleMapsShareUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="contact-map-overlay"
+                        >
+                            Ouvrir l'itineraire
+                        </a>
+                    </div>
+                </div>
             </section>
 
             {toast && (

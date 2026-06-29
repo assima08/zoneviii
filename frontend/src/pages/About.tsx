@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 
+import {
+    googleMapsShareUrl,
+    studioAddressDisplay,
+    studioName,
+    studioType,
+} from "../config/studioLocation";
 import "../styles/editorial.css";
 
 function About() {
@@ -75,6 +81,30 @@ function About() {
                         avec des bases solides.
                     </p>
                 </article>
+            </section>
+
+            <section className="editorial-location">
+                <div>
+                    <span>{studioType}</span>
+                    <h2>Le studio a Quebec</h2>
+                    <p>
+                        {studioName} accueille les artistes, producteurs,
+                        podcasteurs et createurs au {studioAddressDisplay}.
+                        Une adresse centrale pour enregistrer, produire, mixer,
+                        masteriser et preparer vos projets audio.
+                    </p>
+                </div>
+
+                <div className="editorial-actions">
+                    <a
+                        href={googleMapsShareUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ouvrir Google Maps
+                    </a>
+                    <Link to="/contact">Nous contacter</Link>
+                </div>
             </section>
 
             <section className="editorial-cta">
