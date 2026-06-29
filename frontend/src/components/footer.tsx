@@ -8,7 +8,7 @@ const navLinks = [
     { label: "Facebook", href: "https://www.facebook.com/", img: facebookIcon },
     { label: "Instagram", href: "https://www.instagram.com/zooneviii", img: instagramIcon },
     { label: "X", href: "https://www.x.com/", img: xIcon },
-    { label: "TikTok", href: "https://www.tiktok.com/", img: tiktokIcon },
+    { label: "TikTok", href: "https://www.tiktok.com/@zooneviii1", img: tiktokIcon },
 ];
 
 const footerLinks = [
