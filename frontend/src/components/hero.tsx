@@ -38,7 +38,7 @@ function Hero() {
                         onClick={() => navigate("/tarifs")}
                         type="button"
                     >
-                        <span className="play-icon" aria-hidden="true">â–¶</span>
+                        <span className="play-icon" aria-hidden="true" />
                         <span>VOIR LES TARIFS</span>
                     </button>
                 </div>

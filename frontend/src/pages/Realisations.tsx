@@ -162,16 +162,17 @@ function Realisations() {
                                     </p>
 
                                     {realisation.expert_nom && (
-                                        <span className="realisation-expert">
-                                            Expert : {realisation.expert_nom}
-                                        </span>
+                                        <div className="realisation-meta-item">
+                                            <span className="realisation-meta-icon" aria-hidden="true" />
+                                            <span>Expert : {realisation.expert_nom}</span>
+                                        </div>
                                     )}
 
                                     {realisation.services_noms.length > 0 && (
                                         <div className="realisation-services">
                                             {realisation.services_noms.map(
                                                 (service) => (
-                                                    <span key={service}>
+                                                    <span key={service} className="realisation-service-pill">
                                                         {service}
                                                     </span>
                                                 )
@@ -187,7 +188,8 @@ function Realisations() {
                                             className="realisation-link"
                                             aria-label={`Voir le projet ${realisation.titre}`}
                                         >
-                                            Voir le projet
+                                            <span aria-hidden="true">+</span>
+                                            <span className="sr-only">Voir la realisation</span>
                                         </a>
                                     )}
                                 </div>

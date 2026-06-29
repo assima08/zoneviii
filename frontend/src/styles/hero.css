@@ -307,6 +307,10 @@
 }
 
 .play-icon {
-    font-size: 0.9rem;
-    line-height: 1;
+    width: 0;
+    height: 0;
+    border-top: 0.35rem solid transparent;
+    border-bottom: 0.35rem solid transparent;
+    border-left: 0.55rem solid currentColor;
+    line-height: 0;
 }

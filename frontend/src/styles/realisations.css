@@ -1,5 +1,5 @@
 /* ================================
-   PAGE NOS RÃ‰ALISATIONS â€” ZooneVIII
+   PAGE NOS REALISATIONS - ZooneVIII
 ================================ */
 
 .realisations-page {
@@ -14,7 +14,7 @@
     position: relative;
 }
 
-/* Grand 8 dÃ©coratif Ã  droite */
+/* Grand 8 decoratif a droite */
 .realisations-page::before {
     content: "8";
     position: absolute;
@@ -361,45 +361,45 @@
     overflow: hidden;
 }
 
-.realisation-expert {
-    display: inline-flex;
-    margin-bottom: 16px;
-
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 0.82rem;
-    font-weight: 700;
-}
-
-.realisation-expert::before {
-    content: "âœ¦";
-    margin-right: 8px;
-    color: #2454ff;
-}
-
 .realisation-services {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.45rem;
     padding-right: 56px;
     margin-top: auto;
 }
 
-.realisation-services span {
+.realisation-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 16px;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.realisation-meta-icon {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #2454ff;
+    box-shadow: 0 0 10px rgba(36, 84, 255, 0.8);
+    flex-shrink: 0;
+}
+
+.realisation-service-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-
-    color: rgba(255, 255, 255, 0.68);
-    font-size: 0.76rem;
-    font-weight: 700;
+    border: 1px solid rgba(36, 84, 255, 0.45);
+    border-radius: 999px;
+    padding: 0.3rem 0.65rem;
+    color: #dce6ff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: rgba(36, 84, 255, 0.08);
 }
 
-.realisation-services span::before {
-    content: "âœ£";
-    color: #2454ff;
-    font-size: 0.72rem;
-}
 
 .realisation-link {
     position: absolute;
@@ -417,34 +417,36 @@
     border: 1px solid rgba(36, 84, 255, 0.9);
     background: rgba(36, 84, 255, 0.06);
 
-    color: transparent;
-    font-size: 0;
+    color: #2454ff;
+    font-size: 1.45rem;
+    font-weight: 900;
     text-decoration: none;
 
     transition: 0.3s ease;
 }
 
-.realisation-link::after {
-    content: "â†’";
-    color: #2454ff;
-    font-size: 1.3rem;
-    font-weight: 900;
-    transform: translateY(-1px);
-}
-
 .realisation-link:hover {
     background: #2454ff;
+    color: #ffffff;
     box-shadow: 0 0 30px rgba(36, 84, 255, 0.55);
 }
 
-.realisation-link:hover::after {
-    color: #ffffff;
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 
 /* ================================
    CTA FINAL OPTIONNEL
-   Ã€ utiliser si tu ajoutes une section CTA
+   A utiliser si tu ajoutes une section CTA
 ================================ */
 
 .realisations-cta {
