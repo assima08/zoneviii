@@ -38,8 +38,8 @@ function Hero() {
                         onClick={() => navigate("/tarifs")}
                         type="button"
                     >
-                        <span aria-hidden="true">play</span>
-                        VOIR LES TARIFS
+                        <span className="play-icon" aria-hidden="true">▶</span>
+                        <span>VOIR LES TARIFS</span>
                     </button>
                 </div>
             </div>

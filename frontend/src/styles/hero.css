@@ -300,3 +300,13 @@
         0 15px 40px rgba(0,0,0,0.08),
         inset 0 1px 1px rgba(255,255,255,0.9);
 }
+.hero-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.play-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+}

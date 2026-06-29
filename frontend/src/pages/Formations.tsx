@@ -16,7 +16,7 @@ function Formations() {
         <main className="editorial-page">
             <section className="editorial-hero">
                 <span>Formations audio</span>
-                <h1>Formations en production musicale, mix et beatmaking</h1>
+                <h1>NOS FORMATIONS</h1>
                 <p>
                     ZoneVIII propose des formations audio a Quebec pour les
                     artistes, producteurs, beatmakers et createurs qui veulent
