@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 import re
 from urllib.parse import urljoin
 
@@ -8,6 +9,8 @@ from django.utils.html import strip_tags
 from rest_framework import serializers
 
 from .services.reservation_side_effects import run_reservation_side_effects_async
+
+logger = logging.getLogger(__name__)
 
 
 def build_image_url(image, request=None):
@@ -102,6 +105,12 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
         ]
 
     def validate(self, data):
+        logger.info(
+            "Reservation duration validation started date=%s heure=%s duree=%s",
+            data.get("date"),
+            data.get("heure"),
+            data.get("duree"),
+        )
         reservation_date = data["date"]
         reservation_heure = data["heure"]
         reservation_duree = data["duree"]
@@ -126,14 +135,20 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
             ancienne_heure_fin = ancienne_heure_debut + reservation.duree
 
             if nouvelle_heure_debut < ancienne_heure_fin and nouvelle_heure_fin > ancienne_heure_debut:
+                logger.warning(
+                    "Reservation duration validation failed: overlapping reservation id=%s",
+                    reservation.id,
+                )
                 raise serializers.ValidationError(
                     "Ce creneau horaire est deja reserve.",
                 )
 
+        logger.info("Reservation duration validation finished")
         return data
 
     @transaction.atomic
     def create(self, validated_data):
+        logger.info("Reservation database save started")
         nom = validated_data.pop("nomClient")
         prenom = validated_data.pop("prenomClient")
         telephone = validated_data.pop("telephone")
@@ -152,12 +167,14 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
             client=client,
             **validated_data,
         )
+        logger.info("Reservation saved with id=%s", reservation.id)
 
         transaction.on_commit(
             lambda reservation_id=reservation.id: run_reservation_side_effects_async(
                 reservation_id,
             )
         )
+        logger.info("Reservation side effects scheduled for id=%s", reservation.id)
 
         return reservation
 

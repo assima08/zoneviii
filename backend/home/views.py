@@ -63,6 +63,37 @@ class ReservationCreateView(generics.CreateAPIView):
     serializer_class = ReservationCreateSerializer
     queryset = Reservation.objects.select_related("client", "tarif")
 
+    def create(self, request, *args, **kwargs):
+        logger.info(
+            "Reservation create request received payload_keys=%s",
+            sorted(request.data.keys()),
+        )
+        logger.info("Reservation serializer validation started")
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=False)
+
+        if serializer.errors:
+            logger.warning(
+                "Reservation serializer validation failed errors=%s",
+                serializer.errors,
+            )
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        logger.info(
+            "Reservation serializer validation finished validated_fields=%s",
+            sorted(serializer.validated_data.keys()),
+        )
+
+        reservation = serializer.save()
+        headers = self.get_success_headers(serializer.data)
+
+        logger.info(
+            "Reservation API response returned for reservation id=%s",
+            reservation.id,
+        )
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 
 class ContactMessageCreateView(generics.CreateAPIView):
     serializer_class = ContactMessageSerializer
