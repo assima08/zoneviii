@@ -13,18 +13,28 @@ type TimeSlot = {
     start: string;
     end: string;
     label: string;
+    duration: string;
 };
 
 const timeSlots: TimeSlot[] = [
-    { start: "11:00", end: "12:00", label: "11:00 - 12:00" },
-    { start: "12:00", end: "13:00", label: "12:00 - 13:00" },
-    { start: "13:00", end: "14:00", label: "13:00 - 14:00" },
-    { start: "14:00", end: "15:00", label: "14:00 - 15:00" },
-    { start: "15:00", end: "16:00", label: "15:00 - 16:00" },
-    { start: "16:00", end: "17:00", label: "16:00 - 17:00" },
-    { start: "17:00", end: "18:00", label: "17:00 - 18:00" },
-    { start: "18:00", end: "19:00", label: "18:00 - 19:00" },
-    { start: "19:00", end: "20:00", label: "19:00 - 20:00" },
+    {
+        start: "11:00",
+        end: "14:00",
+        label: "11:00 - 14:00",
+        duration: "03:00:00",
+    },
+    {
+        start: "14:00",
+        end: "17:00",
+        label: "14:00 - 17:00",
+        duration: "03:00:00",
+    },
+    {
+        start: "17:00",
+        end: "20:00",
+        label: "17:00 - 20:00",
+        duration: "03:00:00",
+    },
 ];
 
 function ReservationModal({
@@ -44,6 +54,26 @@ function ReservationModal({
     async function handleReservation() {
         if (!tarif) {
             setErrorMessage("Aucun tarif sélectionné.");
+            return;
+        }
+
+        if (!nomClient.trim()) {
+            setErrorMessage("Veuillez entrer votre nom.");
+            return;
+        }
+
+        if (!prenomClient.trim()) {
+            setErrorMessage("Veuillez entrer votre prénom.");
+            return;
+        }
+
+        if (!email.trim()) {
+            setErrorMessage("Veuillez entrer votre email.");
+            return;
+        }
+
+        if (!telephone.trim()) {
+            setErrorMessage("Veuillez entrer votre téléphone.");
             return;
         }
 
@@ -69,7 +99,7 @@ function ReservationModal({
                 telephone,
                 date,
                 heure: selectedTimeSlot.start,
-                duree: "01:00:00",
+                duree: selectedTimeSlot.duration,
                 tarif: tarif.id,
             });
 
@@ -166,7 +196,8 @@ function ReservationModal({
                                         className={`reservation-time-slot ${isSelected ? "selected" : ""}`}
                                         onClick={() => setSelectedTimeSlot(slot)}
                                     >
-                                        {slot.label}
+                                        <span>{slot.label}</span>
+                                        <small>Bloc de 3h</small>
                                     </button>
                                 );
                             })}
