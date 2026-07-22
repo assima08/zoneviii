@@ -35,6 +35,12 @@ const timeSlots: TimeSlot[] = [
         label: "17:00 - 20:00",
         duration: "03:00:00",
     },
+    {
+        start: "20:00",
+        end: "23:00",
+        label: "20:00 - 23:00",
+        duration: "03:00:00",
+    },
 ];
 
 function ReservationModal({
