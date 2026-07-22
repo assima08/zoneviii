@@ -1,502 +1,196 @@
 .modal-overlay {
-
     position: fixed;
-
     inset: 0;
-
-    background: rgba(0,0,0,0.5);
-
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(14px);
-
     -webkit-backdrop-filter: blur(14px);
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     z-index: 999;
-
     padding: 40px 20px;
-
     overflow-y: auto;
 }
-
-
 
 /* =========================
    MODAL
 ========================= */
 
 .reservation-modal {
-
     width: 560px;
-
     max-width: 100%;
-
     max-height: 92vh;
-
     overflow-y: auto;
-
-    padding: 42px;
-
-    border-radius: 34px;
-
-    background:
-            rgba(25,25,28,0.82);
-
-    backdrop-filter: blur(24px);
-
-    -webkit-backdrop-filter: blur(24px);
-
-    border:
-            1px solid rgba(255,255,255,0.08);
-
-    position: relative;
-
     overflow-x: hidden;
-
-    box-shadow:
-            0 25px 70px rgba(0,0,0,0.35);
-
-    animation:
-            modalAppear 0.35s ease;
+    padding: 42px;
+    border-radius: 34px;
+    background: rgba(25, 25, 28, 0.82);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    animation: modalAppear 0.35s ease;
 }
-
-
 
 /* =========================
    CUSTOM SCROLLBAR
 ========================= */
 
 .reservation-modal::-webkit-scrollbar {
-
     width: 8px;
 }
 
 .reservation-modal::-webkit-scrollbar-thumb {
-
-    background: rgba(255,255,255,0.15);
-
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 20px;
 }
-
-
 
 /* =========================
    BLUE GLOW
 ========================= */
 
 .reservation-modal::before {
-
     content: "";
-
     position: absolute;
-
     inset: 0;
-
-    background:
-
-            radial-gradient(
-
-                    circle at bottom center,
-
-                    rgba(45,72,255,0.35),
-
-                    transparent 60%
-            );
-
+    background: radial-gradient(
+            circle at bottom center,
+            rgba(45, 72, 255, 0.35),
+            transparent 60%
+    );
     pointer-events: none;
+    z-index: 0;
 }
-
-
 
 /* =========================
    ANIMATION
 ========================= */
 
 @keyframes modalAppear {
-
     from {
-
         opacity: 0;
-
-        transform:
-                translateY(40px)
-                scale(0.96);
+        transform: translateY(40px) scale(0.96);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-                translateY(0)
-                scale(1);
+        transform: translateY(0) scale(1);
     }
 }
-
-
 
 /* =========================
    CLOSE BUTTON
 ========================= */
 
 .close-button {
-
     position: absolute;
-
     top: 18px;
-
     right: 22px;
-
     border: none;
-
     background: transparent;
-
     color: white;
-
     font-size: 2.2rem;
-
     cursor: pointer;
-
     z-index: 5;
-
-    transition: 0.3s;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
-
-
 
 .close-button:hover {
-
     transform: rotate(90deg);
-
     color: #5f74ff;
 }
-
-
 
 /* =========================
    TITLE
 ========================= */
 
 .reservation-modal h2 {
-
     font-size: 4rem;
-
     font-weight: 900;
-
     line-height: 0.95;
-
     color: white;
-
     margin-bottom: 36px;
-
     letter-spacing: -3px;
-
     position: relative;
-
     z-index: 2;
-
     padding-right: 40px;
 }
-
-
 
 /* =========================
    TARIF BOX
 ========================= */
 
 .selected-tarif {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
+    gap: 1rem;
     padding: 26px 30px;
-
     border-radius: 24px;
-
-    background:
-            rgba(255,255,255,0.96);
-
+    background: rgba(255, 255, 255, 0.96);
     margin-bottom: 28px;
-
     position: relative;
-
     z-index: 2;
 }
 
-
-
 .selected-tarif span {
-
     font-size: 1.15rem;
-
     font-weight: 700;
-
     color: #111;
-
     text-transform: uppercase;
 }
 
-
-
 .selected-tarif strong {
-
     font-size: 2rem;
-
     font-weight: 900;
-
     color: #2d48ff;
+    white-space: nowrap;
 }
-
-
 
 /* =========================
    FORM
 ========================= */
 
 .modal-form {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 18px;
-
     position: relative;
-
     z-index: 2;
 }
-
-
 
 /* =========================
    INPUTS
 ========================= */
 
 .modal-form input {
-
     width: 100%;
-
     height: 74px;
-
     border: none;
-
     border-radius: 24px;
-
     padding: 0 26px;
-
-    background:
-            rgba(255,255,255,0.95);
-
+    background: rgba(255, 255, 255, 0.95);
     font-size: 1.05rem;
-
     color: #111;
-
     outline: none;
-
-    transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
 }
 
-
-
-/* =========================
-   INPUT FOCUS
-========================= */
-
 .modal-form input:focus {
-
     transform: translateY(-2px);
-
-    box-shadow:
-            0 0 0 4px rgba(45,72,255,0.25);
+    box-shadow: 0 0 0 4px rgba(45, 72, 255, 0.25);
 }
-
-
-
-/* =========================
-   PLACEHOLDER
-========================= */
 
 .modal-form input::placeholder {
-
-    color: rgba(0,0,0,0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
-
-
 
 /* =========================
-   BUTTON
+   TIME SLOTS
 ========================= */
 
-.confirm-button {
-
-    width: 100%;
-
-    height: 74px;
-
-    margin-top: 8px;
-
-    border: none;
-
-    border-radius: 24px;
-
-    background:
-
-            linear-gradient(
-                    135deg,
-                    #2d48ff,
-                    #6178ff
-            );
-
-    color: white;
-
-    font-size: 1.05rem;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-
-    box-shadow:
-            0 14px 35px rgba(45,72,255,0.35);
-}
-
-
-
-/* =========================
-   BUTTON HOVER
-========================= */
-
-.confirm-button:hover {
-
-    transform:
-            translateY(-4px);
-
-    box-shadow:
-            0 18px 45px rgba(45,72,255,0.45);
-}
-
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media screen and (max-width: 700px) {
-
-    .modal-overlay {
-
-        padding: 20px 14px;
-    }
-
-    .reservation-modal {
-
-        padding: 28px;
-    }
-
-    .reservation-modal h2 {
-
-        font-size: 2.9rem;
-
-        line-height: 1;
-    }
-
-    .selected-tarif {
-
-        padding: 20px;
-    }
-
-    .selected-tarif strong {
-
-        font-size: 1.5rem;
-    }
-
-    .modal-form input {
-
-        height: 64px;
-
-        border-radius: 20px;
-    }
-
-    .confirm-button {
-
-        height: 64px;
-
-        border-radius: 20px;
-    }
-}
-.reservation-time-section {
-    width: 100%;
-    margin-top: 0.25rem;
-}
-
-.reservation-time-label {
-    margin: 0 0 0.75rem;
-    color: #ffffff;
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-
-.reservation-time-slots {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem;
-}
-
-.reservation-time-slot {
-    border: 1px solid rgba(0, 87, 255, 0.35);
-    background: rgba(255, 255, 255, 0.04);
-    color: #ffffff;
-    border-radius: 14px;
-    padding: 0.85rem 0.65rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.reservation-time-slot:hover {
-    border-color: rgba(0, 87, 255, 0.9);
-    background: rgba(0, 87, 255, 0.14);
-    transform: translateY(-1px);
-}
-
-.reservation-time-slot.selected {
-    background: #0057ff;
-    border-color: #0057ff;
-    color: #ffffff;
-    box-shadow: 0 0 18px rgba(0, 87, 255, 0.45);
-}
-
-.reservation-time-slot:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 3px;
-}
-
-@media screen and (max-width: 768px) {
-    .reservation-time-slots {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .reservation-time-slots {
-        grid-template-columns: 1fr;
-    }
-}
 .reservation-time-section {
     width: 100%;
     margin-top: 0.25rem;
@@ -524,7 +218,7 @@
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -561,12 +255,120 @@
     outline-offset: 3px;
 }
 
-@media screen and (max-width: 768px) {
+/* =========================
+   MESSAGES
+========================= */
+
+.reservation-error,
+.reservation-success {
+    margin: 0;
+    padding: 0.95rem 1rem;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.reservation-error {
+    color: #ffb4b4;
+    background: rgba(255, 60, 60, 0.12);
+    border: 1px solid rgba(255, 60, 60, 0.35);
+}
+
+.reservation-success {
+    color: #c7ffd8;
+    background: rgba(60, 255, 120, 0.12);
+    border: 1px solid rgba(60, 255, 120, 0.35);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.confirm-button {
+    width: 100%;
+    height: 74px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #2d48ff, #6178ff);
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 14px 35px rgba(45, 72, 255, 0.35);
+}
+
+.confirm-button:hover:not(:disabled) {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(45, 72, 255, 0.45);
+}
+
+.confirm-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media screen and (max-width: 700px) {
+    .modal-overlay {
+        padding: 20px 14px;
+        align-items: flex-start;
+    }
+
+    .reservation-modal {
+        padding: 28px;
+        border-radius: 28px;
+    }
+
+    .reservation-modal h2 {
+        font-size: 2.9rem;
+        line-height: 1;
+    }
+
+    .selected-tarif {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .selected-tarif strong {
+        font-size: 1.5rem;
+    }
+
+    .modal-form input {
+        height: 64px;
+        border-radius: 20px;
+    }
+
     .reservation-time-slots {
         grid-template-columns: 1fr;
     }
 
     .reservation-time-slot {
         min-height: 64px;
+    }
+
+    .confirm-button {
+        height: 64px;
+        border-radius: 20px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .reservation-modal {
+        padding: 24px 18px;
+    }
+
+    .reservation-modal h2 {
+        font-size: 2.45rem;
+        letter-spacing: -2px;
+    }
+
+    .selected-tarif {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
