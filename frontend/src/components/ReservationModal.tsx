@@ -9,24 +9,51 @@ interface ReservationModalProps {
     onClose: () => void;
 }
 
+type TimeSlot = {
+    start: string;
+    end: string;
+    label: string;
+};
+
+const timeSlots: TimeSlot[] = [
+    { start: "11:00", end: "12:00", label: "11:00 - 12:00" },
+    { start: "12:00", end: "13:00", label: "12:00 - 13:00" },
+    { start: "13:00", end: "14:00", label: "13:00 - 14:00" },
+    { start: "14:00", end: "15:00", label: "14:00 - 15:00" },
+    { start: "15:00", end: "16:00", label: "15:00 - 16:00" },
+    { start: "16:00", end: "17:00", label: "16:00 - 17:00" },
+    { start: "17:00", end: "18:00", label: "17:00 - 18:00" },
+    { start: "18:00", end: "19:00", label: "18:00 - 19:00" },
+    { start: "19:00", end: "20:00", label: "19:00 - 20:00" },
+];
+
 function ReservationModal({
-    tarif,
-    onClose,
-}: ReservationModalProps) {
+                              tarif,
+                              onClose,
+                          }: ReservationModalProps) {
     const [nomClient, setNomClient] = useState("");
     const [prenomClient, setPrenomClient] = useState("");
     const [email, setEmail] = useState("");
     const [telephone, setTelephone] = useState("");
     const [date, setDate] = useState("");
-    const [heure, setHeure] = useState("");
-    const [duree, setDuree] = useState("");
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot | null>(null);
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     async function handleReservation() {
         if (!tarif) {
-            setErrorMessage("Aucun tarif selectionne.");
+            setErrorMessage("Aucun tarif sélectionné.");
+            return;
+        }
+
+        if (!date) {
+            setErrorMessage("Veuillez choisir une date.");
+            return;
+        }
+
+        if (!selectedTimeSlot) {
+            setErrorMessage("Veuillez choisir un créneau horaire.");
             return;
         }
 
@@ -41,12 +68,12 @@ function ReservationModal({
                 email,
                 telephone,
                 date,
-                heure,
-                duree: normalizeDuration(duree),
+                heure: selectedTimeSlot.start,
+                duree: "01:00:00",
                 tarif: tarif.id,
             });
 
-            setSuccessMessage("Reservation confirmee.");
+            setSuccessMessage("Réservation confirmée.");
 
             window.setTimeout(() => {
                 onClose();
@@ -67,12 +94,13 @@ function ReservationModal({
                     className="close-button"
                     onClick={onClose}
                     type="button"
+                    aria-label="Fermer la fenêtre de réservation"
                 >
-                    x
+                    ×
                 </button>
 
                 <h2>
-                    Reserver une
+                    Réserver une
                     <br />
                     session
                 </h2>
@@ -93,7 +121,7 @@ function ReservationModal({
 
                     <input
                         type="text"
-                        placeholder="Prenom"
+                        placeholder="Prénom"
                         value={prenomClient}
                         onChange={(event) => setPrenomClient(event.target.value)}
                         required
@@ -109,7 +137,7 @@ function ReservationModal({
 
                     <input
                         type="tel"
-                        placeholder="Telephone"
+                        placeholder="Téléphone"
                         value={telephone}
                         onChange={(event) => setTelephone(event.target.value)}
                         required
@@ -122,20 +150,28 @@ function ReservationModal({
                         required
                     />
 
-                    <input
-                        type="time"
-                        value={heure}
-                        onChange={(event) => setHeure(event.target.value)}
-                        required
-                    />
+                    <div className="reservation-time-section">
+                        <p className="reservation-time-label">
+                            Choisir un créneau horaire
+                        </p>
 
-                    <input
-                        type="time"
-                        value={duree}
-                        onChange={(event) => setDuree(event.target.value)}
-                        placeholder="Duree"
-                        required
-                    />
+                        <div className="reservation-time-slots">
+                            {timeSlots.map((slot) => {
+                                const isSelected = selectedTimeSlot?.start === slot.start;
+
+                                return (
+                                    <button
+                                        key={slot.start}
+                                        type="button"
+                                        className={`reservation-time-slot ${isSelected ? "selected" : ""}`}
+                                        onClick={() => setSelectedTimeSlot(slot)}
+                                    >
+                                        {slot.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
 
                     {errorMessage && (
                         <p className="reservation-error">{errorMessage}</p>
@@ -151,26 +187,12 @@ function ReservationModal({
                         disabled={loading}
                         type="button"
                     >
-                        {loading ? "Chargement..." : "Confirmer la reservation"}
+                        {loading ? "Chargement..." : "Confirmer la réservation"}
                     </button>
                 </div>
             </div>
         </div>
     );
-}
-
-function normalizeDuration(duration: string) {
-    if (!duration) {
-        return duration;
-    }
-
-    const parts = duration.split(":");
-
-    if (parts.length === 2) {
-        return `${parts[0]}:${parts[1]}:00`;
-    }
-
-    return duration;
 }
 
 export default ReservationModal;
