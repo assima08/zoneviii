@@ -240,6 +240,10 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", default=True)
 EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL", default=False)
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER or "noreply@zooneviii.com")
+RESERVATION_NOTIFICATION_EMAIL = os.getenv(
+    "RESERVATION_NOTIFICATION_EMAIL",
+    "info@zooneviii.com",
+)
 CONTACT_RECEIVER_EMAIL = os.getenv(
     "CONTACT_RECEIVER_EMAIL",
     os.getenv("CONTACT_EMAIL_TO", "info@zooneviii.com"),
