@@ -82,11 +82,19 @@ def _load_credentials():
 
 def _build_calendar_service(credentials):
     try:
+        import google_auth_httplib2
+        import httplib2
         from googleapiclient.discovery import build
     except ImportError as exc:
         raise GoogleCalendarError("Google Calendar API client is not installed.") from exc
 
-    return build("calendar", "v3", credentials=credentials, cache_discovery=False)
+    timeout = getattr(settings, "GOOGLE_CALENDAR_TIMEOUT_SECONDS", 5)
+    http = google_auth_httplib2.AuthorizedHttp(
+        credentials,
+        http=httplib2.Http(timeout=timeout),
+    )
+
+    return build("calendar", "v3", http=http, cache_discovery=False)
 
 
 def _build_event_payload(reservation):

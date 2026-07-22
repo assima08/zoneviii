@@ -1,5 +1,4 @@
 from datetime import datetime
-import logging
 import re
 from urllib.parse import urljoin
 
@@ -8,11 +7,7 @@ from django.db import transaction
 from django.utils.html import strip_tags
 from rest_framework import serializers
 
-from .services.google_calendar import create_google_calendar_event
-from .services.reservation_notifications import send_reservation_notification_emails
-
-
-logger = logging.getLogger(__name__)
+from .services.reservation_side_effects import run_reservation_side_effects_async
 
 
 def build_image_url(image, request=None):
@@ -158,23 +153,11 @@ class ReservationCreateSerializer(serializers.ModelSerializer):
             **validated_data,
         )
 
-        try:
-            event_id = create_google_calendar_event(reservation)
-            reservation.google_calendar_event_id = event_id
-            reservation.save(update_fields=["google_calendar_event_id"])
-        except Exception:
-            logger.exception(
-                "Google Calendar sync failed for reservation %s",
-                reservation.id,
+        transaction.on_commit(
+            lambda reservation_id=reservation.id: run_reservation_side_effects_async(
+                reservation_id,
             )
-            reservation.google_calendar_sync_warning = (
-                "La reservation est creee, mais la synchronisation Google Calendar a echoue."
-            )
-
-        email_warnings = send_reservation_notification_emails(reservation)
-
-        if email_warnings:
-            reservation.email_notification_warnings = email_warnings
+        )
 
         return reservation
 
