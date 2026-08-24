@@ -100,7 +100,7 @@ function Portfolio() {
                     </span>
 
                     <h1>
-                        Portfolio Photoshoot
+                        portefolio
                     </h1>
                 </div>
 
