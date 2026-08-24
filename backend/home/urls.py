@@ -13,4 +13,5 @@ urlpatterns = [
     path("reservations/", views.ReservationListView.as_view(), name="reservation-list"),
     path("reservations/create/", views.ReservationCreateView.as_view(), name="reservation-create"),
     path("realisations/", RealisationListView.as_view(), name="realisations"),
+    path("portfolio/", views.PortfolioListView.as_view(), name="portfolio-list"),
 ]

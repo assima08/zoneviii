@@ -200,6 +200,11 @@ const seoByPath: Record<string, SeoConfig> = {
         description:
             "Decouvrez les projets realises chez ZooneVIII : enregistrement, mix, mastering, production musicale, podcast et accompagnement artistique.",
     },
+    "/portfolio": {
+        title: "Portfolio Photoshoot | ZooneVIII",
+        description:
+            "Decouvrez le portfolio photoshoot ZooneVIII : galeries photo premium pour artistes, entrepreneurs et createurs a Quebec.",
+    },
     "/experts": {
         title: "Experts audio, beatmakers et ingenieurs du son | ZooneVIII",
         description:

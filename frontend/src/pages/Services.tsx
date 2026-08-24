@@ -100,6 +100,16 @@ function Services() {
                         >
                             Reserver maintenant
                         </button>
+
+                        {/photo|shoot/i.test(service.nomService) && (
+                            <button
+                                className="service-button service-button-secondary"
+                                aria-label="Voir le portfolio photoshoot ZooneVIII"
+                                onClick={() => navigate("/portfolio")}
+                            >
+                                VOIR LE PORTFOLIO
+                            </button>
+                        )}
                     </div>
                 ))}
             </div>

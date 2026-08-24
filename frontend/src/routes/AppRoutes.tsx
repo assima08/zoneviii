@@ -11,6 +11,7 @@ import Experts from "../pages/Experts";
 import FAQ from "../pages/FAQ";
 import Formations from "../pages/Formations";
 import Home from "../pages/Home";
+import Portfolio from "../pages/Portfolio";
 import Realisations from "../pages/Realisations";
 import Reservations from "../pages/Reservations";
 import Tarifs from "../pages/Tarifs";
@@ -30,6 +31,7 @@ function AppRoutes() {
                     <Route path="/tarifs" element={<Tarifs />} />
                     <Route path="/reservations" element={<Reservations />} />
                     <Route path="/realisations" element={<Realisations />} />
+                    <Route path="/portfolio" element={<Portfolio />} />
                     <Route path="/formations" element={<Formations />} />
                     <Route path="/Formations" element={<Navigate to="/formations" replace />} />
                     <Route path="/a-propos" element={<About />} />

@@ -375,6 +375,27 @@
             0 20px 40px rgba(37,72,255,0.38);
 }
 
+.service-button-secondary {
+
+    margin-top: 14px;
+
+    border: 1px solid rgba(33,64,255,0.38);
+
+    background: rgba(255,255,255,0.5);
+
+    color: #2140ff;
+
+    box-shadow: none;
+}
+
+.service-button-secondary:hover {
+
+    background: rgba(255,255,255,0.75);
+
+    box-shadow:
+            0 16px 34px rgba(37,72,255,0.18);
+}
+
 .page-state {
 
     grid-column: 1 / -1;

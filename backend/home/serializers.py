@@ -43,7 +43,10 @@ from .models import (
     Reservation,
     Service,
     Tarifs,
-    Realisation
+    Realisation,
+    Portfolio,
+    PortfolioPhoto
+
 )
 
 
@@ -317,3 +320,47 @@ class RealisationSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, obj):
         return build_image_url(obj.image, self.context.get("request")) or None
+
+
+class PortfolioPhotoSerializer(serializers.ModelSerializer):
+    photo_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PortfolioPhoto
+        fields = [
+            "id",
+            "titre",
+            "photo",
+            "photo_url",
+            "ordre",
+            "date",
+        ]
+
+    def get_photo_url(self, obj):
+        return build_image_url(obj.photo, self.context.get("request")) or None
+
+
+class PortfolioSerializer(serializers.ModelSerializer):
+    photos = PortfolioPhotoSerializer(many=True, read_only=True)
+    image_principale = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Portfolio
+        fields = [
+            "id",
+            "titre",
+            "description",
+            "date_shooting",
+            "est_publie",
+            "created_at",
+            "image_principale",
+            "photos",
+        ]
+
+    def get_image_principale(self, obj):
+        first_photo = next(iter(obj.photos.all()), None)
+
+        if not first_photo:
+            return None
+
+        return build_image_url(first_photo.photo, self.context.get("request")) or None

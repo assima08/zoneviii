@@ -3,17 +3,19 @@ import logging
 from django.conf import settings
 from django.core.cache import cache
 from django.core.mail import send_mail
+from django.db.models import Prefetch
 from django.http import JsonResponse
 from django.template.defaultfilters import date as date_filter
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
 
-from .models import ContactMessage, Expert, Formation, Realisation, Reservation, Service, Tarifs
+from .models import ContactMessage, Expert, Formation, Portfolio, PortfolioPhoto, Realisation, Reservation, Service, Tarifs
 from .serializers import (
     ContactMessageSerializer,
     ExpertSerializer,
     FormationSerializer,
+    PortfolioSerializer,
     ReservationCreateSerializer,
     ReservationSerializer,
     ServiceSerializer,
@@ -202,6 +204,26 @@ class RealisationListView(generics.ListAPIView):
             queryset = queryset.filter(services__nomService__icontains=service)
 
         return queryset.distinct()
+
+    def get_serializer_context(self):
+        return {"request": self.request}
+
+
+class PortfolioListView(generics.ListAPIView):
+    serializer_class = PortfolioSerializer
+
+    def get_queryset(self):
+        return (
+            Portfolio.objects
+            .filter(est_publie=True)
+            .prefetch_related(
+                Prefetch(
+                    "photos",
+                    queryset=PortfolioPhoto.objects.order_by("ordre", "id"),
+                )
+            )
+            .order_by("-date_shooting", "-created_at", "titre")
+        )
 
     def get_serializer_context(self):
         return {"request": self.request}

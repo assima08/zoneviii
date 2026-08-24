@@ -2,6 +2,7 @@ import axios from "axios";
 
 import type { ContactMessagePayload } from "../interfaces/ContactMessage";
 import type { Expert } from "../interfaces/Expert";
+import type { Portfolio } from "../interfaces/Portfolio";
 import type { Service } from "../interfaces/Service";
 import type { ReservationCreatePayload } from "../interfaces/Reservation";
 import type { Tarif } from "../interfaces/Tarif";
@@ -61,6 +62,11 @@ export async function sendContactMessage(payload: ContactMessagePayload) {
 
 export async function getRealisations() {
     const response = await api.get<Realisation[]>("/api/realisations/");
+    return response.data;
+}
+
+export async function getPortfolios() {
+    const response = await api.get<Portfolio[]>("/api/portfolio/");
     return response.data;
 }
 

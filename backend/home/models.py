@@ -1,4 +1,16 @@
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.utils import timezone
+
+
+MAX_PORTFOLIO_IMAGE_SIZE = 8 * 1024 * 1024
+VALID_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "webp"]
+
+
+def validate_portfolio_image_size(image):
+    if image and image.size > MAX_PORTFOLIO_IMAGE_SIZE:
+        raise ValidationError("L'image ne doit pas depasser 8 Mo.")
 
 
 class Service(models.Model):
@@ -161,3 +173,46 @@ class Realisation(models.Model):
 
     def __str__(self):
         return self.titre
+
+class Portfolio(models.Model):
+    titre = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    date_shooting = models.DateField(blank=True, null=True)
+    est_publie = models.BooleanField(default=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.titre
+
+    class Meta:
+        ordering = ["-date_shooting", "-created_at", "titre"]
+
+
+class PortfolioPhoto(models.Model):
+    titre = models.CharField(max_length=100)
+
+    date = models.DateTimeField(auto_now_add=True)
+
+    portfolio = models.ForeignKey(
+        Portfolio,
+        on_delete=models.CASCADE,
+        related_name="photos"
+    )
+
+    photo = models.ImageField(
+        upload_to="portfolioPhotos/",
+        null=True,
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=VALID_IMAGE_EXTENSIONS),
+            validate_portfolio_image_size,
+        ],
+    )
+
+    ordre = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.titre
+
+    class Meta:
+        ordering = ["ordre", "id"]
